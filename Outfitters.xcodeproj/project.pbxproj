@@ -7,18 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		212AA07585DB47BA1B8F4E1B /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66A5EEB1B8BA79F2A03CCAC /* AmplifyModels.swift */; };
+		32A7043C387BADCC68EE86FA /* Post+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC232BBD8AAA851213D0A91 /* Post+Schema.swift */; };
+		6F4501DC7FB789D4FCA46005 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = BD192A353078249CBBC5E432 /* amplifyconfiguration.json */; };
+		8B096F7269B7F566DEBD6205 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB261946D7120200185CD94 /* Post.swift */; };
+		951C90B6678356E3E2F881AF /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 722AC06912855F4AD30E3A4E /* awsconfiguration.json */; };
 		E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */; };
-		E1ED1CE9272D0EE300AD6034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CE8272D0EE300AD6034 /* ContentView.swift */; };
 		E1ED1CEB272D0EE500AD6034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1CEA272D0EE500AD6034 /* Assets.xcassets */; };
 		E1ED1CEE272D0EE500AD6034 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */; };
+		E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CF8272D0FB600AD6034 /* ContentView.swift */; };
+		E1ED1CFB272D0FE900AD6034 /* SUImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFA272D0FE900AD6034 /* SUImagePickerView.swift */; };
+		E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFC272D103100AD6034 /* AddClothesView.swift */; };
+		E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */; };
+		E1ED1D04272D173D00AD6034 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D01272D173D00AD6034 /* AmplifyModels.swift */; };
+		E1ED1D05272D173D00AD6034 /* Post+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D02272D173D00AD6034 /* Post+Schema.swift */; };
+		E1ED1D06272D173D00AD6034 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D03272D173D00AD6034 /* Post.swift */; };
+		E1ED1D09272D177B00AD6034 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1D07272D177B00AD6034 /* amplifyconfiguration.json */; };
+		E1ED1D0A272D177B00AD6034 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1D08272D177B00AD6034 /* awsconfiguration.json */; };
+		E1ED1D0C272D19E900AD6034 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D0B272D19E900AD6034 /* Extensions.swift */; };
+		E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D0D272D221500AD6034 /* ClosetView.swift */; };
+		E7E834622AFC1DC0C89A90C5 /* Pods_Outfitters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9C3E2BD9F7FE327E3A9C74 /* Pods_Outfitters.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E59AACB188509280D23FC18 /* Pods-Outfitters.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outfitters.debug.xcconfig"; path = "Target Support Files/Pods-Outfitters/Pods-Outfitters.debug.xcconfig"; sourceTree = "<group>"; };
+		722AC06912855F4AD30E3A4E /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		9D2E7693DBDCF603DD049185 /* Pods-Outfitters.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outfitters.release.xcconfig"; path = "Target Support Files/Pods-Outfitters/Pods-Outfitters.release.xcconfig"; sourceTree = "<group>"; };
+		BCB261946D7120200185CD94 /* Post.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Post.swift; path = amplify/generated/models/Post.swift; sourceTree = "<group>"; };
+		BD192A353078249CBBC5E432 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		CCC232BBD8AAA851213D0A91 /* Post+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Post+Schema.swift"; path = "amplify/generated/models/Post+Schema.swift"; sourceTree = "<group>"; };
 		E1ED1CE3272D0EE300AD6034 /* Outfitters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outfitters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfittersApp.swift; sourceTree = "<group>"; };
-		E1ED1CE8272D0EE300AD6034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1ED1CEA272D0EE500AD6034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E1ED1CF8272D0FB600AD6034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E1ED1CFA272D0FE900AD6034 /* SUImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SUImagePickerView.swift; sourceTree = "<group>"; };
+		E1ED1CFC272D103100AD6034 /* AddClothesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClothesView.swift; sourceTree = "<group>"; };
+		E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIewRouter.swift; sourceTree = "<group>"; };
+		E1ED1D01272D173D00AD6034 /* AmplifyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmplifyModels.swift; sourceTree = "<group>"; };
+		E1ED1D02272D173D00AD6034 /* Post+Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+Schema.swift"; sourceTree = "<group>"; };
+		E1ED1D03272D173D00AD6034 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		E1ED1D07272D177B00AD6034 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
+		E1ED1D08272D177B00AD6034 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
+		E1ED1D0B272D19E900AD6034 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E1ED1D0D272D221500AD6034 /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
+		EF9C3E2BD9F7FE327E3A9C74 /* Pods_Outfitters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outfitters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F66A5EEB1B8BA79F2A03CCAC /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,17 +60,50 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7E834622AFC1DC0C89A90C5 /* Pods_Outfitters.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FFAAE7C233D250CF85E3BA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E59AACB188509280D23FC18 /* Pods-Outfitters.debug.xcconfig */,
+				9D2E7693DBDCF603DD049185 /* Pods-Outfitters.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4AA136D4B690790B08C2B814 /* AmplifyModels */ = {
+			isa = PBXGroup;
+			children = (
+				F66A5EEB1B8BA79F2A03CCAC /* AmplifyModels.swift */,
+				CCC232BBD8AAA851213D0A91 /* Post+Schema.swift */,
+				BCB261946D7120200185CD94 /* Post.swift */,
+			);
+			name = AmplifyModels;
+			sourceTree = "<group>";
+		};
+		9C2C98143C75DFC885D45A5D /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				722AC06912855F4AD30E3A4E /* awsconfiguration.json */,
+				BD192A353078249CBBC5E432 /* amplifyconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			sourceTree = "<group>";
+		};
 		E1ED1CDA272D0EE300AD6034 = {
 			isa = PBXGroup;
 			children = (
 				E1ED1CE5272D0EE300AD6034 /* Outfitters */,
 				E1ED1CE4272D0EE300AD6034 /* Products */,
+				9C2C98143C75DFC885D45A5D /* AmplifyConfig */,
+				4AA136D4B690790B08C2B814 /* AmplifyModels */,
+				0FFAAE7C233D250CF85E3BA9 /* Pods */,
+				E34D13788549D1E09E287AC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,8 +118,14 @@
 		E1ED1CE5272D0EE300AD6034 /* Outfitters */ = {
 			isa = PBXGroup;
 			children = (
+				E1ED1D07272D177B00AD6034 /* amplifyconfiguration.json */,
+				E1ED1D08272D177B00AD6034 /* awsconfiguration.json */,
+				E1ED1D0F272D2B2600AD6034 /* DisplayedViews */,
+				E1ED1D00272D173D00AD6034 /* models */,
 				E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */,
-				E1ED1CE8272D0EE300AD6034 /* ContentView.swift */,
+				E1ED1D0B272D19E900AD6034 /* Extensions.swift */,
+				E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */,
+				E1ED1CFA272D0FE900AD6034 /* SUImagePickerView.swift */,
 				E1ED1CEA272D0EE500AD6034 /* Assets.xcassets */,
 				E1ED1CEC272D0EE500AD6034 /* Preview Content */,
 			);
@@ -67,6 +140,35 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		E1ED1D00272D173D00AD6034 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				E1ED1D01272D173D00AD6034 /* AmplifyModels.swift */,
+				E1ED1D02272D173D00AD6034 /* Post+Schema.swift */,
+				E1ED1D03272D173D00AD6034 /* Post.swift */,
+			);
+			name = models;
+			path = amplify/generated/models;
+			sourceTree = SOURCE_ROOT;
+		};
+		E1ED1D0F272D2B2600AD6034 /* DisplayedViews */ = {
+			isa = PBXGroup;
+			children = (
+				E1ED1D0D272D221500AD6034 /* ClosetView.swift */,
+				E1ED1CFC272D103100AD6034 /* AddClothesView.swift */,
+				E1ED1CF8272D0FB600AD6034 /* ContentView.swift */,
+			);
+			path = DisplayedViews;
+			sourceTree = "<group>";
+		};
+		E34D13788549D1E09E287AC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF9C3E2BD9F7FE327E3A9C74 /* Pods_Outfitters.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +176,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1ED1CF1272D0EE500AD6034 /* Build configuration list for PBXNativeTarget "Outfitters" */;
 			buildPhases = (
+				1F6D52EA339DB41F401A51E9 /* [CP] Check Pods Manifest.lock */,
 				E1ED1CDF272D0EE300AD6034 /* Sources */,
 				E1ED1CE0272D0EE300AD6034 /* Frameworks */,
 				E1ED1CE1272D0EE300AD6034 /* Resources */,
+				313ACB4AE8B875BA56F93F4C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,18 +231,75 @@
 			files = (
 				E1ED1CEE272D0EE500AD6034 /* Preview Assets.xcassets in Resources */,
 				E1ED1CEB272D0EE500AD6034 /* Assets.xcassets in Resources */,
+				E1ED1D0A272D177B00AD6034 /* awsconfiguration.json in Resources */,
+				E1ED1D09272D177B00AD6034 /* amplifyconfiguration.json in Resources */,
+				951C90B6678356E3E2F881AF /* awsconfiguration.json in Resources */,
+				6F4501DC7FB789D4FCA46005 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F6D52EA339DB41F401A51E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Outfitters-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		313ACB4AE8B875BA56F93F4C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Outfitters/Pods-Outfitters-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Outfitters/Pods-Outfitters-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Outfitters/Pods-Outfitters-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E1ED1CDF272D0EE300AD6034 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1ED1CE9272D0EE300AD6034 /* ContentView.swift in Sources */,
+				E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */,
+				E1ED1D06272D173D00AD6034 /* Post.swift in Sources */,
+				E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */,
 				E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */,
+				E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */,
+				E1ED1D05272D173D00AD6034 /* Post+Schema.swift in Sources */,
+				E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */,
+				E1ED1D04272D173D00AD6034 /* AmplifyModels.swift in Sources */,
+				E1ED1D0C272D19E900AD6034 /* Extensions.swift in Sources */,
+				E1ED1CFB272D0FE900AD6034 /* SUImagePickerView.swift in Sources */,
+				212AA07585DB47BA1B8F4E1B /* AmplifyModels.swift in Sources */,
+				32A7043C387BADCC68EE86FA /* Post+Schema.swift in Sources */,
+				8B096F7269B7F566DEBD6205 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +424,7 @@
 		};
 		E1ED1CF2272D0EE500AD6034 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E59AACB188509280D23FC18 /* Pods-Outfitters.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -272,6 +434,7 @@
 				DEVELOPMENT_TEAM = JAFM26WWR8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Outfitters uses camera to scan clothing items";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -293,6 +456,7 @@
 		};
 		E1ED1CF3272D0EE500AD6034 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D2E7693DBDCF603DD049185 /* Pods-Outfitters.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +466,7 @@
 				DEVELOPMENT_TEAM = JAFM26WWR8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Outfitters uses camera to scan clothing items";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
