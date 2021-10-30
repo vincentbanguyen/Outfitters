@@ -7,8 +7,7 @@ extension Post {
    public enum CodingKeys: String, ModelKey {
     case id
     case imageKey
-    case createdAt
-    case updatedAt
+    case itemType
   }
   
   public static let keys = CodingKeys.self
@@ -22,8 +21,7 @@ extension Post {
     model.fields(
       .id(),
       .field(post.imageKey, is: .required, ofType: .string),
-      .field(post.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
-      .field(post.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
+      .field(post.itemType, is: .required, ofType: .string)
     )
     }
 }

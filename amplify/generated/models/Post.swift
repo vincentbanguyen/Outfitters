@@ -5,23 +5,13 @@ import Foundation
 public struct Post: Model {
   public let id: String
   public var imageKey: String
-  public var createdAt: Temporal.DateTime?
-  public var updatedAt: Temporal.DateTime?
+  public var itemType: String
   
   public init(id: String = UUID().uuidString,
-      imageKey: String) {
-    self.init(id: id,
-      imageKey: imageKey,
-      createdAt: nil,
-      updatedAt: nil)
-  }
-  internal init(id: String = UUID().uuidString,
       imageKey: String,
-      createdAt: Temporal.DateTime? = nil,
-      updatedAt: Temporal.DateTime? = nil) {
+      itemType: String) {
       self.id = id
       self.imageKey = imageKey
-      self.createdAt = createdAt
-      self.updatedAt = updatedAt
+      self.itemType = itemType
   }
 }

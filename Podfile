@@ -8,9 +8,9 @@ target 'Outfitters' do
   # Pods for Outfitters
 
 pod 'PhotoRoomKit'
-pod 'Amplify'
-pod 'AmplifyPlugins/AWSCognitoAuthPlugin'
-pod 'AmplifyPlugins/AWSS3StoragePlugin'
-pod 'AmplifyPlugins/AWSAPIPlugin'
-pod 'AmplifyPlugins/AWSDataStorePlugin'
+#pod 'Amplify'
+#pod 'AmplifyPlugins/AWSCognitoAuthPlugin'
+#pod 'AmplifyPlugins/AWSS3StoragePlugin'
+#pod 'AmplifyPlugins/AWSAPIPlugin'
+#pod 'AmplifyPlugins/AWSDataStorePlugin'
 end

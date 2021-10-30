@@ -4,13 +4,14 @@
 //
 //  Created by Vincent Nguyen on 10/27/21.
 //
-
+import Combine
 import SwiftUI
 import Amplify
 import PhotoRoomKit
 
 struct AddClothesView: View {
     @StateObject var viewRouter = ViewRouter()
+    
     @State private var image: Image? = Image(systemName: "camera")
     @State private var shouldPresentImagePicker = false
     @State private var shouldPresentActionScheet = false
@@ -19,7 +20,8 @@ struct AddClothesView: View {
     @State var outputImage: UIImage = UIImage(systemName: "camera")!
     @State var testImage: UIImage = UIImage(named: "shirt.png")!
     @State var removedBg = false
-    
+    @State var didSelectItemType = false
+    @State var itemType = "shirt"
     @State var uploadedImage = false
     
     var body: some View {
@@ -29,12 +31,12 @@ struct AddClothesView: View {
             if removedBg == false  {
             image!
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 200, height: 200)
             } else {
                 Image(uiImage: outputImage)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 200, height: 200)
                 
                   
@@ -56,22 +58,27 @@ struct AddClothesView: View {
             .clipShape(Capsule())
             .frame(width: 140, height: 60)
             
-   
+            // add buttin optiosn to speicfy item type
             
             // activate remove bg
             Button(action: {
                 let inputImage = image.asUIImage()
 
                 // removing backgoung
-                if uploadedImage == true && removedBg == false {
-                removeBackground(inputImage: inputImage)
+                if uploadedImage == true && removedBg == false  && didSelectItemType == false {
+              
+                    
+                    // removeBackground(inputImage: inputImage)
+                    
+                    removedBg = true
                 }
+                
                 
                 // upload to AWS
                 else {
-                    let uploadImage = self.outputImage
+                    let uploadImage = self.testImage
                         //upload to aws
-                    uploadToAWS(uploadImage)
+                    uploadToAWS(uploadImage, itemType: itemType)
                     viewRouter.currentPage = .closet
                     
                 }
@@ -134,17 +141,17 @@ struct AddClothesView: View {
         
     }
     
-    func uploadToAWS(_ image: UIImage) {
+    func uploadToAWS(_ image: UIImage, itemType: String) {
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         let key = UUID().uuidString + ".jpg"
         _ = Amplify.Storage.uploadData(key: key, data: imageData) { result in
             switch result {
             case .success:
-                print("Uploaded image")
-                let post = Post(imageKey: key)
+                print("Uploaded image \(key) to storage ")
+                let post = Post(imageKey: key, itemType: itemType)
                 save(post)
-                
+
             case .failure(let error):
                 print("Failed to upload - \(error) ")
             }
@@ -155,7 +162,7 @@ struct AddClothesView: View {
         Amplify.DataStore.save(post) { result in
             switch result {
             case .success:
-                print("post saved")
+                print("post saved to data store \(post.imageKey)")
                 self.image = nil
                 
             case .failure(let error):

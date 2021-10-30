@@ -18,8 +18,10 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 switch viewRouter.currentPage {
+                    
                 case .closet:
                    ClosetView()
+                    
                 case .outfits:
                     Text("Liked")
                 case .addClothes:
