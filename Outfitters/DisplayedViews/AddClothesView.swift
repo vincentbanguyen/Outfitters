@@ -200,7 +200,7 @@ struct AddClothesView: View {
         _ = Amplify.Storage.uploadData(key: key, data: imageData) { result in
             switch result {
             case .success:
-                print("Uploaded image \(key) to storage ")
+                print("@Storage add: \(key)  ")
                 let post = Post(imageKey: key, itemType: itemType)
                 save(post)
                 
@@ -214,7 +214,7 @@ struct AddClothesView: View {
         Amplify.DataStore.save(post) { result in
             switch result {
             case .success:
-                print("post saved to data store \(post.imageKey)")
+                print("@DataStore add: \(post.imageKey)")
                 self.image = nil
                 
             case .failure(let error):
