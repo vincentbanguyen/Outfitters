@@ -25,7 +25,7 @@ struct ContentView: View {
                 case .outfits:
                     Text("Liked")
                 case .addClothes:
-                    AddClothesView()
+                    AddClothesView(viewRouter: viewRouter)
                  
                 }
                 Spacer()
@@ -35,7 +35,7 @@ struct ContentView: View {
                             .offset(y: -geometry.size.height/6)
                     }
                     HStack {
-                        TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .closet, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "homekit", tabName: "Closet")
+                        TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .closet, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "house.fill", tabName: "Closet")
                   
                         ZStack {
                             Circle()
@@ -55,7 +55,7 @@ struct ContentView: View {
                                     showPopUp.toggle()
                                 }
                             }
-                        TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .outfits, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "waveform", tabName: "Outfits")
+                        TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .outfits, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "tshirt.fill", tabName: "Outfits")
                    
                     }
                         .frame(width: geometry.size.width, height: geometry.size.height/8)

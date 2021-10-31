@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 struct ClothingItem: Identifiable {
-    var id: String
+    let id = UUID()
+    var imageKey: String
     
     var image: UIImage
     var itemType: String

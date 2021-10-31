@@ -9,59 +9,37 @@ import SwiftUI
 import Amplify
 import Combine
 struct ClosetView: View {
-    @State var posts = [Post]()
+    @State var posts = [String: Post?]()
     
     @State var observationObject: AnyCancellable?
 
     
-    @State var images = [ClothingItem]()
+    @State var images = [String: ClothingItem?]()
     
     var body: some View {
         
         List {
-            ForEach(images) { image in
+            
+            ForEach(images.sorted(by: { $0.key > $1.key }), id: \.key) { key, image in
                 if let image = image {
+                    VStack {
+                        Text("\(image.imageKey)")
                     Image(uiImage: image.image)
                         .resizable()
                         .scaledToFit()
+                        
+                        
+                    }
                 }
-            }.onDelete(perform: deleteItem)
+            }
+            .onDelete { indexSet in
+                let key = Array(images.keys)[indexSet.first!]
+                print("removing from \(key) from images " )
+             
+                deleteItem(imageKey: key)
+            }
         }
         
-        
-//
-//        List(imageCache.sorted(by: {$0.key > $1.key}), id: \.key) { key, image in
-//            if let image = image {
-//                Image(uiImage: image)
-//                    .resizable()
-//                    .scaledToFit()
-//            }
-//        }
-        
-        
-        //    var body: some View {
-        //        List {
-        //            ForEach(posts) { post in
-        //
-        //                Image(uiImage: downloadImage(post: post)!)
-        //
-        //                    .resizable()
-        //                    .aspectRatio(contentMode: .fill)
-        //                    .frame(width: 200, height: 200)
-        //                    .cornerRadius(10)
-        //                    .overlay(
-        //                        Rectangle()
-        //                            .foregroundColor(.black)
-        //                            .cornerRadius(10)
-        //                            .opacity(0.2)
-        //                    )
-        //
-        //            }
-        //
-        //       .onDelete(perform: deleteItem)
-        //
-        //
-        //        }
     
 
     .onAppear {
@@ -75,29 +53,45 @@ struct ClosetView: View {
     }
 }
 
-    func deleteItem(indexSet: IndexSet) {
-        print("deleted item at \(indexSet)")
+    
+    private func listContent(for keys: [String]) -> some View {
+        ForEach(images.sorted(by: { $0.key > $1.key }), id: \.key) { key, image in
+            if let image = image {
+                VStack {
+                    Text("\(image.imageKey)")
+                Image(uiImage: image.image)
+                    .resizable()
+                    .scaledToFit()
+                    
+                    
+                }
+            }
+        }
+          .onDelete { indexSet in
+              let key = keys[indexSet.first!]
+              deleteItem(imageKey: key)
+          }
+      }
+    
+    func deleteItem(imageKey: String) {
+        guard let post = self.posts[imageKey] else { return }
         
-        var updatedPosts = posts
-       updatedPosts.remove(atOffsets: indexSet)
-        
-        guard let post = Set(updatedPosts).symmetricDifference(posts).first else { return }
-        images.remove(atOffsets: indexSet)
-        Amplify.DataStore.delete(post) { result in
+        print("deleting kwy \(imageKey) ")
+        Amplify.DataStore.delete(post!) { result in
             switch result {
             case .success:
-                print("Post key \(post.imageKey) deleted in datastore at \(indexSet)")
-                self.images.remove(atOffsets: indexSet)
+                print("@DataStore remove: \(imageKey)" )
+           //     self.images.remove(atOffsets: indexSet)
             case .failure(let error):
                 print("Error deleting post - \(error.localizedDescription)")
             }
         }
         
-        Amplify.Storage.remove(key: post.imageKey) { event in
+        Amplify.Storage.remove(key: imageKey) { event in
             switch event {
             case let .success(data):
                 
-                print("Completed: Deleted \(data) and key: \(post.imageKey) in storage")
+                print("@Stirage remove: \(imageKey)")
                 
             case let .failure(storageError):
                 print("Failed: \(storageError.errorDescription). \(storageError.recoverySuggestion)")
@@ -130,7 +124,9 @@ struct ClosetView: View {
 //                }
                 
                 // download images
-                self.posts = posts
+                for post in posts {
+                    self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
+                }
                 downloadData(for: posts)
                 
              //   self.posts = posts
@@ -148,7 +144,7 @@ struct ClosetView: View {
             let storageOperation = Amplify.Storage.downloadData(
                 key: post.imageKey,
                 progressListener: { progress in
-                    print("Progress: \(progress)")
+               //     print("Progress: \(progress)")
                 }, resultListener: { (result) in
                     switch result {
                     case .success(let imageData):
@@ -158,7 +154,7 @@ struct ClosetView: View {
                         
                         DispatchQueue.main.async {
                            // self.posts.append(post)
-                            images.append(ClothingItem(id: post.imageKey, image: image!, itemType: post.itemType))
+                            images[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
                         }
                         
                     case .failure(let error):
@@ -177,16 +173,20 @@ struct ClosetView: View {
                 
                 switch changes.mutationType {
                 case "create":
-                    self.posts.append(post)
+                    self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
     
 
                 case "delete":
                     
-                    if let index = self.posts.firstIndex(of: post) {
-                        print("removing image at \(index)")
-                        self.posts.remove(at: index)
-                   //     self.images.remove(at: index)
-                    }
+                    self.posts.removeValue(forKey: post.imageKey)
+    
+                        
+                    print("@posts remove: \(post.imageKey)")
+                    print("@Images remove: \(post.imageKey)")
+          
+                  
+                    self.images.removeValue(forKey: post.imageKey)
+                    
                 default:
                     break
                 }
