@@ -79,13 +79,13 @@ struct AddClothesView: View {
                         switch selectedItemType {
                         case 0:
                             
-                            itemType = "top"
+                            itemType = "tops"
                             print(itemType)
                         case 1:
-                            itemType = "bottom"
+                            itemType = "bottoms"
                             print(itemType)
                         case 2:
-                            itemType = "shoe"
+                            itemType = "shoes"
                             print(itemType)
                         default:
                             itemType = "item"
@@ -108,9 +108,6 @@ struct AddClothesView: View {
                 }
             }
             .padding(10)
-            
-
-         
 
             
             // activate remove bg
@@ -167,11 +164,7 @@ struct AddClothesView: View {
                 self.shouldPresentCamera = false
             }), ActionSheet.Button.cancel()])
         }
-        
-        
     }
-    
-    
     
     func removeBackground(inputImage: UIImage) {
         
@@ -192,18 +185,15 @@ struct AddClothesView: View {
         }
         
     }
-    
     func uploadToAWS(_ image: UIImage, itemType: String) {
-        
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         let key = UUID().uuidString + ".jpg"
         _ = Amplify.Storage.uploadData(key: key, data: imageData) { result in
             switch result {
             case .success:
-                print("@Storage add: \(key)  ")
+                print("@Storage add \(itemType): \(key)  ")
                 let post = Post(imageKey: key, itemType: itemType)
                 save(post)
-                
             case .failure(let error):
                 print("Failed to upload - \(error) ")
             }
@@ -214,7 +204,7 @@ struct AddClothesView: View {
         Amplify.DataStore.save(post) { result in
             switch result {
             case .success:
-                print("@DataStore add: \(post.imageKey)")
+                print("@DataStore add \(itemType): \(post.imageKey)")
                 self.image = nil
                 
             case .failure(let error):

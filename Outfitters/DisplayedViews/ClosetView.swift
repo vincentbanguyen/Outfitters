@@ -8,65 +8,195 @@
 import SwiftUI
 import Amplify
 import Combine
+@available(iOS 15.0, *)
 struct ClosetView: View {
-    @State var posts = [String: Post?]()
     
-    @State var observationObject: AnyCancellable?
+    @StateObject var viewRouter = ViewRouter()
+
+    @Binding var posts: [String: Post]
+
+    @State var images = [String: ClothingItem]()
+    
+    @Binding var tops: [String: ClothingItem]
+    @Binding var bottoms: [String: ClothingItem]
+    @Binding var shoes: [String: ClothingItem]
+    
+    @Binding var topsKey: String
+    @Binding var bottomsKey: String
+    @Binding var shoesKey: String
     
     
-    @State var images = [String: ClothingItem?]()
+    enum itemTypes: String, CaseIterable {
+        case tops = "Tops"
+        case bottoms = "Bottoms"
+        case shoes = "Shoes"
+    }
     
+    @State var selectedItemType: itemTypes = .tops
     var body: some View {
         
-        List {
-            self.listContent(for: Array(images.keys))   
+        NavigationView {
+            VStack {
+                Picker("Closet", selection: $selectedItemType) {
+                    ForEach(itemTypes.allCases, id: \.self) {
+                        Text($0.rawValue)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                
+                
+                List {
+                    self.listContent(for: getArrayKeys(selectedItemType: selectedItemType), selectedItemType: selectedItemType)
+                }
+            }
+            .navigationTitle("Closet")
         }
+        
         .onAppear {
             print("on closet page")
             
             // might move all functions to loading screen]
             
-            getPosts()
-            observePosts()
+            
         }
     }
     
+    func getArrayKeys(selectedItemType: itemTypes) -> [String] {
+        switch selectedItemType {
+        case .tops:
+            print("TOPS")
+            return Array(tops.keys)
+        case .bottoms:
+            print("BOTTOMS")
+            return Array(bottoms.keys)
+        case .shoes:
+            print("SHOES")
+            return Array(shoes.keys)
+        }
+    }
     
-    private func listContent(for keys: [String]) -> some View {
+    private func listContent(for keys: [String], selectedItemType: itemTypes) -> some View {
         ForEach(keys, id: \.self) { key in
             if let key = key {
-                VStack {
-                    Text("\(self.images[key]!!.imageKey)")
-                    Image(uiImage: self.images[key]!!.image)
-                        .resizable()
-                        .scaledToFit()
+                
+                
+                switch selectedItemType {
+                case .tops:
+                    VStack {
+                        //        Text("\(self.tops[key]!!.imageKey)")
+                        Image(uiImage: self.tops[key]!.image)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(20)
+                            .swipeActions(edge: .leading) {
+                                
+                                Button {
+                                    topsKey = key
+                                    viewRouter.currentPage = .addOutfit
+                                    print("going to add outfit")
+                                    
+                                } label: {
+                                    Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                                }
+                                .tint(Color("colorPlus"))
+                            }
+                        
+                            .swipeActions(edge: .trailing) {
+                                
+                                Button {
+                                    print("deleting: \(key)")
+                                    deleteItem(imageKey: key, selectedItemType: selectedItemType)
+                                    
+                                } label: {
+                                    Label("Remove Item", systemImage: "trash.fill")
+                                }
+                                .tint(.red)
+                            }
+                        
+                    }
+                case .bottoms:
+                    VStack {
+                        //        Text("\(self.tops[key]!!.imageKey)")
+                        Image(uiImage: self.bottoms[key]!.image)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(20)
+                            .swipeActions(edge: .leading) {
+                                
+                                Button {
+                                    bottomsKey = key
+                                    viewRouter.currentPage = .addOutfit
+                                    print("going to add outfit")
+                                    
+                                } label: {
+                                    Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                                }
+                                .tint(Color("colorPlus"))
+                            }
+                        
+                            .swipeActions(edge: .trailing) {
+                                
+                                Button {
+                                    print("deleting: \(key)")
+                                    deleteItem(imageKey: key, selectedItemType: selectedItemType)
+                                    
+                                } label: {
+                                    Label("Remove Item", systemImage: "trash.fill")
+                                }
+                                .tint(.red)
+                            }
+                        
+                    }
+                case .shoes:
+                    VStack {
+                        //        Text("\(self.tops[key]!!.imageKey)")
+                        Image(uiImage: self.shoes[key]!.image)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(20)
+                            .swipeActions(edge: .leading) {
+                                
+                                Button {
+                                    shoesKey = key
+                                    viewRouter.currentPage = .addOutfit
+                                    print("going to add outfit")
+                                    
+                                } label: {
+                                    Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                                }
+                                .tint(Color("colorPlus"))
+                            }
+                        
+                            .swipeActions(edge: .trailing) {
+                                
+                                Button {
+                                    print("deleting: \(key)")
+                                    deleteItem(imageKey: key, selectedItemType: selectedItemType)
+                                    
+                                } label: {
+                                    Label("Remove Item", systemImage: "trash.fill")
+                                }
+                                .tint(.red)
+                            }
+                        
+                    }
                 }
+                
+                
             }
         }
         .onDelete { indexSet in
-            let key = keys[indexSet.first!]
-            print("deleting: \(key)")
-            deleteItem(imageKey: key)
+//            let key = keys[indexSet.first!]
+//         print("deleting: ")
+//            deleteItem(imageKey: key, selectedItemType: selectedItemType)
         }
+        
     }
     
-    func deleteListItem(at offset: IndexSet) {
-        print("offset \(offset) offset.first! : \(offset.first!)")
-        //                let key = Array(self.users.keys)[offset.first!]
-        let key = Array(posts.keys)[offset.first!]
-        print("removing key:  \(key)" )
-        print("@posts remove: \(key)")
-        print("@Images remove: \(key)")
-        
-        
-        deleteItem(imageKey: key)
-    }
-    
-    
-    func deleteItem(imageKey: String) {
+    func deleteItem(imageKey: String, selectedItemType: itemTypes) {
         guard let post = self.posts[imageKey] else { return }
         
-        Amplify.DataStore.delete(post!) { result in
+        Amplify.DataStore.delete(post) { result in
             switch result {
             case .success:
                 print("@DataStore remove: \(imageKey)" )
@@ -90,104 +220,26 @@ struct ClosetView: View {
         self.posts.removeValue(forKey: imageKey)
         self.images.removeValue(forKey: imageKey)
         
-        
-    }
-    func getPosts() {
-        
-        
-        
-        Amplify.DataStore.query(Post.self) { result in
-            switch result {
-            case .success(let posts):
-                print("GETTING POSTS")
-                
-                
-                //      to clear datastore/
-                //                for post in posts {
-                //                Amplify.DataStore.delete(post) { result in
-                //                    switch result {
-                //                    case .success:
-                //                        print("Post key \(post.imageKey) deleted in datastore at")
-                //                       // self.images.remove(atOffsets: indexSet)
-                //                    case .failure(let error):
-                //                        print("Error deleting post - \(error.localizedDescription)")
-                //                    }
-                //                }
-                //                }
-                
-                // download images
-                downloadData(for: posts)
-                
-                //   self.posts = posts
-                
-            case .failure(let error):
-                print(error)
-            }
+        switch selectedItemType {
+        case .tops:
+            print("REMOVING TOP: \(imageKey)")
+            self.tops.removeValue(forKey: imageKey)
+        case .bottoms:
+            print("REMOVING BOTTOM: \(imageKey)")
+            self.bottoms.removeValue(forKey: imageKey)
+        case .shoes:
+            print("REMOVING SHOE: \(imageKey)")
+            self.shoes.removeValue(forKey: imageKey)
         }
-    }
-    
-    
-    func downloadData(for posts: [Post]) {
         
-        for post in posts {
-            let storageOperation = Amplify.Storage.downloadData(
-                key: post.imageKey,
-                progressListener: { progress in
-                    //     print("Progress: \(progress)")
-                }, resultListener: { (result) in
-                    switch result {
-                    case .success(let imageData):
-                        
-                        let image = UIImage(data: imageData)
-                        // let image = UIImage(data: imageData)
-                        
-                        DispatchQueue.main.async {
-                            // self.posts.append(post)
-                            self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
-                            print(post.imageKey)
-                            images[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
-                        }
-                        
-                    case .failure(let error):
-                        print("failed to donwload image data")
-                    }
-                })
-        }
+        
     }
-    func observePosts() {
-        observationObject = Amplify.DataStore.publisher(for: Post.self).sink(
-            receiveCompletion: { print($0)},
-            receiveValue: { changes in
-                guard let post = try? changes.decodeModel(as: Post.self) else { return }
-                
-                
-                
-                switch changes.mutationType {
-                case "create":
-                    self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
-                    downloadData(for: [post])
-                    
-                case "delete":
-                    
-                    
-                    
-                    
-                    print("deleted stuff")
-                    
-                default:
-                    break
-                }
-                
-                
-            }
-        )
-    }
-    
+   
     
 }
-
-struct ClosetView_Previews: PreviewProvider {
-    static var previews: some View {
-        ClosetView()
-    }
-}
+//
+//struct ClosetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ClosetView()
+//    }
+//}

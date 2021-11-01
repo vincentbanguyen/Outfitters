@@ -1,24 +1,6 @@
 {
-  "api": {
-    "amplifyDatasource": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": ""
-            }
-          }
-        }
-      }
-    }
-  },
   "auth": {
-    "outfitters4ff3a68c": {
+    "outfitters9a1b8875": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -45,9 +27,27 @@
     }
   },
   "storage": {
-    "s33d995ab4": {
+    "s32382a793": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
+    }
+  },
+  "api": {
+    "outfitters": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "description": ""
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
     }
   }
 }

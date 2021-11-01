@@ -8,6 +8,8 @@ extension Post {
     case id
     case imageKey
     case itemType
+    case createdAt
+    case updatedAt
   }
   
   public static let keys = CodingKeys.self
@@ -21,7 +23,9 @@ extension Post {
     model.fields(
       .id(),
       .field(post.imageKey, is: .required, ofType: .string),
-      .field(post.itemType, is: .required, ofType: .string)
+      .field(post.itemType, is: .required, ofType: .string),
+      .field(post.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
+      .field(post.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )
     }
 }

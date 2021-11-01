@@ -18,5 +18,6 @@ enum Page {
     case closet
     case outfits
     case addClothes
+    case addOutfit
 }
 

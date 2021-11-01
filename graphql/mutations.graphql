@@ -6,6 +6,7 @@ mutation CreatePost(
   createPost(input: $input, condition: $condition) {
     id
     imageKey
+    itemType
     _version
     _deleted
     _lastChangedAt
@@ -20,6 +21,7 @@ mutation UpdatePost(
   updatePost(input: $input, condition: $condition) {
     id
     imageKey
+    itemType
     _version
     _deleted
     _lastChangedAt
@@ -34,6 +36,7 @@ mutation DeletePost(
   deletePost(input: $input, condition: $condition) {
     id
     imageKey
+    itemType
     _version
     _deleted
     _lastChangedAt

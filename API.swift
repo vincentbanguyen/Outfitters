@@ -5,8 +5,8 @@ import AWSAppSync
 public struct CreatePostInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: GraphQLID? = nil, imageKey: String, version: Int? = nil) {
-    graphQLMap = ["id": id, "imageKey": imageKey, "_version": version]
+  public init(id: GraphQLID? = nil, imageKey: String, itemType: String, version: Int? = nil) {
+    graphQLMap = ["id": id, "imageKey": imageKey, "itemType": itemType, "_version": version]
   }
 
   public var id: GraphQLID? {
@@ -27,6 +27,15 @@ public struct CreatePostInput: GraphQLMapConvertible {
     }
   }
 
+  public var itemType: String {
+    get {
+      return graphQLMap["itemType"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "itemType")
+    }
+  }
+
   public var version: Int? {
     get {
       return graphQLMap["_version"] as! Int?
@@ -40,8 +49,8 @@ public struct CreatePostInput: GraphQLMapConvertible {
 public struct ModelPostConditionInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(imageKey: ModelStringInput? = nil, and: [ModelPostConditionInput?]? = nil, or: [ModelPostConditionInput?]? = nil, not: ModelPostConditionInput? = nil) {
-    graphQLMap = ["imageKey": imageKey, "and": and, "or": or, "not": not]
+  public init(imageKey: ModelStringInput? = nil, itemType: ModelStringInput? = nil, and: [ModelPostConditionInput?]? = nil, or: [ModelPostConditionInput?]? = nil, not: ModelPostConditionInput? = nil) {
+    graphQLMap = ["imageKey": imageKey, "itemType": itemType, "and": and, "or": or, "not": not]
   }
 
   public var imageKey: ModelStringInput? {
@@ -50,6 +59,15 @@ public struct ModelPostConditionInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "imageKey")
+    }
+  }
+
+  public var itemType: ModelStringInput? {
+    get {
+      return graphQLMap["itemType"] as! ModelStringInput?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "itemType")
     }
   }
 
@@ -345,8 +363,8 @@ public struct ModelSizeInput: GraphQLMapConvertible {
 public struct UpdatePostInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: GraphQLID, imageKey: String? = nil, version: Int? = nil) {
-    graphQLMap = ["id": id, "imageKey": imageKey, "_version": version]
+  public init(id: GraphQLID, imageKey: String? = nil, itemType: String? = nil, version: Int? = nil) {
+    graphQLMap = ["id": id, "imageKey": imageKey, "itemType": itemType, "_version": version]
   }
 
   public var id: GraphQLID {
@@ -364,6 +382,15 @@ public struct UpdatePostInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "imageKey")
+    }
+  }
+
+  public var itemType: String? {
+    get {
+      return graphQLMap["itemType"] as! String?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "itemType")
     }
   }
 
@@ -406,8 +433,8 @@ public struct DeletePostInput: GraphQLMapConvertible {
 public struct ModelPostFilterInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: ModelIDInput? = nil, imageKey: ModelStringInput? = nil, and: [ModelPostFilterInput?]? = nil, or: [ModelPostFilterInput?]? = nil, not: ModelPostFilterInput? = nil) {
-    graphQLMap = ["id": id, "imageKey": imageKey, "and": and, "or": or, "not": not]
+  public init(id: ModelIDInput? = nil, imageKey: ModelStringInput? = nil, itemType: ModelStringInput? = nil, and: [ModelPostFilterInput?]? = nil, or: [ModelPostFilterInput?]? = nil, not: ModelPostFilterInput? = nil) {
+    graphQLMap = ["id": id, "imageKey": imageKey, "itemType": itemType, "and": and, "or": or, "not": not]
   }
 
   public var id: ModelIDInput? {
@@ -425,6 +452,15 @@ public struct ModelPostFilterInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "imageKey")
+    }
+  }
+
+  public var itemType: ModelStringInput? {
+    get {
+      return graphQLMap["itemType"] as! ModelStringInput?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "itemType")
     }
   }
 
@@ -583,7 +619,7 @@ public struct ModelIDInput: GraphQLMapConvertible {
 
 public final class CreatePostMutation: GraphQLMutation {
   public static let operationString =
-    "mutation CreatePost($input: CreatePostInput!, $condition: ModelPostConditionInput) {\n  createPost(input: $input, condition: $condition) {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "mutation CreatePost($input: CreatePostInput!, $condition: ModelPostConditionInput) {\n  createPost(input: $input, condition: $condition) {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public var input: CreatePostInput
   public var condition: ModelPostConditionInput?
@@ -630,6 +666,7 @@ public final class CreatePostMutation: GraphQLMutation {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -643,8 +680,8 @@ public final class CreatePostMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -671,6 +708,15 @@ public final class CreatePostMutation: GraphQLMutation {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
@@ -724,7 +770,7 @@ public final class CreatePostMutation: GraphQLMutation {
 
 public final class UpdatePostMutation: GraphQLMutation {
   public static let operationString =
-    "mutation UpdatePost($input: UpdatePostInput!, $condition: ModelPostConditionInput) {\n  updatePost(input: $input, condition: $condition) {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "mutation UpdatePost($input: UpdatePostInput!, $condition: ModelPostConditionInput) {\n  updatePost(input: $input, condition: $condition) {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public var input: UpdatePostInput
   public var condition: ModelPostConditionInput?
@@ -771,6 +817,7 @@ public final class UpdatePostMutation: GraphQLMutation {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -784,8 +831,8 @@ public final class UpdatePostMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -812,6 +859,15 @@ public final class UpdatePostMutation: GraphQLMutation {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
@@ -865,7 +921,7 @@ public final class UpdatePostMutation: GraphQLMutation {
 
 public final class DeletePostMutation: GraphQLMutation {
   public static let operationString =
-    "mutation DeletePost($input: DeletePostInput!, $condition: ModelPostConditionInput) {\n  deletePost(input: $input, condition: $condition) {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "mutation DeletePost($input: DeletePostInput!, $condition: ModelPostConditionInput) {\n  deletePost(input: $input, condition: $condition) {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public var input: DeletePostInput
   public var condition: ModelPostConditionInput?
@@ -912,6 +968,7 @@ public final class DeletePostMutation: GraphQLMutation {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -925,8 +982,8 @@ public final class DeletePostMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -953,6 +1010,15 @@ public final class DeletePostMutation: GraphQLMutation {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
@@ -1006,7 +1072,7 @@ public final class DeletePostMutation: GraphQLMutation {
 
 public final class SyncPostsQuery: GraphQLQuery {
   public static let operationString =
-    "query SyncPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {\n  syncPosts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {\n    __typename\n    items {\n      __typename\n      id\n      imageKey\n      _version\n      _deleted\n      _lastChangedAt\n      createdAt\n      updatedAt\n    }\n    nextToken\n    startedAt\n  }\n}"
+    "query SyncPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {\n  syncPosts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {\n    __typename\n    items {\n      __typename\n      id\n      imageKey\n      itemType\n      _version\n      _deleted\n      _lastChangedAt\n      createdAt\n      updatedAt\n    }\n    nextToken\n    startedAt\n  }\n}"
 
   public var filter: ModelPostFilterInput?
   public var limit: Int?
@@ -1113,6 +1179,7 @@ public final class SyncPostsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+          GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
           GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
           GraphQLField("_deleted", type: .scalar(Bool.self)),
           GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -1126,8 +1193,8 @@ public final class SyncPostsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-          self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+        public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+          self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
         }
 
         public var __typename: String {
@@ -1154,6 +1221,15 @@ public final class SyncPostsQuery: GraphQLQuery {
           }
           set {
             snapshot.updateValue(newValue, forKey: "imageKey")
+          }
+        }
+
+        public var itemType: String {
+          get {
+            return snapshot["itemType"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "itemType")
           }
         }
 
@@ -1208,7 +1284,7 @@ public final class SyncPostsQuery: GraphQLQuery {
 
 public final class GetPostQuery: GraphQLQuery {
   public static let operationString =
-    "query GetPost($id: ID!) {\n  getPost(id: $id) {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "query GetPost($id: ID!) {\n  getPost(id: $id) {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public var id: GraphQLID
 
@@ -1253,6 +1329,7 @@ public final class GetPostQuery: GraphQLQuery {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -1266,8 +1343,8 @@ public final class GetPostQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -1294,6 +1371,15 @@ public final class GetPostQuery: GraphQLQuery {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
@@ -1347,7 +1433,7 @@ public final class GetPostQuery: GraphQLQuery {
 
 public final class ListPostsQuery: GraphQLQuery {
   public static let operationString =
-    "query ListPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String) {\n  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {\n    __typename\n    items {\n      __typename\n      id\n      imageKey\n      _version\n      _deleted\n      _lastChangedAt\n      createdAt\n      updatedAt\n    }\n    nextToken\n    startedAt\n  }\n}"
+    "query ListPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String) {\n  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {\n    __typename\n    items {\n      __typename\n      id\n      imageKey\n      itemType\n      _version\n      _deleted\n      _lastChangedAt\n      createdAt\n      updatedAt\n    }\n    nextToken\n    startedAt\n  }\n}"
 
   public var filter: ModelPostFilterInput?
   public var limit: Int?
@@ -1452,6 +1538,7 @@ public final class ListPostsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+          GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
           GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
           GraphQLField("_deleted", type: .scalar(Bool.self)),
           GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -1465,8 +1552,8 @@ public final class ListPostsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-          self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+        public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+          self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
         }
 
         public var __typename: String {
@@ -1493,6 +1580,15 @@ public final class ListPostsQuery: GraphQLQuery {
           }
           set {
             snapshot.updateValue(newValue, forKey: "imageKey")
+          }
+        }
+
+        public var itemType: String {
+          get {
+            return snapshot["itemType"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "itemType")
           }
         }
 
@@ -1547,7 +1643,7 @@ public final class ListPostsQuery: GraphQLQuery {
 
 public final class OnCreatePostSubscription: GraphQLSubscription {
   public static let operationString =
-    "subscription OnCreatePost {\n  onCreatePost {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "subscription OnCreatePost {\n  onCreatePost {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public init() {
   }
@@ -1585,6 +1681,7 @@ public final class OnCreatePostSubscription: GraphQLSubscription {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -1598,8 +1695,8 @@ public final class OnCreatePostSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -1626,6 +1723,15 @@ public final class OnCreatePostSubscription: GraphQLSubscription {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
@@ -1679,7 +1785,7 @@ public final class OnCreatePostSubscription: GraphQLSubscription {
 
 public final class OnUpdatePostSubscription: GraphQLSubscription {
   public static let operationString =
-    "subscription OnUpdatePost {\n  onUpdatePost {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "subscription OnUpdatePost {\n  onUpdatePost {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public init() {
   }
@@ -1717,6 +1823,7 @@ public final class OnUpdatePostSubscription: GraphQLSubscription {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -1730,8 +1837,8 @@ public final class OnUpdatePostSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -1758,6 +1865,15 @@ public final class OnUpdatePostSubscription: GraphQLSubscription {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
@@ -1811,7 +1927,7 @@ public final class OnUpdatePostSubscription: GraphQLSubscription {
 
 public final class OnDeletePostSubscription: GraphQLSubscription {
   public static let operationString =
-    "subscription OnDeletePost {\n  onDeletePost {\n    __typename\n    id\n    imageKey\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
+    "subscription OnDeletePost {\n  onDeletePost {\n    __typename\n    id\n    imageKey\n    itemType\n    _version\n    _deleted\n    _lastChangedAt\n    createdAt\n    updatedAt\n  }\n}"
 
   public init() {
   }
@@ -1849,6 +1965,7 @@ public final class OnDeletePostSubscription: GraphQLSubscription {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("imageKey", type: .nonNull(.scalar(String.self))),
+        GraphQLField("itemType", type: .nonNull(.scalar(String.self))),
         GraphQLField("_version", type: .nonNull(.scalar(Int.self))),
         GraphQLField("_deleted", type: .scalar(Bool.self)),
         GraphQLField("_lastChangedAt", type: .nonNull(.scalar(Int.self))),
@@ -1862,8 +1979,8 @@ public final class OnDeletePostSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, imageKey: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
-        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
+      public init(id: GraphQLID, imageKey: String, itemType: String, version: Int, deleted: Bool? = nil, lastChangedAt: Int, createdAt: String, updatedAt: String) {
+        self.init(snapshot: ["__typename": "Post", "id": id, "imageKey": imageKey, "itemType": itemType, "_version": version, "_deleted": deleted, "_lastChangedAt": lastChangedAt, "createdAt": createdAt, "updatedAt": updatedAt])
       }
 
       public var __typename: String {
@@ -1890,6 +2007,15 @@ public final class OnDeletePostSubscription: GraphQLSubscription {
         }
         set {
           snapshot.updateValue(newValue, forKey: "imageKey")
+        }
+      }
+
+      public var itemType: String {
+        get {
+          return snapshot["itemType"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "itemType")
         }
       }
 
