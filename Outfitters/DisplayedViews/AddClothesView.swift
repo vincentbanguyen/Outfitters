@@ -31,19 +31,19 @@ struct AddClothesView: View {
     
     var body: some View {
         // WARNING: Force wrapped image for demo purpose
-        
+        NavigationView {
         VStack {
             if removedBg == false  {
                 image!
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 300, height: 300)
+                    .frame(width: 250, height: 250)
                     .padding(40)
             } else {
                 Image(uiImage: outputImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 300, height: 300)
+                    .frame(width: 250, height: 250)
                     .padding(40)
                 
                 
@@ -149,6 +149,8 @@ struct AddClothesView: View {
                 .cornerRadius(40)
                 .foregroundColor(.white)
             }
+        }
+        .navigationBarTitle("Add Clothes")
         }
         .onAppear(perform: {
             print(didSelectItemType)

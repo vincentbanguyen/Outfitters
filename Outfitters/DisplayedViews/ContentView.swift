@@ -182,8 +182,8 @@ struct ContentView: View {
                                 outfitSummer[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
                             case "outfitFall":
                                 outfitFall[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
-                            case "outfitFall":
-                                outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                            case "outfitWinter":
+                                outfitWinter[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
                             default:
                                 print("uh oh no item type")
                             }
