@@ -1,0 +1,59 @@
+{
+    "UserAgent": "aws-amplify/cli",
+    "Version": "0.1.0",
+    "IdentityManager": {
+        "Default": {}
+    },
+    "CredentialsProvider": {
+        "CognitoIdentity": {
+            "Default": {
+                "PoolId": "us-west-1:b8eb3a44-09fe-40a2-b990-41718d9777a6",
+                "Region": "us-west-1"
+            }
+        }
+    },
+    "CognitoUserPool": {
+        "Default": {
+            "PoolId": "us-west-1_iaLOVEVpG",
+            "AppClientId": "2dsqebofutnqbmfs2k310ogb62",
+            "Region": "us-west-1"
+        }
+    },
+    "Auth": {
+        "Default": {
+            "authenticationFlowType": "USER_SRP_AUTH",
+            "loginMechanisms": [
+                "PREFERRED_USERNAME"
+            ],
+            "signupAttributes": [
+                "EMAIL"
+            ],
+            "passwordProtectionSettings": {
+                "passwordPolicyMinLength": 8,
+                "passwordPolicyCharacters": []
+            },
+            "mfaConfiguration": "OFF",
+            "mfaTypes": [
+                "SMS"
+            ],
+            "verificationMechanisms": [
+                "EMAIL"
+            ]
+        }
+    },
+    "S3TransferUtility": {
+        "Default": {
+            "Bucket": "outfitters10610951e88e4a85bdc2a62fcf6e5b57202925-dev",
+            "Region": "us-west-1"
+        }
+    },
+    "AppSync": {
+        "Default": {
+            "ApiUrl": "https://zd2s6fd4njcg5gvxq3wqkt5ss4.appsync-api.us-west-1.amazonaws.com/graphql",
+            "Region": "us-west-1",
+            "AuthMode": "API_KEY",
+            "ApiKey": "da2-noabozznbrdxhiwnlknksvpt2u",
+            "ClientDatabasePrefix": "outfitters_API_KEY"
+        }
+    }
+}
