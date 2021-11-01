@@ -14,11 +14,8 @@
 		E12E5859272D417C006B0D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E5858272D417C006B0D52 /* Assets.xcassets */; };
 		E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5890272D4CE2006B0D52 /* AppDelegate.swift */; };
 		E12E5897272DBBF7006B0D52 /* Post+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5896272DBBF7006B0D52 /* Post+Extensions.swift */; };
-		E18B1C3D272F7F4600744C68 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = E18B1C3C272F7F4600744C68 /* SQLite */; };
-		E18B1C3F272F8ACF00744C68 /* CreateOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18B1C3E272F8ACF00744C68 /* CreateOutfitView.swift */; };
-		E18B1C41272FBFAC00744C68 /* OutfitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18B1C40272FBFAC00744C68 /* OutfitsView.swift */; };
-		E18B1C482730689300744C68 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E18B1C462730689300744C68 /* awsconfiguration.json */; };
-		E18B1C492730689300744C68 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E18B1C472730689300744C68 /* amplifyconfiguration.json */; };
+		E1926C3B273069E50071FDCF /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E1926C39273069E50071FDCF /* awsconfiguration.json */; };
+		E1926C3C273069E50071FDCF /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = E1926C3A273069E50071FDCF /* amplifyconfiguration.json */; };
 		E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */; };
 		E1ED1CEE272D0EE500AD6034 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */; };
 		E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CF8272D0FB600AD6034 /* ContentView.swift */; };
@@ -67,10 +64,8 @@
 		E18B1C27272F5CF900744C68 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E18B1C2D272F5E4200744C68 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E18B1C37272F790700744C68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		E18B1C3E272F8ACF00744C68 /* CreateOutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOutfitView.swift; sourceTree = "<group>"; };
-		E18B1C40272FBFAC00744C68 /* OutfitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitsView.swift; sourceTree = "<group>"; };
-		E18B1C462730689300744C68 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		E18B1C472730689300744C68 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		E1926C39273069E50071FDCF /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		E1926C3A273069E50071FDCF /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		E1ED1CE3272D0EE300AD6034 /* Outfitters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outfitters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfittersApp.swift; sourceTree = "<group>"; };
 		E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -89,7 +84,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E18B1C3D272F7F4600744C68 /* SQLite in Frameworks */,
 				E7E834622AFC1DC0C89A90C5 /* Pods_Outfitters.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +132,8 @@
 		E1ED1CE5272D0EE300AD6034 /* Outfitters */ = {
 			isa = PBXGroup;
 			children = (
-				E18B1C472730689300744C68 /* amplifyconfiguration.json */,
-				E18B1C462730689300744C68 /* awsconfiguration.json */,
+				E1926C3A273069E50071FDCF /* amplifyconfiguration.json */,
+				E1926C39273069E50071FDCF /* awsconfiguration.json */,
 				E18B1C37272F790700744C68 /* Info.plist */,
 				E1ED1D0F272D2B2600AD6034 /* DisplayedViews */,
 				E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */,
@@ -166,11 +160,9 @@
 		E1ED1D0F272D2B2600AD6034 /* DisplayedViews */ = {
 			isa = PBXGroup;
 			children = (
-				E1ED1CF8272D0FB600AD6034 /* ContentView.swift */,
 				E1ED1D0D272D221500AD6034 /* ClosetView.swift */,
 				E1ED1CFC272D103100AD6034 /* AddClothesView.swift */,
-				E18B1C3E272F8ACF00744C68 /* CreateOutfitView.swift */,
-				E18B1C40272FBFAC00744C68 /* OutfitsView.swift */,
+				E1ED1CF8272D0FB600AD6034 /* ContentView.swift */,
 			);
 			path = DisplayedViews;
 			sourceTree = "<group>";
@@ -217,9 +209,6 @@
 			dependencies = (
 			);
 			name = Outfitters;
-			packageProductDependencies = (
-				E18B1C3C272F7F4600744C68 /* SQLite */,
-			);
 			productName = Outfitters;
 			productReference = E1ED1CE3272D0EE300AD6034 /* Outfitters.app */;
 			productType = "com.apple.product-type.application";
@@ -267,8 +256,8 @@
 			files = (
 				E1ED1CEE272D0EE500AD6034 /* Preview Assets.xcassets in Resources */,
 				E12E5859272D417C006B0D52 /* Assets.xcassets in Resources */,
-				E18B1C482730689300744C68 /* awsconfiguration.json in Resources */,
-				E18B1C492730689300744C68 /* amplifyconfiguration.json in Resources */,
+				E1926C3B273069E50071FDCF /* awsconfiguration.json in Resources */,
+				E1926C3C273069E50071FDCF /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,11 +331,9 @@
 				E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */,
 				E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */,
 				E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */,
-				E18B1C41272FBFAC00744C68 /* OutfitsView.swift in Sources */,
 				E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */,
 				E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */,
 				E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */,
-				E18B1C3F272F8ACF00744C68 /* CreateOutfitView.swift in Sources */,
 				E1ED1D0C272D19E900AD6034 /* Extensions.swift in Sources */,
 				E12E5897272DBBF7006B0D52 /* Post+Extensions.swift in Sources */,
 				E1ED1CFB272D0FE900AD6034 /* SUImagePickerView.swift in Sources */,
@@ -574,14 +561,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E18B1C3C272F7F4600744C68 /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E18B1C34272F781200744C68 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
-			productName = SQLite;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E1ED1CDB272D0EE300AD6034 /* Project object */;
 }
