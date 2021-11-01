@@ -31,7 +31,7 @@ struct AddClothesView: View {
     
     var body: some View {
         // WARNING: Force wrapped image for demo purpose
-        NavigationView {
+      
         VStack {
             if removedBg == false  {
                 image!
@@ -150,8 +150,7 @@ struct AddClothesView: View {
                 .foregroundColor(.white)
             }
         }
-        .navigationBarTitle("Add Clothes")
-        }
+        
         .onAppear(perform: {
             print(didSelectItemType)
         })
