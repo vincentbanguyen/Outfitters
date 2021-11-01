@@ -24,21 +24,11 @@
 		E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */; };
 		E1ED1D0C272D19E900AD6034 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D0B272D19E900AD6034 /* Extensions.swift */; };
 		E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D0D272D221500AD6034 /* ClosetView.swift */; };
+		E1FD0496273076CA00CAFF8A /* CreateOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD0494273076CA00CAFF8A /* CreateOutfitView.swift */; };
+		E1FD0497273076CA00CAFF8A /* OutfitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD0495273076CA00CAFF8A /* OutfitsView.swift */; };
+		E1FD049B2730772F00CAFF8A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FD049A2730772F00CAFF8A /* SQLite.framework */; };
 		E7E834622AFC1DC0C89A90C5 /* Pods_Outfitters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9C3E2BD9F7FE327E3A9C74 /* Pods_Outfitters.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		E18B1C30272F5E4200744C68 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5E59AACB188509280D23FC18 /* Pods-Outfitters.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outfitters.debug.xcconfig"; path = "Target Support Files/Pods-Outfitters/Pods-Outfitters.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +65,9 @@
 		E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIewRouter.swift; sourceTree = "<group>"; };
 		E1ED1D0B272D19E900AD6034 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E1ED1D0D272D221500AD6034 /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
+		E1FD0494273076CA00CAFF8A /* CreateOutfitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateOutfitView.swift; sourceTree = "<group>"; };
+		E1FD0495273076CA00CAFF8A /* OutfitsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitsView.swift; sourceTree = "<group>"; };
+		E1FD049A2730772F00CAFF8A /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9C3E2BD9F7FE327E3A9C74 /* Pods_Outfitters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Outfitters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66A5EEB1B8BA79F2A03CCAC /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7E834622AFC1DC0C89A90C5 /* Pods_Outfitters.framework in Frameworks */,
+				E1FD049B2730772F00CAFF8A /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +154,8 @@
 		E1ED1D0F272D2B2600AD6034 /* DisplayedViews */ = {
 			isa = PBXGroup;
 			children = (
+				E1FD0494273076CA00CAFF8A /* CreateOutfitView.swift */,
+				E1FD0495273076CA00CAFF8A /* OutfitsView.swift */,
 				E1ED1D0D272D221500AD6034 /* ClosetView.swift */,
 				E1ED1CFC272D103100AD6034 /* AddClothesView.swift */,
 				E1ED1CF8272D0FB600AD6034 /* ContentView.swift */,
@@ -170,6 +166,7 @@
 		E34D13788549D1E09E287AC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E1FD049A2730772F00CAFF8A /* SQLite.framework */,
 				E18B1C2D272F5E4200744C68 /* SQLite.framework */,
 				E18B1C27272F5CF900744C68 /* SQLite.framework */,
 				E18B1C05272F5CF300744C68 /* Amplify.framework */,
@@ -201,14 +198,14 @@
 				E1ED1CE0272D0EE300AD6034 /* Frameworks */,
 				E1ED1CE1272D0EE300AD6034 /* Resources */,
 				313ACB4AE8B875BA56F93F4C /* [CP] Embed Pods Frameworks */,
-				E18B1C04272F5C2100744C68 /* ShellScript */,
-				E18B1C30272F5E4200744C68 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Outfitters;
+			packageProductDependencies = (
+			);
 			productName = Outfitters;
 			productReference = E1ED1CE3272D0EE300AD6034 /* Outfitters.app */;
 			productType = "com.apple.product-type.application";
@@ -303,23 +300,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Outfitters/Pods-Outfitters-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E18B1C04272F5C2100744C68 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/AmplifyTools/amplify-tools.sh\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -330,6 +310,8 @@
 				E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */,
 				E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */,
 				E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */,
+				E1FD0496273076CA00CAFF8A /* CreateOutfitView.swift in Sources */,
+				E1FD0497273076CA00CAFF8A /* OutfitsView.swift in Sources */,
 				E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */,
 				E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */,
 				E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */,
