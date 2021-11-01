@@ -22,7 +22,11 @@ struct ContentView: View {
     @State var tops = [String: ClothingItem]()
     @State var bottoms = [String: ClothingItem]()
     @State var shoes = [String: ClothingItem]()
-    @State var outfits = [String: ClothingItem]()
+    
+    @State var outfitSpring = [String: ClothingItem]()
+    @State var outfitSummer = [String: ClothingItem]()
+    @State var outfitFall = [String: ClothingItem]()
+    @State var outfitWinter = [String: ClothingItem]()
     
     @State var showPopUp = false
     
@@ -33,6 +37,7 @@ struct ContentView: View {
     @State var bottomsKey = "none"
     @State var shoesKey = "none"
     
+    @State var modifyingOutfits = false
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -44,11 +49,12 @@ struct ContentView: View {
                    
                   
                 case .outfits:
-                    if tops.count > 0 && bottoms.count > 0 && shoes.count > 0 {
-                        Text("outfits page")
+                    if outfitSpring.count > 0 || outfitSummer.count > 0 || outfitFall.count > 0 || outfitWinter.count > 0 {
+                        
+                        OutfitsView(viewRouter: viewRouter, posts: $posts, outfitSpring: $outfitSpring, outfitSummer: $outfitSummer, outfitFall: $outfitFall, outfitWinter: $outfitWinter)
                     }
                     else {
-                        Text("Add more items to the closet first!")
+                        Text("Create an outfit first!")
                     }
                     
                 case .addClothes:
@@ -56,7 +62,7 @@ struct ContentView: View {
                     
                 case .addOutfit:
                     if tops.count > 0 && bottoms.count > 0 && shoes.count > 0 {
-                        CreateOutfitView(viewRouter: viewRouter, posts: $posts, tops: $tops, bottoms: $bottoms, shoes: $shoes, topsKey: $topsKey, bottomsKey: $bottomsKey, shoesKey: $shoesKey)
+                        CreateOutfitView(viewRouter: viewRouter, posts: $posts, tops: $tops, bottoms: $bottoms, shoes: $shoes, topsKey: $topsKey, bottomsKey: $bottomsKey, shoesKey: $shoesKey, modifyingOutfits: $modifyingOutfits)
                     }
                     else {
                         Text("Add more items to the closet first!")
@@ -69,7 +75,7 @@ struct ContentView: View {
                 Spacer()
                 ZStack {
                     if showPopUp {
-                        PlusMenu(viewRouter: viewRouter, showPopUp: $showPopUp, widthAndHeight: geometry.size.width/7)
+                        PlusMenu(viewRouter: viewRouter, showPopUp: $showPopUp, modifyingOutfits: $modifyingOutfits, widthAndHeight: geometry.size.width/7)
                             .offset(y: -geometry.size.height/6)
                     }
                     HStack {
@@ -170,8 +176,14 @@ struct ContentView: View {
                                 bottoms[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
                             case "shoes":
                                 shoes[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
-                            case "outfits":
-                                outfits[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                            case "outfitSpring":
+                                outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                            case "outfitSummer":
+                                outfitSummer[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                            case "outfitFall":
+                                outfitFall[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                            case "outfitFall":
+                                outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
                             default:
                                 print("uh oh no item type")
                             }
@@ -180,6 +192,7 @@ struct ContentView: View {
                         
                     case .failure(let error):
                         print("failed to donwload image data")
+                        downloadData(for: posts)
                     }
                 })
         }
@@ -223,6 +236,9 @@ struct PlusMenu: View {
     @StateObject var viewRouter = ViewRouter()
     
     @Binding var showPopUp: Bool
+    
+    @Binding var modifyingOutfits: Bool
+    
     let widthAndHeight: CGFloat
     
     var body: some View {
@@ -258,6 +274,8 @@ struct PlusMenu: View {
             }
             .onTapGesture {
                 viewRouter.currentPage = .addOutfit
+                modifyingOutfits = true
+                
                 withAnimation {
                     showPopUp = false
                 }

@@ -43,15 +43,12 @@ struct ClosetView: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                
-                
                 List {
                     self.listContent(for: getArrayKeys(selectedItemType: selectedItemType), selectedItemType: selectedItemType)
                 }
             }
             .navigationTitle("Closet")
         }
-        
         .onAppear {
             print("on closet page")
             
@@ -218,7 +215,6 @@ struct ClosetView: View {
         }
         
         self.posts.removeValue(forKey: imageKey)
-        self.images.removeValue(forKey: imageKey)
         
         switch selectedItemType {
         case .tops:

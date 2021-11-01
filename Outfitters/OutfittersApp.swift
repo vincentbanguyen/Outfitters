@@ -12,6 +12,7 @@ import SwiftUI
 struct OutfittersApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    
     @StateObject var viewRouter = ViewRouter()
     var body: some Scene {
         WindowGroup {

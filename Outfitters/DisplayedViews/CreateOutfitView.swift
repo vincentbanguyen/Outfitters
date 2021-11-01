@@ -14,6 +14,7 @@ struct CreateOutfitView: View {
     @Binding var tops: [String: ClothingItem]
     @Binding var bottoms: [String: ClothingItem]
     @Binding var shoes: [String: ClothingItem]
+
     
     
     @State var randomTopsKey = 0
@@ -28,25 +29,27 @@ struct CreateOutfitView: View {
     @Binding var shoesKey: String
     @State var modifyingShoes = false
     
-    @State private var outfitImage: Image? = Image(systemName: "tshirt")
+    @Binding var modifyingOutfits: Bool
+    
+    @State var didSelectSeasonType = false
+    let selectedSeasons = ["🌷", "☀️", "🍁","❄️"]
+    @State var seasonType = "item"
+    @State public var selectedSeasonType: Int?
+    
+    @State private var outfitImage: UIImage? = UIImage(systemName: "tshirt")
     
     
-    let imageSize = 180.0
+    let imageSize = 150.0
     
     var body: some View {
         VStack {
-            
-//            Image(uiImage: tops[Array(tops.keys)[randomTopsKey]]!.image
-//                    .overlayWith(image: bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image, posX: 0, posY: CGFloat(bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image.size.height))
-//                    .overlayWith(image: shoes[Array(shoes.keys)[randomShoesKey]]!.image, posX: 0, posY: CGFloat(shoes[Array(shoes.keys)[randomShoesKey]]!.image.size.height * 2)))
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .cornerRadius(20)
-//                .frame(width:  imageSize, height: imageSize * 3)
-//                .scaledToFit()
+    
+           
             Button(action: {
               randomizeOutfit()
                 modifyingTops = true
+                modifyingBottoms = true
+                modifyingShoes = true
             }
                 ,label: {
                 HStack {
@@ -232,14 +235,57 @@ struct CreateOutfitView: View {
                 
             }
             
+            HStack {
+                ForEach(0..<selectedSeasons.count, id: \.self) { selectedSeason in
+                    Button(action: {
+                        self.selectedSeasonType = selectedSeason
+                        didSelectSeasonType = true
+                        switch selectedSeasonType {
+                        case 0:
+                        
+                            seasonType = "outfitSpring"
+                            print(seasonType)
+                        case 1:
+                            seasonType = "outfitSummer"
+                            print(seasonType)
+                        case 2:
+                            seasonType = "outfitFall"
+                            print(seasonType)
+                        case 3:
+                            seasonType = "outfitWinter"
+                            print(seasonType)
+                        default:
+                            seasonType = "item"
+                        }
+                    }) {
+                        
+                        Text("\(selectedSeasons[selectedSeason])")
+                            .font(Font.system(size: 30, weight: .semibold))
+                           
+                    }
+                    .frame(width: 60, height: 60)
+                    .background(self.selectedSeasonType == selectedSeason ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
+                    .cornerRadius(40)
+                   // .foregroundColor(self.buttonSelected == selectedType ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
+                    .overlay(
+                           RoundedRectangle(cornerRadius: 40)
+                               .stroke(Color(#colorLiteral(red: 0.2067584602, green: 0.6186007545, blue: 1, alpha: 1)), lineWidth: 5)
+                       )
+                    .padding(4)
+                }
+            }
+            .padding(4)
+ 
             
        
             Button(action: {
                 // SAVE OUTFIT BY SAVING KEYS OF TOPS BOTTOMS SHOES
                 
-                saveOutfit(tops: modifyingTops ? tops[Array(tops.keys)[randomTopsKey]]!.image : tops[topsKey]!.image  ,
-                           bottoms:  modifyingBottoms ? bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image : bottoms[bottomsKey]!.image,
-                           shoes:  modifyingShoes ? shoes[Array(shoes.keys)[randomShoesKey]]!.image : shoes[shoesKey]!.image)
+                saveOutfit(topsImage: modifyingTops ? tops[Array(tops.keys)[randomTopsKey]]!.image : tops[topsKey]!.image  ,
+                           bottomsImage:  modifyingBottoms ? bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image : bottoms[bottomsKey]!.image,
+                           shoesImage:  modifyingShoes ? shoes[Array(shoes.keys)[randomShoesKey]]!.image : shoes[shoesKey]!.image)
+                
+                viewRouter.currentPage = .outfits
             }
                 ,label: {
                 HStack {
@@ -265,37 +311,44 @@ struct CreateOutfitView: View {
             print("generating random keys")
            randomizeOutfit()
             
+            if modifyingOutfits == true {
+                modifyingTops = true
+                modifyingBottoms = true
+                modifyingShoes = true
+            }
+            
+            
         })
         
         
     }
     
-    func saveOutfit(tops: UIImage, bottoms: UIImage, shoes: UIImage) {
-        
-        outfitImage = tops[Array(tops.keys)[randomTopsKey]]!.image
-                .overlayWith(image: bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image, posX: 0, posY: CGFloat(bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image.size.height))
-                .overlayWith(image: shoes[Array(shoes.keys)[randomShoesKey]]!.image, posX: 0, posY: CGFloat(shoes[Array(shoes.keys)[randomShoesKey]]!.image.size.height * 2))
-        
-        uploadToAWS(image: outfitImage, itemType: "outfits")
-        
+    func saveOutfit(topsImage: UIImage, bottomsImage: UIImage, shoesImage: UIImage) {
+        if didSelectSeasonType {
+        outfitImage = topsImage
+                .overlayWith(image: bottomsImage, posX: 0, posY: CGFloat(bottomsImage.size.height))
+                .overlayWith(image: shoesImage, posX: 0, posY: CGFloat(shoesImage.size.height * 2))
+
+       
+        uploadToAWS(outfitImage!, seasonType: seasonType)
+        }
     }
     func randomizeOutfit() {
-        modifyingBottoms = true
-        modifyingShoes = true
+        
         randomTopsKey =  Int.random(in: 0..<tops.count)
         randomBottomsKey =  Int.random(in: 0..<bottoms.count)
         randomShoesKey =  Int.random(in: 0..<shoes.count)
     }
     
-    func uploadToAWS(_ image: UIImage, itemType: String) {
+    func uploadToAWS(_ image: UIImage, seasonType: String) {
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         let key = UUID().uuidString + ".jpg"
         _ = Amplify.Storage.uploadData(key: key, data: imageData) { result in
             switch result {
             case .success:
-                print("@Storage add \(itemType): \(key)   ")
-                let post = Post(imageKey: key, itemType: itemType)
+                print("@Storage add \(seasonType): \(key)   ")
+                let post = Post(imageKey: key, itemType: seasonType)
                 save(post)
                 
             case .failure(let error):
@@ -308,7 +361,7 @@ struct CreateOutfitView: View {
         Amplify.DataStore.save(post) { result in
             switch result {
             case .success:
-                print("@DataStore add \(itemType): \(post.imageKey)")
+                print("@DataStore add : \(post.imageKey)")
                 self.outfitImage = nil
                 
             case .failure(let error):

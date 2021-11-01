@@ -18,6 +18,7 @@
 		E12E5897272DBBF7006B0D52 /* Post+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5896272DBBF7006B0D52 /* Post+Extensions.swift */; };
 		E18B1C3D272F7F4600744C68 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = E18B1C3C272F7F4600744C68 /* SQLite */; };
 		E18B1C3F272F8ACF00744C68 /* CreateOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18B1C3E272F8ACF00744C68 /* CreateOutfitView.swift */; };
+		E18B1C41272FBFAC00744C68 /* OutfitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18B1C40272FBFAC00744C68 /* OutfitsView.swift */; };
 		E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */; };
 		E1ED1CEE272D0EE500AD6034 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */; };
 		E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CF8272D0FB600AD6034 /* ContentView.swift */; };
@@ -69,6 +70,7 @@
 		E18B1C2D272F5E4200744C68 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E18B1C37272F790700744C68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E18B1C3E272F8ACF00744C68 /* CreateOutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOutfitView.swift; sourceTree = "<group>"; };
+		E18B1C40272FBFAC00744C68 /* OutfitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitsView.swift; sourceTree = "<group>"; };
 		E1ED1CE3272D0EE300AD6034 /* Outfitters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outfitters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfittersApp.swift; sourceTree = "<group>"; };
 		E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				E1ED1D0D272D221500AD6034 /* ClosetView.swift */,
 				E1ED1CFC272D103100AD6034 /* AddClothesView.swift */,
 				E18B1C3E272F8ACF00744C68 /* CreateOutfitView.swift */,
+				E18B1C40272FBFAC00744C68 /* OutfitsView.swift */,
 			);
 			path = DisplayedViews;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */,
 				E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */,
 				E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */,
+				E18B1C41272FBFAC00744C68 /* OutfitsView.swift in Sources */,
 				E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */,
 				E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */,
 				E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */,
