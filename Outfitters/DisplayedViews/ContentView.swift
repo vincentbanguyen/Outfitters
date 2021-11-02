@@ -139,6 +139,8 @@ struct ContentView: View {
                                 }
                                 }
                 
+                print("NUCLEAR DELETE")
+                
                 // download images
                 downloadData(for: posts)
                 
