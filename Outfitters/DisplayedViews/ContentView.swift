@@ -195,7 +195,7 @@ struct ContentView: View {
                         
                     case .failure(let error):
                         print("failed to donwload image data")
-                        downloadData(for: posts)
+                    //    downloadData(for: posts)
                     }
                 })
         }
