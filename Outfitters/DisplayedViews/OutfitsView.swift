@@ -17,6 +17,7 @@ struct OutfitsView: View {
         case winter = "Winter"
     }
     
+    @Binding var resetAllData: Bool
     
     @StateObject var viewRouter = ViewRouter()
     @Binding var posts: [String: Post]
@@ -45,6 +46,21 @@ struct OutfitsView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 
                 HStack {
+                    
+                    if promptDelete == true {
+                    Button(action: {
+                        deleteDataStore()
+                    }, label: {
+                        ZStack {
+                            Circle().fill(.red).frame(width: 40, height: 40)
+                            Image(systemName: "exclamationmark.triangle")
+                                .font(Font.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                        }
+                    })
+                    }
+                    
+                    
                     Spacer()
                     Button(action: {
                         withAnimation{
@@ -74,6 +90,37 @@ struct OutfitsView: View {
             .navigationTitle("Outfits")
         }
     }
+    
+    func deleteDataStore() {
+        
+        
+        
+        Amplify.DataStore.query(Post.self) { result in
+            switch result {
+            case .success(let posts):
+                print("deleting post POSTS")
+                
+                
+                // to clear datastore/
+                for post in posts {
+                    Amplify.DataStore.delete(post) { result in
+                        switch result {
+                        case .success:
+                            print("Post key \(post.imageKey) deleted in datastore at")
+                            // self.images.remove(atOffsets: indexSet)
+                        case .failure(let error):
+                            print("Error deleting post - \(error.localizedDescription)")
+                        }
+                    }
+                }
+                self.posts.removeAll()
+                self.resetAllData = true
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func listContent(for keys: [String], selectedSeasonType: seasonTypes) -> some View {
         ForEach(keys, id: \.self) { key in
             if let key = key {

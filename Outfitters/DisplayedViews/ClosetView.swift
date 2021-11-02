@@ -11,6 +11,8 @@ import Combine
 @available(iOS 15.0, *)
 struct ClosetView: View {
     
+    
+    
     @StateObject var viewRouter = ViewRouter()
 
     @Binding var posts: [String: Post]
@@ -80,7 +82,7 @@ struct ClosetView: View {
                 switch selectedItemType {
                 case .tops:
                     VStack {
-                        //        Text("\(self.tops[key]!!.imageKey)")
+                     
                         Image(uiImage: self.tops[key]!.image)
                             .resizable()
                             .scaledToFit()
@@ -113,7 +115,7 @@ struct ClosetView: View {
                     }
                 case .bottoms:
                     VStack {
-                        //        Text("\(self.tops[key]!!.imageKey)")
+                 
                         Image(uiImage: self.bottoms[key]!.image)
                             .resizable()
                             .scaledToFit()
@@ -146,7 +148,7 @@ struct ClosetView: View {
                     }
                 case .shoes:
                     VStack {
-                        //        Text("\(self.tops[key]!!.imageKey)")
+                  
                         Image(uiImage: self.shoes[key]!.image)
                             .resizable()
                             .scaledToFit()

@@ -12,7 +12,8 @@ import Combine
 @available(iOS 15.0, *)
 struct ContentView: View {
     
-  
+    @State var resetAllData = false
+    
     @StateObject var viewRouter: ViewRouter
     
     
@@ -51,7 +52,7 @@ struct ContentView: View {
                 case .outfits:
                     if outfitSpring.count > 0 || outfitSummer.count > 0 || outfitFall.count > 0 || outfitWinter.count > 0 {
                         
-                        OutfitsView(viewRouter: viewRouter, posts: $posts, outfitSpring: $outfitSpring, outfitSummer: $outfitSummer, outfitFall: $outfitFall, outfitWinter: $outfitWinter)
+                        OutfitsView(resetAllData: $resetAllData, viewRouter: viewRouter, posts: $posts, outfitSpring: $outfitSpring, outfitSummer: $outfitSummer, outfitFall: $outfitFall, outfitWinter: $outfitWinter)
                     }
                     else {
                         Text("Create an outfit first!")
@@ -212,6 +213,16 @@ struct ContentView: View {
                     
                 case "delete":
                     print("deleted stuff")
+                    
+                    if resetAllData == true {
+                        self.bottoms.removeAll()
+                        self.tops.removeAll()
+                        self.shoes.removeAll()
+                        self.outfitFall.removeAll()
+                        self.outfitSpring.removeAll()
+                        self.outfitSummer.removeAll()
+                        self.outfitWinter.removeAll()
+                    }
                     
                 default:
                     break

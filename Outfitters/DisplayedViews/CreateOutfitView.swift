@@ -280,12 +280,13 @@ struct CreateOutfitView: View {
        
             Button(action: {
                 // SAVE OUTFIT BY SAVING KEYS OF TOPS BOTTOMS SHOES
-                
+                if didSelectSeasonType {
                 saveOutfit(topsImage: modifyingTops ? tops[Array(tops.keys)[randomTopsKey]]!.image : tops[topsKey]!.image  ,
                            bottomsImage:  modifyingBottoms ? bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image : bottoms[bottomsKey]!.image,
                            shoesImage:  modifyingShoes ? shoes[Array(shoes.keys)[randomShoesKey]]!.image : shoes[shoesKey]!.image)
                 
                 viewRouter.currentPage = .outfits
+                }
             }
                 ,label: {
                 HStack {
@@ -324,14 +325,14 @@ struct CreateOutfitView: View {
     }
     
     func saveOutfit(topsImage: UIImage, bottomsImage: UIImage, shoesImage: UIImage) {
-        if didSelectSeasonType {
+      
         outfitImage = topsImage
                 .overlayWith(image: bottomsImage, posX: 0, posY: CGFloat(bottomsImage.size.height))
                 .overlayWith(image: shoesImage, posX: 0, posY: CGFloat(shoesImage.size.height * 2))
 
        
         uploadToAWS(outfitImage!, seasonType: seasonType)
-        }
+        
     }
     func randomizeOutfit() {
         

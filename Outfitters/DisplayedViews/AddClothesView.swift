@@ -31,7 +31,6 @@ struct AddClothesView: View {
     
     var body: some View {
         // WARNING: Force wrapped image for demo purpose
-      
         VStack {
             if removedBg == false  {
                 image!
@@ -78,7 +77,6 @@ struct AddClothesView: View {
                         didSelectItemType = true
                         switch selectedItemType {
                         case 0:
-                            
                             itemType = "tops"
                             print(itemType)
                         case 1:
@@ -150,7 +148,6 @@ struct AddClothesView: View {
                 .foregroundColor(.white)
             }
         }
-        
         .onAppear(perform: {
             print(didSelectItemType)
         })
@@ -174,6 +171,8 @@ struct AddClothesView: View {
             DispatchQueue.main.async {
                 if let error = error {
                     // An error occured
+                    print("error in removing background")
+                    return
                 }
                 guard let image = image else {
                     // No image returned
@@ -182,6 +181,7 @@ struct AddClothesView: View {
                 // All good
                 outputImage = image
                 removedBg = true
+                print("removed background")
             }
         }
         
