@@ -18,7 +18,7 @@ struct AddClothesView: View {
     @State private var shouldPresentCamera = false
     
     @State var outputImage: UIImage = UIImage(systemName: "camera")!
-    @State var testImage: UIImage = UIImage(named: "shirt.png")!
+    //@State var testImage: UIImage = UIImage(systemName: "tshirt")!
     @State var removedBg = false
     @State var didSelectItemType = false
     @State var itemType = "item"
