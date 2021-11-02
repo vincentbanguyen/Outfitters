@@ -127,17 +127,17 @@ struct ContentView: View {
                 
                 
                 //      to clear datastore/
-                //                for post in posts {
-                //                Amplify.DataStore.delete(post) { result in
-                //                    switch result {
-                //                    case .success:
-                //                        print("Post key \(post.imageKey) deleted in datastore at")
-                //                       // self.images.remove(atOffsets: indexSet)
-                //                    case .failure(let error):
-                //                        print("Error deleting post - \(error.localizedDescription)")
-                //                    }
-                //                }
-                //                }
+                                for post in posts {
+                                Amplify.DataStore.delete(post) { result in
+                                    switch result {
+                                    case .success:
+                                        print("Post key \(post.imageKey) deleted in datastore at")
+                                       // self.images.remove(atOffsets: indexSet)
+                                    case .failure(let error):
+                                        print("Error deleting post - \(error.localizedDescription)")
+                                    }
+                                }
+                                }
                 
                 // download images
                 downloadData(for: posts)
