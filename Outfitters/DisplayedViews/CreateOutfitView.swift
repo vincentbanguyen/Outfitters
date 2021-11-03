@@ -40,7 +40,8 @@ struct CreateOutfitView: View {
     
     
     let imageSize = 150.0
-    
+    let circleSize = 60.0
+    let arrowSize = 30.0
     var body: some View {
         VStack {
     
@@ -79,9 +80,9 @@ struct CreateOutfitView: View {
                     ZStack {
                         Circle()
                             .fill(Color("colorPlus"))
-                            .frame(width: 80, height: 80)
+                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.left")
-                            .font(Font.system(size: 40, weight: .semibold))
+                            .font(Font.system(size: arrowSize, weight: .semibold))
                             .foregroundColor(.white)
                     }
                 })
@@ -116,15 +117,16 @@ struct CreateOutfitView: View {
                     ZStack {
                         Circle()
                             .fill(Color("colorPlus"))
-                            .frame(width: 80, height: 80)
+                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.right")
-                            .font(Font.system(size: 40, weight: .semibold))
+                            .font(Font.system(size: arrowSize, weight: .semibold))
                             .foregroundColor(.white)
                     }
                 })
                 
             }
                 
+            // BOTTOMS
             HStack {
                 Button(action: {
                     modifyingBottoms = true
@@ -138,14 +140,14 @@ struct CreateOutfitView: View {
                     ZStack {
                         Circle()
                             .fill(Color("colorPlus"))
-                            .frame(width: 80, height: 80)
+                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.left")
-                            .font(Font.system(size: 40, weight: .semibold))
+                            .font(Font.system(size: arrowSize, weight: .semibold))
                             .foregroundColor(.white)
                     }
                 })
                 if bottomsKey == "none" || modifyingBottoms == true {
-                    if let image = bottoms[Array(tops.keys)[randomBottomsKey]]?.image {
+                    if let image = bottoms[Array(bottoms.keys)[randomBottomsKey]]?.image {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -175,9 +177,9 @@ struct CreateOutfitView: View {
                     ZStack {
                         Circle()
                             .fill(Color("colorPlus"))
-                            .frame(width: 80, height: 80)
+                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.right")
-                            .font(Font.system(size: 40, weight: .semibold))
+                            .font(Font.system(size: arrowSize, weight: .semibold))
                             .foregroundColor(.white)
                     }
                 })
@@ -198,14 +200,14 @@ struct CreateOutfitView: View {
                     ZStack {
                         Circle()
                             .fill(Color("colorPlus"))
-                            .frame(width: 80, height: 80)
+                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.left")
-                            .font(Font.system(size: 40, weight: .semibold))
+                            .font(Font.system(size: arrowSize, weight: .semibold))
                             .foregroundColor(.white)
                     }
                 })
                 if shoesKey == "none" || modifyingShoes == true {
-                    if let image = shoes[Array(tops.keys)[randomShoesKey]]?.image {
+                    if let image = shoes[Array(shoes.keys)[randomShoesKey]]?.image {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -235,9 +237,9 @@ struct CreateOutfitView: View {
                     ZStack {
                         Circle()
                             .fill(Color("colorPlus"))
-                            .frame(width: 80, height: 80)
+                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.right")
-                            .font(Font.system(size: 40, weight: .semibold))
+                            .font(Font.system(size: arrowSize, weight: .semibold))
                             .foregroundColor(.white)
                     }
                 })
