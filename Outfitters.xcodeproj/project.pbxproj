@@ -10,6 +10,8 @@
 		212AA07585DB47BA1B8F4E1B /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66A5EEB1B8BA79F2A03CCAC /* AmplifyModels.swift */; };
 		32A7043C387BADCC68EE86FA /* Post+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC232BBD8AAA851213D0A91 /* Post+Schema.swift */; };
 		8B096F7269B7F566DEBD6205 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB261946D7120200185CD94 /* Post.swift */; };
+		E128FAFC273248B3002D02BF /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FAFB273248B3002D02BF /* ImagePickerView.swift */; };
+		E128FAFE273248CD002D02BF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FAFD273248CD002D02BF /* Coordinator.swift */; };
 		E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */; };
 		E12E5859272D417C006B0D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E5858272D417C006B0D52 /* Assets.xcassets */; };
 		E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5890272D4CE2006B0D52 /* AppDelegate.swift */; };
@@ -19,7 +21,6 @@
 		E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */; };
 		E1ED1CEE272D0EE500AD6034 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */; };
 		E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CF8272D0FB600AD6034 /* ContentView.swift */; };
-		E1ED1CFB272D0FE900AD6034 /* SUImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFA272D0FE900AD6034 /* SUImagePickerView.swift */; };
 		E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFC272D103100AD6034 /* AddClothesView.swift */; };
 		E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */; };
 		E1ED1D0C272D19E900AD6034 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ED1D0B272D19E900AD6034 /* Extensions.swift */; };
@@ -35,6 +36,8 @@
 		9D2E7693DBDCF603DD049185 /* Pods-Outfitters.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outfitters.release.xcconfig"; path = "Target Support Files/Pods-Outfitters/Pods-Outfitters.release.xcconfig"; sourceTree = "<group>"; };
 		BCB261946D7120200185CD94 /* Post.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Post.swift; path = amplify/generated/models/Post.swift; sourceTree = "<group>"; };
 		CCC232BBD8AAA851213D0A91 /* Post+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Post+Schema.swift"; path = "amplify/generated/models/Post+Schema.swift"; sourceTree = "<group>"; };
+		E128FAFB273248B3002D02BF /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		E128FAFD273248CD002D02BF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClothingItem+Extension.swift"; sourceTree = "<group>"; };
 		E12E5858272D417C006B0D52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		E12E5880272D48CE006B0D52 /* Amplify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Amplify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +63,6 @@
 		E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfittersApp.swift; sourceTree = "<group>"; };
 		E1ED1CED272D0EE500AD6034 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E1ED1CF8272D0FB600AD6034 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		E1ED1CFA272D0FE900AD6034 /* SUImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SUImagePickerView.swift; sourceTree = "<group>"; };
 		E1ED1CFC272D103100AD6034 /* AddClothesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClothesView.swift; sourceTree = "<group>"; };
 		E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIewRouter.swift; sourceTree = "<group>"; };
 		E1ED1D0B272D19E900AD6034 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -136,7 +138,8 @@
 				E12E5896272DBBF7006B0D52 /* Post+Extensions.swift */,
 				E1ED1D0B272D19E900AD6034 /* Extensions.swift */,
 				E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */,
-				E1ED1CFA272D0FE900AD6034 /* SUImagePickerView.swift */,
+				E128FAFB273248B3002D02BF /* ImagePickerView.swift */,
+				E128FAFD273248CD002D02BF /* Coordinator.swift */,
 				E12E5858272D417C006B0D52 /* Assets.xcassets */,
 				E1ED1CEC272D0EE500AD6034 /* Preview Content */,
 			);
@@ -317,8 +320,9 @@
 				E1ED1D0E272D221500AD6034 /* ClosetView.swift in Sources */,
 				E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */,
 				E1ED1D0C272D19E900AD6034 /* Extensions.swift in Sources */,
+				E128FAFE273248CD002D02BF /* Coordinator.swift in Sources */,
 				E12E5897272DBBF7006B0D52 /* Post+Extensions.swift in Sources */,
-				E1ED1CFB272D0FE900AD6034 /* SUImagePickerView.swift in Sources */,
+				E128FAFC273248B3002D02BF /* ImagePickerView.swift in Sources */,
 				212AA07585DB47BA1B8F4E1B /* AmplifyModels.swift in Sources */,
 				32A7043C387BADCC68EE86FA /* Post+Schema.swift in Sources */,
 				8B096F7269B7F566DEBD6205 /* Post.swift in Sources */,

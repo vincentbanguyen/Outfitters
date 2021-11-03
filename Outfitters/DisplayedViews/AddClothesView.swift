@@ -12,18 +12,32 @@ import PhotoRoomKit
 struct AddClothesView: View {
     @StateObject var viewRouter = ViewRouter()
     
-    @State private var image: Image? = Image(systemName: "tshirt")
-    @State private var shouldPresentImagePicker = false
-    @State private var shouldPresentActionScheet = false
-    @State private var shouldPresentCamera = false
     
-    @State var outputImage: UIImage = UIImage(systemName: "camera")!
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+        @State private var selectedImage: UIImage?
+        @State private var isImagePickerDisplay = false
+    
+    @State private var isAnimating = false
+
+
+    var foreverAnimation: Animation {
+        Animation.linear(duration: 2.0)
+            .repeatForever(autoreverses: false)
+    }
+    
+    @State var processingBg = false
+    @State var processingAWS = false
+//    @State private var shouldPresentImagePicker = false
+    @State private var shouldPresentActionScheet = false
+//    @State private var shouldPresentCamera = false
+    
+    
+    @State var outputImage: UIImage =  UIImage(systemName: "camera")!
     //@State var testImage: UIImage = UIImage(systemName: "tshirt")!
     @State var removedBg = false
     @State var didSelectItemType = false
     @State var itemType = "item"
-    @State var uploadedImage = false
-    
+
     let selectedTypes = ["👚", "👖", "👟"]
     
     @State public var selectedItemType: Int?
@@ -32,22 +46,30 @@ struct AddClothesView: View {
     var body: some View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
-            if removedBg == false  {
-                if let image = image {
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 250, height: 250)
-                    .padding(40)
-                }
-            } else {
+            
+            if removedBg == true {
                 Image(uiImage: outputImage)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 250, height: 250)
+                .padding(40)
+            }
+        
+            else if selectedImage != nil  {
+               
+                Image(uiImage: selectedImage!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 250)
                     .padding(40)
                 
-                
+            } else {
+               
+                Image(systemName: "tshirt.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250, height: 250)
+                    .padding(40)
             }
             
             // adding clothing item image
@@ -115,38 +137,65 @@ struct AddClothesView: View {
             Button(action: {
              
                 // removing backgoung
-                if uploadedImage == true && removedBg == false  {
-                    if let inputImage = self.image {
-                  //      print(inputImage.asUIImage())
-                        
-                  //      self.outputImage = inputImage.asUIImage()
-                        self.removedBg = true
-                      //  removeBackground(inputImage: inputImage.asUIImage())
+                if selectedImage != nil && removedBg == false  {
+                    if let inputImage = self.selectedImage {
+                       // print(inputImage.asUIImage())
+                        processingBg = true
+                        removeBackground(inputImage: inputImage)
                     }
                     //removedBg = true
                 }
                 
                 // upload to AWS
-                else if uploadedImage == true && removedBg == true && didSelectItemType == true {
+                else if selectedImage != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
-                 
+                    
                     //upload to aws
-                    uploadToAWS(outputImage, itemType: itemType)
+                    processingAWS = true
+                    uploadToAWS(self.outputImage, itemType: itemType)
                     viewRouter.currentPage = .closet
                     
                 }
             }) {
                 HStack {
                     
-                    if removedBg == false {
+                    if removedBg == false && processingBg == false {
                         Image(systemName: "checkmark")
                             .font(Font.system(size: 30, weight: .semibold))
                         Text("Confirm")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
-                    else {
+                    
+                    else if removedBg == false && processingBg == true {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 30, weight: .semibold))
+                            .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0.0))
+                            .animation(self.isAnimating ? foreverAnimation : .default)
+                            .onAppear { self.isAnimating = true }
+                            .onDisappear { self.isAnimating = false }
+                        Text("Confirm")
+                            .font(Font.system(size: 30, weight: .semibold))
+                    }
+                    
+                    
+                    
+                    else if removedBg == true && processingAWS == false {
                         Image(systemName: "plus")
                             .font(Font.system(size: 30, weight: .semibold))
+                        Text("Add to Closet")
+                            .font(Font.system(size: 30, weight: .semibold))
+                    }
+                    
+                    else {
+                        
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 30, weight: .semibold))
+                            .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0.0))
+                            .animation(self.isAnimating ? foreverAnimation : .default)
+                            .onAppear { self.isAnimating = true }
+                            .onDisappear { self.isAnimating = false }
                         Text("Add to Closet")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
@@ -160,15 +209,15 @@ struct AddClothesView: View {
         .onAppear(perform: {
             print(didSelectItemType)
         })
-        .sheet(isPresented: $shouldPresentImagePicker) {
-            SUImagePickerView(sourceType: self.shouldPresentCamera ? .camera : .photoLibrary, image: self.$image, isPresented: self.$shouldPresentImagePicker, uploadedImage: $uploadedImage)
-        }.actionSheet(isPresented: $shouldPresentActionScheet) { () -> ActionSheet in
+        .sheet(isPresented: self.$isImagePickerDisplay) {
+            ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
+        }.actionSheet(isPresented:  self.$shouldPresentActionScheet) { () -> ActionSheet in
             ActionSheet(title: Text("Upload Clothing Item"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                self.shouldPresentImagePicker = true
-                self.shouldPresentCamera = true
+                self.sourceType = .camera
+                self.isImagePickerDisplay.toggle()
             }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                self.shouldPresentImagePicker = true
-                self.shouldPresentCamera = false
+                self.sourceType = .photoLibrary
+                self.isImagePickerDisplay.toggle()
             }), ActionSheet.Button.cancel()])
         }
     }
@@ -185,7 +234,6 @@ struct AddClothesView: View {
                 }
                 guard let image = image else {
                     // No image returned
-                    print("ERROR NO IMAGE RETURNED")
                     return
                 }
                 // All good
@@ -220,7 +268,7 @@ struct AddClothesView: View {
             switch result {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
-                self.image = nil
+                self.selectedImage = nil
                 
             case .failure(let error):
                 print("failed to save post ")
