@@ -1,52 +1,53 @@
 //
 //  ImagePicker.swift
-//  Outfitters
+//  SwiftUIImagePicker
 //
-//  Created by Vincent Nguyen on 11/3/21.
+//  Created by Simon Ng on 10/6/2020.
+//  Copyright © 2020 AppCoda. All rights reserved.
 //
-
-import Foundation
 import UIKit
 import SwiftUI
-struct ImagePicker: UIViewControllerRepresentable {
-    typealias UIViewControllerType = UIImagePickerController
-    typealias SourceType = UIImagePickerController.SourceType
 
-       let sourceType: SourceType
-    let completionHandler: (UIImage?) -> Void
+struct ImagePicker: UIViewControllerRepresentable {
     
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let viewController = UIImagePickerController()
-        viewController.delegate = context.coordinator
-        viewController.sourceType = sourceType
-        return viewController
+    var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
+    @Binding var selectedImage: UIImage?
+    @Environment(\.presentationMode) private var presentationMode
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = context.coordinator
+        
+        return imagePicker
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+        
+    }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(completionHandler: completionHandler)
+        Coordinator(self)
     }
     
     final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        let completionHandler: (UIImage?) -> Void
         
-        init(completionHandler: @escaping (UIImage?) -> Void) {
-            self.completionHandler = completionHandler
+        var parent: ImagePicker
+        
+        init(_ parent: ImagePicker) {
+            self.parent = parent
         }
         
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            let image: UIImage? = {
-                if let image = info[.editedImage] as? UIImage {
-                    return image
-                }
-                return info[.originalImage] as? UIImage
-            }()
-            completionHandler(image)
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            completionHandler(nil)
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                parent.selectedImage = image
+            }
+            
+            parent.presentationMode.wrappedValue.dismiss()
         }
     }
 }

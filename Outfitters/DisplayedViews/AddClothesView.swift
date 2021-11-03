@@ -16,12 +16,7 @@ struct AddClothesView: View {
     @StateObject var viewRouter = ViewRouter()
     
     
-    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-        @State var selectedImage: UIImage?
-        @State private var isPresentingImagePicker = false
-    
-  
-         
+    @EnvironmentObject var imageVM: ImageViewModel
     
     @State private var isAnimating = false
 
@@ -33,9 +28,7 @@ struct AddClothesView: View {
     
     @State var processingBg = false
     @State var processingAWS = false
-//    @State private var shouldPresentImagePicker = false
-    @State private var shouldPresentActionScheet = false
-//    @State private var shouldPresentCamera = false
+
     
     
     @State var outputImage: UIImage?
@@ -63,9 +56,9 @@ struct AddClothesView: View {
                 }
             }
         
-            else if selectedImage != nil  {
+            else if imageVM.image != nil  {
                
-                Image(uiImage: selectedImage!)
+                Image(uiImage: imageVM.image!)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250)
@@ -81,13 +74,17 @@ struct AddClothesView: View {
             }
             
             // adding clothing item image
-            Button(action: {
-                self.shouldPresentActionScheet = true
-            }) {
+            
+            HStack {
+                
+            Button{
+                imageVM.source = .camera
+                imageVM.showPhotoPicker()
+            } label: {
                 HStack {
                     Image(systemName: "camera")
                         .font(Font.system(size: 30, weight: .semibold))
-                    Text("Add Item")
+                    Text("Camera")
                         .font(Font.system(size: 30, weight: .semibold))
                     
                 }
@@ -97,11 +94,30 @@ struct AddClothesView: View {
             .background(Color("colorPlus"))
             .cornerRadius(40)
             .foregroundColor(.white)
-            
-            
-            //  buttin optiosn to speicfy item type
-         
-                    .font(Font.system(size: 30, weight: .semibold))
+                
+                
+                Button{
+                    imageVM.source = .library
+                    imageVM.showPhotoPicker()
+                } label: {
+                    HStack {
+                        Image(systemName: "camera")
+                            .font(Font.system(size: 30, weight: .semibold))
+                        Text("Photos")
+                            .font(Font.system(size: 30, weight: .semibold))
+                        
+                    }
+                    
+                }
+                .frame(width: 300, height: 60)
+                .background(Color("colorPlus"))
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                
+                
+                
+            }
+                
             HStack {
                 ForEach(0..<selectedTypes.count, id: \.self) { selectedType in
                     Button(action: {
@@ -146,18 +162,17 @@ struct AddClothesView: View {
              
                 // removing backgoung
 
-                if selectedImage != nil && removedBg == false  {
-                    if let inputImage = self.selectedImage {
-                       // print(inputImage.asUIImage())
-                        
-                        print(selectedImage!.size)
+                if imageVM.image != nil && removedBg == false  {
+                    if let inputImage = imageVM.image {
+
+                    
                         processingBg = true
                         removeBackground(inputImage: inputImage)
 
                     }
                 }
                 // upload to AWS
-                else if selectedImage != nil && removedBg == true && didSelectItemType == true {
+                else if imageVM.image != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
                  
                     if let outputImage = self.outputImage {
@@ -230,24 +245,13 @@ struct AddClothesView: View {
         .onAppear(perform: {
             print(didSelectItemType)
         })
-        .sheet(isPresented: $isPresentingImagePicker) {
-            ImagePicker(sourceType: sourceType, completionHandler: didSelectImage)
-        }.actionSheet(isPresented:  self.$shouldPresentActionScheet) { () -> ActionSheet in
-            ActionSheet(title: Text("Upload Clothing Item"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                self.sourceType = .camera
-                self.isPresentingImagePicker.toggle()
-            }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                self.sourceType = .photoLibrary
-                self.isPresentingImagePicker.toggle()
-            }), ActionSheet.Button.cancel()])
+        .sheet(isPresented: $imageVM.showPicker) {
+            ImagePicker(sourceType: imageVM.source == .library ? .photoLibrary : .camera, selectedImage: $imageVM.image)
+                .ignoresSafeArea()
         }
+        
     }
-    
-    
-    func didSelectImage(_ image: UIImage?) {
-                selectedImage = image
-                isPresentingImagePicker = false
-            }
+
     
     func removeBackground(inputImage: UIImage) {
         print("trying to remove background")
@@ -294,7 +298,7 @@ struct AddClothesView: View {
             switch result {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
-                self.selectedImage = nil
+                self.imageVM.image = nil
                 self.outputImage = nil
                 
             case .failure(let error):

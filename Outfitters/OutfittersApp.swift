@@ -17,6 +17,11 @@ struct OutfittersApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(viewRouter: viewRouter)
+                .environmentObject(ImageViewModel())
+                .onAppear {
+                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
+                }
+            
         }
     }
 }
