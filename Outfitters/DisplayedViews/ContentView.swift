@@ -68,10 +68,6 @@ struct ContentView: View {
                     else {
                         Text("Add more items to the closet first!")
                     }
-                   
-                    
-                 
-                 
                 }
                 Spacer()
                 ZStack {
@@ -207,7 +203,6 @@ struct ContentView: View {
             receiveCompletion: { print($0)},
             receiveValue: { changes in
                 guard let post = try? changes.decodeModel(as: Post.self) else { return }
-                
                 
                 
                 switch changes.mutationType {

@@ -51,24 +51,7 @@ struct CreateOutfitView: View {
         VStack {
     
            
-            Button(action: {
-              randomizeOutfit()
-                modifyingTops = true
-                modifyingBottoms = true
-                modifyingShoes = true
-            }
-                ,label: {
-                HStack {
-                    Image(systemName: "dice")
-                        .font(Font.system(size: 30, weight: .semibold))
-                    Text("Randomize")
-                        .font(Font.system(size: 30, weight: .semibold))
-                }
-                .frame(width: 300, height: 60)
-                .background(Color.purple)
-                .cornerRadius(40)
-                .foregroundColor(.white)
-            })
+           
             
             
             // TOPS
@@ -83,12 +66,12 @@ struct CreateOutfitView: View {
                     }
                 }, label: {
                     ZStack {
-                        Circle()
-                            .fill(Color("colorPlus"))
-                            .frame(width: circleSize, height: circleSize)
+//                        Circle()
+//                            .fill(Color("colorPlus"))
+//                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.left")
                             .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("colorPlus"))
                     }
                 })
                 if topsKey == "none" || modifyingTops == true {
@@ -120,12 +103,13 @@ struct CreateOutfitView: View {
                     }
                 }, label: {
                     ZStack {
-                        Circle()
-                            .fill(Color("colorPlus"))
-                            .frame(width: circleSize, height: circleSize)
+//                        Circle()
+//                            .fill(Color("colorPlus"))
+//                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.right")
                             .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("colorPlus"))
+                        
                     }
                 })
                 
@@ -143,12 +127,12 @@ struct CreateOutfitView: View {
                     }
                 }, label: {
                     ZStack {
-                        Circle()
-                            .fill(Color("colorPlus"))
-                            .frame(width: circleSize, height: circleSize)
+//                        Circle()
+//                            .fill(Color("colorPlus"))
+//                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.left")
                             .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("colorPlus"))
                     }
                 })
                 if bottomsKey == "none" || modifyingBottoms == true {
@@ -180,12 +164,12 @@ struct CreateOutfitView: View {
                     }
                 }, label: {
                     ZStack {
-                        Circle()
-                            .fill(Color("colorPlus"))
-                            .frame(width: circleSize, height: circleSize)
+//                        Circle()
+//                            .fill(Color("colorPlus"))
+//                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.right")
                             .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("colorPlus"))
                     }
                 })
                 
@@ -203,12 +187,12 @@ struct CreateOutfitView: View {
                     }
                 }, label: {
                     ZStack {
-                        Circle()
-                            .fill(Color("colorPlus"))
-                            .frame(width: circleSize, height: circleSize)
+//                        Circle()
+//                            .fill(Color("colorPlus"))
+//                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.left")
                             .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("colorPlus"))
                     }
                 })
                 if shoesKey == "none" || modifyingShoes == true {
@@ -240,12 +224,12 @@ struct CreateOutfitView: View {
                     }
                 }, label: {
                     ZStack {
-                        Circle()
-                            .fill(Color("colorPlus"))
-                            .frame(width: circleSize, height: circleSize)
+//                        Circle()
+//                            .fill(Color("colorPlus"))
+//                            .frame(width: circleSize, height: circleSize)
                     Image(systemName: "arrow.right")
                             .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("colorPlus"))
                     }
                 })
                 
@@ -293,7 +277,26 @@ struct CreateOutfitView: View {
             .padding(4)
  
             
-       
+            HStack {
+                
+                Button(action: {
+                  randomizeOutfit()
+                    modifyingTops = true
+                    modifyingBottoms = true
+                    modifyingShoes = true
+                }
+                    ,label: {
+                    HStack {
+                        Image(systemName: "dice")
+                            .font(Font.system(size: 30, weight: .semibold))
+                    }
+                    .frame(width: 150, height: 60)
+                    .background(Color("colorPlus"))
+                    .cornerRadius(40)
+                    .foregroundColor(.white)
+                })
+                
+                
             Button(action: {
                 // SAVE OUTFIT BY SAVING KEYS OF TOPS BOTTOMS SHOES
                 if didSelectSeasonType {
@@ -331,20 +334,22 @@ struct CreateOutfitView: View {
                 }
             }
                 ,label: {
+                
+                
                 HStack {
                     Image(systemName: "plus")
                         .font(Font.system(size: 30, weight: .semibold))
-                    Text("Add Outfit")
-                        .font(Font.system(size: 30, weight: .semibold))
+//                    Text("Add Outfit")
+//                        .font(Font.system(size: 30, weight: .semibold))
                     
                     
                 }
-                .frame(width: 300, height: 60)
-                .background(Color.purple)
+                .frame(width: 150, height: 60)
+                .background(Color("colorPlus"))
                 .cornerRadius(40)
                 .foregroundColor(.white)
             })
-              
+        }
             
             Spacer()
             
