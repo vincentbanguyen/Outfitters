@@ -12,6 +12,7 @@
 		8B096F7269B7F566DEBD6205 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB261946D7120200185CD94 /* Post.swift */; };
 		E128FAFC273248B3002D02BF /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FAFB273248B3002D02BF /* ImagePickerView.swift */; };
 		E128FAFE273248CD002D02BF /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FAFD273248CD002D02BF /* Coordinator.swift */; };
+		E128FB0027330CD4002D02BF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FAFF27330CD4002D02BF /* ImagePicker.swift */; };
 		E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */; };
 		E12E5859272D417C006B0D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E5858272D417C006B0D52 /* Assets.xcassets */; };
 		E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5890272D4CE2006B0D52 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 		CCC232BBD8AAA851213D0A91 /* Post+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Post+Schema.swift"; path = "amplify/generated/models/Post+Schema.swift"; sourceTree = "<group>"; };
 		E128FAFB273248B3002D02BF /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		E128FAFD273248CD002D02BF /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E128FAFF27330CD4002D02BF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClothingItem+Extension.swift"; sourceTree = "<group>"; };
 		E12E5858272D417C006B0D52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		E12E5880272D48CE006B0D52 /* Amplify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Amplify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 				E1ED1D0B272D19E900AD6034 /* Extensions.swift */,
 				E1ED1CFE272D10F900AD6034 /* VIewRouter.swift */,
 				E128FAFB273248B3002D02BF /* ImagePickerView.swift */,
+				E128FAFF27330CD4002D02BF /* ImagePicker.swift */,
 				E128FAFD273248CD002D02BF /* Coordinator.swift */,
 				E12E5858272D417C006B0D52 /* Assets.xcassets */,
 				E1ED1CEC272D0EE500AD6034 /* Preview Content */,
@@ -313,6 +316,7 @@
 				E1ED1CF9272D0FB600AD6034 /* ContentView.swift in Sources */,
 				E1ED1CFD272D103100AD6034 /* AddClothesView.swift in Sources */,
 				E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */,
+				E128FB0027330CD4002D02BF /* ImagePicker.swift in Sources */,
 				E1FD0496273076CA00CAFF8A /* CreateOutfitView.swift in Sources */,
 				E1FD0497273076CA00CAFF8A /* OutfitsView.swift in Sources */,
 				E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */,

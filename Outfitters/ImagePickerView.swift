@@ -14,12 +14,14 @@ struct ImagePickerView: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) var isPresented
-    var sourceType: UIImagePickerController.SourceType
+    typealias SourceType = UIImagePickerController.SourceType
     typealias UIViewControllerType = UIImagePickerController
+    
+    let sourceType: SourceType
         
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = self.sourceType
+        imagePicker.sourceType = sourceType
        imagePicker.delegate = context.coordinator // confirming the delegate
         return imagePicker
     }
@@ -44,6 +46,13 @@ class ImagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImageP
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        
+        let image: UIImage? = {
+                        if let image = info[.editedImage] as? UIImage {
+                            return image
+                        }
+                        return info[.originalImage] as? UIImage
+                    }()
         imagePickerView.selectedImage = selectedImage
         imagePickerView.isPresented.wrappedValue.dismiss()
     }

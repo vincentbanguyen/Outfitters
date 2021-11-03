@@ -18,7 +18,10 @@ struct AddClothesView: View {
     
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
         @State var selectedImage: UIImage?
-        @State private var isImagePickerDisplay = false
+        @State private var isPresentingImagePicker = false
+    
+  
+         
     
     @State private var isAnimating = false
 
@@ -227,18 +230,24 @@ struct AddClothesView: View {
         .onAppear(perform: {
             print(didSelectItemType)
         })
-        .sheet(isPresented: self.$isImagePickerDisplay) {
-            ImagePickerView(selectedImage: $selectedImage, sourceType: self.sourceType)
+        .sheet(isPresented: $isPresentingImagePicker) {
+            ImagePicker(sourceType: sourceType, completionHandler: didSelectImage)
         }.actionSheet(isPresented:  self.$shouldPresentActionScheet) { () -> ActionSheet in
             ActionSheet(title: Text("Upload Clothing Item"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                 self.sourceType = .camera
-                self.isImagePickerDisplay.toggle()
+                self.isPresentingImagePicker.toggle()
             }), ActionSheet.Button.default(Text("Photo Library"), action: {
                 self.sourceType = .photoLibrary
-                self.isImagePickerDisplay.toggle()
+                self.isPresentingImagePicker.toggle()
             }), ActionSheet.Button.cancel()])
         }
     }
+    
+    
+    func didSelectImage(_ image: UIImage?) {
+                selectedImage = image
+                isPresentingImagePicker = false
+            }
     
     func removeBackground(inputImage: UIImage) {
         print("trying to remove background")
