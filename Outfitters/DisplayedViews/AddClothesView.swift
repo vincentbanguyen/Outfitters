@@ -10,6 +10,9 @@ import Amplify
 import PhotoRoomKit
 
 struct AddClothesView: View {
+    
+    let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
+    
     @StateObject var viewRouter = ViewRouter()
     
     
@@ -239,7 +242,6 @@ struct AddClothesView: View {
     
     func removeBackground(inputImage: UIImage) {
         print("trying to remove background")
-        let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
         segmentationService.segment(image: inputImage) { (image, error) in
             DispatchQueue.main.async {
                 if let error = error {
