@@ -76,7 +76,7 @@ struct ContentView: View {
                             .offset(y: -geometry.size.height/6)
                     }
                     HStack {
-                        TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .closet, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "house.fill", tabName: "Closet")
+                        TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .closet, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "rectangle.portrait.split.2x1", tabName: "Closet")
                   
                         ZStack {
                             Circle()

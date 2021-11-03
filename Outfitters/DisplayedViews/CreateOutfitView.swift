@@ -14,6 +14,18 @@ struct CreateOutfitView: View {
     @Binding var tops: [String: ClothingItem]
     @Binding var bottoms: [String: ClothingItem]
     @Binding var shoes: [String: ClothingItem]
+    
+    
+    @State private var isAnimating = false
+
+
+    var foreverAnimation: Animation {
+        Animation.linear(duration: 2.0)
+            .repeatForever(autoreverses: false)
+    }
+    
+    @State var processingAWS = false
+    
 
     
     
@@ -308,21 +320,33 @@ struct CreateOutfitView: View {
                         guard let shoes = shoes[shoesKey] else { return }
                         shoesImage = shoes.image
                     }
-                    
+                    processingAWS = true
                     
                 saveOutfit(topsImage: topsImage  ,
                            bottomsImage:  bottomsImage,
                            shoesImage:  shoesImage)
                 
-                viewRouter.currentPage = .outfits
+               
                 }
             }
                 ,label: {
                 
                 
                 HStack {
+                    if !processingAWS {
                     Image(systemName: "plus")
                         .font(Font.system(size: 30, weight: .semibold))
+                    } else {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 30, weight: .semibold))
+                            .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0.0))
+                            .animation(self.isAnimating ? foreverAnimation : .default)
+                            .onAppear { self.isAnimating = true }
+                            .onDisappear { self.isAnimating = false }
+                        
+                    }
+                    
 //                    Text("Add Outfit")
 //                        .font(Font.system(size: 30, weight: .semibold))
                     
@@ -398,6 +422,7 @@ struct CreateOutfitView: View {
             case .success:
                 print("@DataStore add : \(post.imageKey)")
                 self.outfitImage = nil
+                viewRouter.currentPage = .outfits
                 
             case .failure(let error):
                 print("failed to save post ")
