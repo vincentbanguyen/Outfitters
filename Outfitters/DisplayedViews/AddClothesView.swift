@@ -112,10 +112,12 @@ struct AddClothesView: View {
             
             // activate remove bg
             Button(action: {
-                let inputImage = image.asUIImage()
+             
                 // removing backgoung
                 if uploadedImage == true && removedBg == false  {
-                     removeBackground(inputImage: inputImage)
+                    if let inputImage = image {
+                        removeBackground(inputImage: inputImage.asUIImage())
+                    }
                     //removedBg = true
                 }
                 
