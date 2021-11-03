@@ -17,6 +17,18 @@ struct AddClothesView: View {
     @State private var shouldPresentActionScheet = false
     @State private var shouldPresentCamera = false
     
+    
+    @State private var isAnimating = false
+
+
+    var foreverAnimation: Animation {
+        Animation.linear(duration: 2.0)
+            .repeatForever(autoreverses: false)
+    }
+    
+    
+    @State var processingBg = false
+    @State var processingAWS = false
     @State var outputImage: UIImage = UIImage(systemName: "camera")!
     //@State var testImage: UIImage = UIImage(systemName: "tshirt")!
     @State var removedBg = false
@@ -119,9 +131,9 @@ struct AddClothesView: View {
                     if let inputImage = self.image {
                   //      print(inputImage.asUIImage())
                         
-                  //      self.outputImage = inputImage.asUIImage()
-                        self.removedBg = true
-                      //  removeBackground(inputImage: inputImage.asUIImage())
+                        self.outputImage = inputImage.asUIImage()
+                       // self.removedBg = true
+                      removeBackground(inputImage: inputImage.asUIImage())
                     }
                     //removedBg = true
                 }
@@ -138,18 +150,48 @@ struct AddClothesView: View {
             }) {
                 HStack {
                     
-                    if removedBg == false {
+                    if removedBg == false && processingBg == false {
                         Image(systemName: "checkmark")
                             .font(Font.system(size: 30, weight: .semibold))
                         Text("Confirm")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
-                    else {
+                    
+                    else if removedBg == false && processingBg == true {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 30, weight: .semibold))
+                            .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0.0))
+                            .animation(self.isAnimating ? foreverAnimation : .default)
+                            .onAppear { self.isAnimating = true }
+                            .onDisappear { self.isAnimating = false }
+                        Text("Confirm")
+                            .font(Font.system(size: 30, weight: .semibold))
+                    }
+                    
+                    
+                    
+                    else if removedBg == true && processingAWS == false {
                         Image(systemName: "plus")
                             .font(Font.system(size: 30, weight: .semibold))
                         Text("Add to Closet")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
+                    
+                    else {
+                        
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .foregroundColor(.white)
+                            .font(Font.system(size: 30, weight: .semibold))
+                            .rotationEffect(Angle(degrees: self.isAnimating ? 360 : 0.0))
+                            .animation(self.isAnimating ? foreverAnimation : .default)
+                            .onAppear { self.isAnimating = true }
+                            .onDisappear { self.isAnimating = false }
+                        Text("Add to Closet")
+                            .font(Font.system(size: 30, weight: .semibold))
+                    }
+                    
+                  
                 }
                 .frame(width: 300, height: 60)
                 .background(Color.green)
