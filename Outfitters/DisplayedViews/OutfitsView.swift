@@ -41,26 +41,22 @@ struct OutfitsView: View {
                         Text($0.rawValue)
                     }
                 }
-                
-                
                 .pickerStyle(SegmentedPickerStyle())
                 
                 HStack {
                     
                     if promptDelete == true {
-                    Button(action: {
-                        deleteDataStore()
-                    }, label: {
-                        ZStack {
-                            Circle().fill(.red).frame(width: 40, height: 40)
-                            Image(systemName: "exclamationmark.triangle")
-                                .font(Font.system(size: 20, weight: .semibold))
-                                .foregroundColor(.white)
-                        }
-                    })
+                        Button(action: {
+                            deleteDataStore()
+                        }, label: {
+                            ZStack {
+                                Circle().fill(.red).frame(width: 40, height: 40)
+                                Image(systemName: "exclamationmark.triangle")
+                                    .font(Font.system(size: 20, weight: .semibold))
+                                    .foregroundColor(.white)
+                            }
+                        })
                     }
-                    
-                    
                     Spacer()
                     Button(action: {
                         withAnimation{
@@ -80,21 +76,14 @@ struct OutfitsView: View {
                     HStack(spacing: 20) {
                         
                         self.listContent(for: getArrayKeys(selectedSeasonType: selectedSeasonType), selectedSeasonType: selectedSeasonType)
-                        
                   }
                 }
-                
-              
-                
             }
             .navigationTitle("Outfits")
         }
     }
     
     func deleteDataStore() {
-        
-        
-        
         Amplify.DataStore.query(Post.self) { result in
             switch result {
             case .success(let posts):
@@ -137,8 +126,6 @@ struct OutfitsView: View {
                         .cornerRadius(20)
                         
                 }
-                    
-                    
                 case .summer:
                     if let image = self.outfitSummer[key]?.image {
                     Image(uiImage: image)
@@ -148,9 +135,6 @@ struct OutfitsView: View {
                         .cornerRadius(20)
                         
                 }
-
-                       
-                    
                 case .fall:
                     if let image = self.outfitFall[key]?.image {
                     Image(uiImage: image)
@@ -159,10 +143,7 @@ struct OutfitsView: View {
                         
                         .cornerRadius(20)
                         
-                }
-
-                  
-                    
+                }  
                 case .winter:
                     if let image = self.outfitWinter[key]?.image {
                     Image(uiImage: image)
