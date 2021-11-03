@@ -50,9 +50,9 @@ struct OutfitsView: View {
                             deleteDataStore()
                         }, label: {
                             ZStack {
-                                Circle().fill(.red).frame(width: 40, height: 40)
+                                Circle().fill(.red).frame(width: 20, height: 20)
                                 Image(systemName: "exclamationmark.triangle")
-                                    .font(Font.system(size: 20, weight: .semibold))
+                                    .font(Font.system(size: 10, weight: .semibold))
                                     .foregroundColor(.white)
                             }
                         })
