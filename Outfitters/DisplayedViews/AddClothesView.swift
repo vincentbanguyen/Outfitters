@@ -10,6 +10,7 @@ import Amplify
 import PhotoRoomKit
 
 struct AddClothesView: View {
+    let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
     @StateObject var viewRouter = ViewRouter()
     
     @State private var image: Image? = Image(systemName: "tshirt")
@@ -29,7 +30,7 @@ struct AddClothesView: View {
     
     @State var processingBg = false
     @State var processingAWS = false
-    @State var outputImage: UIImage = UIImage(systemName: "camera")!
+    @State var outputImage: UIImage?
     //@State var testImage: UIImage = UIImage(systemName: "tshirt")!
     @State var removedBg = false
     @State var didSelectItemType = false
@@ -53,7 +54,7 @@ struct AddClothesView: View {
                     .padding(40)
                 }
             } else {
-                Image(uiImage: outputImage)
+                Image(uiImage: outputImage!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 250)
@@ -145,7 +146,7 @@ struct AddClothesView: View {
                  
                     //upload to aws
                     processingAWS = true
-                    uploadToAWS(outputImage, itemType: itemType)
+                    uploadToAWS(outputImage!, itemType: itemType)
                     viewRouter.currentPage = .closet
                     
                 }
@@ -219,7 +220,7 @@ struct AddClothesView: View {
     
     func removeBackground(inputImage: UIImage) {
         print("trying to remove background")
-        let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
+       
         segmentationService.segment(image: inputImage) { (image, error) in
             DispatchQueue.main.async {
                 if let error = error {
@@ -265,6 +266,7 @@ struct AddClothesView: View {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
                 self.image = nil
+                self.outputImage = nil
             case .failure(let error):
                 print("failed to save post ")
             }
