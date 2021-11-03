@@ -64,9 +64,9 @@ struct OutfitsView: View {
                         }
                     }, label: {
                         ZStack {
-                            Circle().fill(.red).frame(width: 40, height: 40)
+                            Circle().fill(Color("colorPlus")).frame(width: 20, height: 20)
                             Image(systemName: "trash.fill")
-                                .font(Font.system(size: 20, weight: .semibold))
+                                .font(Font.system(size: 10, weight: .semibold))
                                 .foregroundColor(.white)
                         }
                     })
