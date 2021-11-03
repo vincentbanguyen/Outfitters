@@ -14,7 +14,7 @@ struct AddClothesView: View {
     
     
     @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-        @State private var selectedImage: UIImage?
+        @State var selectedImage: UIImage?
         @State private var isImagePickerDisplay = false
     
     @State private var isAnimating = false
@@ -32,7 +32,7 @@ struct AddClothesView: View {
 //    @State private var shouldPresentCamera = false
     
     
-    @State var outputImage: UIImage =  UIImage(systemName: "camera")!
+    @State var outputImage: UIImage?
     //@State var testImage: UIImage = UIImage(systemName: "tshirt")!
     @State var removedBg = false
     @State var didSelectItemType = false
@@ -48,11 +48,13 @@ struct AddClothesView: View {
         VStack {
             
             if removedBg == true {
-                Image(uiImage: outputImage)
+                if let outfitImage = self.outputImage {
+                Image(uiImage: outfitImage)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 250, height: 250)
                 .padding(40)
+                }
             }
         
             else if selectedImage != nil  {
@@ -151,19 +153,22 @@ struct AddClothesView: View {
                 // upload to AWS
                 else if selectedImage != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
-                    print(outputImage.size)
+                 
+                    if let outputImage = self.outputImage {
+                        processingAWS = true
+                        uploadToAWS(outputImage, itemType: itemType)
+                        viewRouter.currentPage = .closet
+                    }
                     let targetSize = CGSize(width: 3024, height: 4032)
-
-                    let resizedOutputImage = self.outputImage.scalePreservingAspectRatio(
-                        targetSize: targetSize
-                    )
-                    
-                    print(resizedOutputImage.size)
+//
+//                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
+//                        targetSize: targetSize
+//                    )
+//
+//                    print(resizedOutputImage.size)
 
                     //upload to aws
-                    processingAWS = true
-                    uploadToAWS(resizedOutputImage, itemType: itemType)
-                    viewRouter.currentPage = .closet
+                   
                     
                 }
             }) {
@@ -220,7 +225,7 @@ struct AddClothesView: View {
             print(didSelectItemType)
         })
         .sheet(isPresented: self.$isImagePickerDisplay) {
-            ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
+            ImagePickerView(selectedImage: $selectedImage, sourceType: self.sourceType)
         }.actionSheet(isPresented:  self.$shouldPresentActionScheet) { () -> ActionSheet in
             ActionSheet(title: Text("Upload Clothing Item"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                 self.sourceType = .camera
@@ -255,7 +260,7 @@ struct AddClothesView: View {
         
     }
     func uploadToAWS(_ image: UIImage, itemType: String) {
-        guard let imageData = image.pngData() else {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             print("cant compress")
             return
             
@@ -279,6 +284,7 @@ struct AddClothesView: View {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
                 self.selectedImage = nil
+                self.outputImage = nil
                 
             case .failure(let error):
                 print("failed to save post ")
