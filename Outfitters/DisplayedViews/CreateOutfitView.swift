@@ -86,21 +86,24 @@ struct CreateOutfitView: View {
                     }
                 })
                 if topsKey == "none" || modifyingTops == true {
-                    Image(uiImage: tops[Array(tops.keys)[randomTopsKey]]!.image)
+                    if let image = tops[Array(tops.keys)[randomTopsKey]]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(20)
                         .frame(width:  imageSize, height: imageSize)
                         .scaledToFit()
+                    }
                 }
                 else {
-                    Image(uiImage: tops[topsKey]!.image)
+                    if let image = tops[topsKey]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(20)
                         .frame(width:  imageSize, height: imageSize)
                         .scaledToFit()
-                    
+                    }
                 }
                 Button(action: {
                     modifyingTops = true
@@ -142,21 +145,24 @@ struct CreateOutfitView: View {
                     }
                 })
                 if bottomsKey == "none" || modifyingBottoms == true {
-                    Image(uiImage: bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image)
+                    if let image = bottoms[Array(tops.keys)[randomBottomsKey]]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(20)
                         .frame(width:  imageSize, height: imageSize)
                         .scaledToFit()
+                    }
                 }
                 else {
-                    Image(uiImage: bottoms[bottomsKey]!.image)
+                    if let image = bottoms[bottomsKey]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(20)
                         .frame(width:  imageSize, height: imageSize)
                         .scaledToFit()
-                    
+                    }
                 }
                 Button(action: {
                     modifyingBottoms = true
@@ -199,21 +205,24 @@ struct CreateOutfitView: View {
                     }
                 })
                 if shoesKey == "none" || modifyingShoes == true {
-                    Image(uiImage: shoes[Array(shoes.keys)[randomShoesKey]]!.image)
+                    if let image = shoes[Array(tops.keys)[randomShoesKey]]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(20)
                         .frame(width:  imageSize, height: imageSize)
                         .scaledToFit()
+                    }
                 }
                 else {
-                    Image(uiImage: shoes[shoesKey]!.image)
+                    if let image = shoes[shoesKey]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .cornerRadius(20)
                         .frame(width:  imageSize, height: imageSize)
                         .scaledToFit()
-                    
+                    }
                 }
                 Button(action: {
                     modifyingShoes = true
@@ -281,9 +290,17 @@ struct CreateOutfitView: View {
             Button(action: {
                 // SAVE OUTFIT BY SAVING KEYS OF TOPS BOTTOMS SHOES
                 if didSelectSeasonType {
-                saveOutfit(topsImage: modifyingTops ? tops[Array(tops.keys)[randomTopsKey]]!.image : tops[topsKey]!.image  ,
-                           bottomsImage:  modifyingBottoms ? bottoms[Array(bottoms.keys)[randomBottomsKey]]!.image : bottoms[bottomsKey]!.image,
-                           shoesImage:  modifyingShoes ? shoes[Array(shoes.keys)[randomShoesKey]]!.image : shoes[shoesKey]!.image)
+                    guard let topsRandom = tops[Array(tops.keys)[randomTopsKey]] else { return }
+                    guard let tops = tops[topsKey] else { return }
+                    
+                    guard let bottomsRandom = bottoms[Array(bottoms.keys)[randomBottomsKey]] else { return }
+                    guard let bottoms = bottoms[bottomsKey] else { return }
+                    
+                    guard let shoesRandom = shoes[Array(shoes.keys)[randomShoesKey]] else { return }
+                    guard let shoes = shoes[shoesKey] else { return }
+                saveOutfit(topsImage: modifyingTops ? topsRandom.image : tops.image  ,
+                           bottomsImage:  modifyingBottoms ? bottomsRandom.image : bottoms.image,
+                           shoesImage:  modifyingShoes ? shoesRandom.image : shoes.image)
                 
                 viewRouter.currentPage = .outfits
                 }
@@ -330,8 +347,11 @@ struct CreateOutfitView: View {
                 .overlayWith(image: bottomsImage, posX: 0, posY: CGFloat(bottomsImage.size.height))
                 .overlayWith(image: shoesImage, posX: 0, posY: CGFloat(shoesImage.size.height * 2))
 
-       
-        uploadToAWS(outfitImage!, seasonType: seasonType)
+        if let outfitImage = outfitImage {
+            uploadToAWS(outfitImage, seasonType: seasonType)
+        }
+        
+        
         
     }
     func randomizeOutfit() {

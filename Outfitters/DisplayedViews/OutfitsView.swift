@@ -129,35 +129,50 @@ struct OutfitsView: View {
                    
                 switch selectedSeasonType {
                 case .spring:
-                    
-                    Image(uiImage: self.outfitSpring[key]!.image)
+                    if let image = self.outfitSpring[key]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         
                         .cornerRadius(20)
                         
+                }
                     
                     
                 case .summer:
-                    Image(uiImage: self.outfitSummer[key]!.image)
+                    if let image = self.outfitSummer[key]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
                         
                         .cornerRadius(20)
+                        
+                }
+
                        
                     
                 case .fall:
-                    Image(uiImage: self.outfitFall[key]!.image)
+                    if let image = self.outfitFall[key]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
+                        
                         .cornerRadius(20)
+                        
+                }
+
                   
                     
                 case .winter:
-                    Image(uiImage: self.outfitWinter[key]!.image)
+                    if let image = self.outfitWinter[key]?.image {
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
+                        
                         .cornerRadius(20)
+                        
+                }
+
               
                 }
                     if promptDelete {
@@ -175,15 +190,6 @@ struct OutfitsView: View {
                    
                     
                 }
-                
-//                .simultaneousGesture(
-//                    LongPressGesture()
-//                        .onEnded { _ in
-//                            withAnimation{
-//                                promptDelete.toggle()
-//                            }
-//                        }
-//                )
                 
             }
         }

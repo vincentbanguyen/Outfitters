@@ -33,11 +33,13 @@ struct AddClothesView: View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
             if removedBg == false  {
-                image!
+                if let image = image {
+                image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 250)
                     .padding(40)
+                }
             } else {
                 Image(uiImage: outputImage)
                     .resizable()

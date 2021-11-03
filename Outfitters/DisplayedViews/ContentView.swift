@@ -164,7 +164,7 @@ struct ContentView: View {
                     switch result {
                     case .success(let imageData):
                         
-                        let image = UIImage(data: imageData)
+                        if let image = UIImage(data: imageData) {
                         // let image = UIImage(data: imageData)
                         
                         DispatchQueue.main.async {
@@ -174,23 +174,25 @@ struct ContentView: View {
                             
                             switch post.itemType {
                             case "tops":
-                                tops[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                tops[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             case "bottoms":
-                                bottoms[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                bottoms[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             case "shoes":
-                                shoes[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                shoes[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             case "outfitSpring":
-                                outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             case "outfitSummer":
-                                outfitSummer[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                outfitSummer[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             case "outfitFall":
-                                outfitFall[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                outfitFall[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             case "outfitWinter":
-                                outfitWinter[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image!, itemType: post.itemType)
+                                outfitWinter[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
                             default:
                                 print("uh oh no item type")
                             }
                             
+                            
+                        }
                         }
                         
                     case .failure(let error):

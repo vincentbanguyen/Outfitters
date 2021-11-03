@@ -82,8 +82,8 @@ struct ClosetView: View {
                 switch selectedItemType {
                 case .tops:
                     VStack {
-                     
-                        Image(uiImage: self.tops[key]!.image)
+                        if let image = self.tops[key]?.image {
+                        Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(20)
@@ -111,12 +111,13 @@ struct ClosetView: View {
                                 }
                                 .tint(.red)
                             }
-                        
+                        }
                     }
                 case .bottoms:
                     VStack {
                  
-                        Image(uiImage: self.bottoms[key]!.image)
+                        if let image = self.bottoms[key]?.image {
+                        Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(20)
@@ -144,12 +145,14 @@ struct ClosetView: View {
                                 }
                                 .tint(.red)
                             }
+                        }
                         
                     }
                 case .shoes:
                     VStack {
                   
-                        Image(uiImage: self.shoes[key]!.image)
+                        if let image = self.shoes[key]?.image {
+                        Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
                             .cornerRadius(20)
@@ -177,6 +180,7 @@ struct ClosetView: View {
                                 }
                                 .tint(.red)
                             }
+                        }
                         
                     }
                 }
