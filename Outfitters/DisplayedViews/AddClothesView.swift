@@ -150,13 +150,13 @@ struct AddClothesView: View {
                 else if selectedImage != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
                     print(outputImage.size)
-                    let targetSize = CGSize(width: 300, height: 300)
+                    let targetSize = CGSize(width: 10000, height: 10000)
 
                     let resizedOutputImage = outputImage.scalePreservingAspectRatio(
                         targetSize: targetSize
                     )
                     
-                  
+                    print(resizedOutputImage.size)
 
                     //upload to aws
                     processingAWS = true
