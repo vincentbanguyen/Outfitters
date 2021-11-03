@@ -84,6 +84,7 @@ struct AddClothesView: View {
                         case 1:
                             itemType = "bottoms"
                             print(itemType)
+                        
                         case 2:
                             itemType = "shoes"
                             print(itemType)
@@ -169,7 +170,7 @@ struct AddClothesView: View {
     }
     
     func removeBackground(inputImage: UIImage) {
-        
+        print("attempnig to remove background")
         let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
         segmentationService.segment(image: inputImage) { (image, error) in
             DispatchQueue.main.async {
