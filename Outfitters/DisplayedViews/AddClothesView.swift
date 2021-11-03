@@ -117,6 +117,7 @@ struct AddClothesView: View {
                 // removing backgoung
                 if uploadedImage == true && removedBg == false  {
                     if let inputImage = image {
+                        
                         removeBackground(inputImage: inputImage.asUIImage())
                     }
                     //removedBg = true
@@ -170,7 +171,7 @@ struct AddClothesView: View {
     }
     
     func removeBackground(inputImage: UIImage) {
-        print("attempnig to remove background")
+        print("trying to remove background")
         let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
         segmentationService.segment(image: inputImage) { (image, error) in
             DispatchQueue.main.async {
@@ -184,15 +185,19 @@ struct AddClothesView: View {
                     return
                 }
                 // All good
-                outputImage = image
-                removedBg = true
+                self.outputImage = image
+                self.removedBg = true
                 print("removed background")
             }
         }
         
     }
     func uploadToAWS(_ image: UIImage, itemType: String) {
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            print("cant compress")
+            return
+            
+        }
         let key = UUID().uuidString + ".jpg"
         _ = Amplify.Storage.uploadData(key: key, data: imageData) { result in
             switch result {
