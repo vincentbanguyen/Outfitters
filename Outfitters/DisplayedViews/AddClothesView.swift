@@ -117,9 +117,9 @@ struct AddClothesView: View {
                 // removing backgoung
                 if uploadedImage == true && removedBg == false  {
                     if let inputImage = self.image {
-                        print(inputImage.asUIImage())
+                  //      print(inputImage.asUIImage())
                         
-                        self.outputImage = inputImage.asUIImage()
+                  //      self.outputImage = inputImage.asUIImage()
                         self.removedBg = true
                       //  removeBackground(inputImage: inputImage.asUIImage())
                     }
