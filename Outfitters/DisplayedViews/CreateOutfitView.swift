@@ -46,13 +46,9 @@ struct CreateOutfitView: View {
     
     let imageSize = 150.0
     let circleSize = 60.0
-    let arrowSize = 30.0
+
     var body: some View {
         VStack {
-    
-           
-           
-            
             
             // TOPS
             HStack {
@@ -69,9 +65,7 @@ struct CreateOutfitView: View {
 //                        Circle()
 //                            .fill(Color("colorPlus"))
 //                            .frame(width: circleSize, height: circleSize)
-                    Image(systemName: "arrow.left")
-                            .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(Color("colorPlus"))
+                        arrowLeft()
                     }
                 })
                 if topsKey == "none" || modifyingTops == true {
@@ -106,9 +100,7 @@ struct CreateOutfitView: View {
 //                        Circle()
 //                            .fill(Color("colorPlus"))
 //                            .frame(width: circleSize, height: circleSize)
-                    Image(systemName: "arrow.right")
-                            .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(Color("colorPlus"))
+                   arrowRight()
                         
                     }
                 })
@@ -130,9 +122,7 @@ struct CreateOutfitView: View {
 //                        Circle()
 //                            .fill(Color("colorPlus"))
 //                            .frame(width: circleSize, height: circleSize)
-                    Image(systemName: "arrow.left")
-                            .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(Color("colorPlus"))
+                  arrowLeft()
                     }
                 })
                 if bottomsKey == "none" || modifyingBottoms == true {
@@ -167,9 +157,7 @@ struct CreateOutfitView: View {
 //                        Circle()
 //                            .fill(Color("colorPlus"))
 //                            .frame(width: circleSize, height: circleSize)
-                    Image(systemName: "arrow.right")
-                            .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(Color("colorPlus"))
+                  arrowRight()
                     }
                 })
                 
@@ -190,9 +178,7 @@ struct CreateOutfitView: View {
 //                        Circle()
 //                            .fill(Color("colorPlus"))
 //                            .frame(width: circleSize, height: circleSize)
-                    Image(systemName: "arrow.left")
-                            .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(Color("colorPlus"))
+                   arrowLeft()
                     }
                 })
                 if shoesKey == "none" || modifyingShoes == true {
@@ -227,9 +213,7 @@ struct CreateOutfitView: View {
 //                        Circle()
 //                            .fill(Color("colorPlus"))
 //                            .frame(width: circleSize, height: circleSize)
-                    Image(systemName: "arrow.right")
-                            .font(Font.system(size: arrowSize, weight: .semibold))
-                            .foregroundColor(Color("colorPlus"))
+                  arrowRight()
                     }
                 })
                 
@@ -422,6 +406,23 @@ struct CreateOutfitView: View {
     }
     
 }
+
+struct arrowLeft: View {
+    var body: some View {
+    Image(systemName: "arrow.left")
+            .font(Font.system(size: 30, weight: .bold))
+            .foregroundColor(Color("colorPlus"))
+    }
+}
+
+struct arrowRight: View {
+    var body: some View {
+    Image(systemName: "arrow.right")
+            .font(Font.system(size: 30, weight: .bold))
+            .foregroundColor(Color("colorPlus"))
+    }
+}
+
 
 //struct OutfitsView_Previews: PreviewProvider {
 //    @State static var posts = ["String": Post(id: "hi", imageKey: "hi", itemType: "hi")]
