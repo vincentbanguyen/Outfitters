@@ -77,6 +77,8 @@ struct AddClothesView: View {
             
             HStack {
                 
+                
+                // IMAGE PICKER
             Button{
                 imageVM.source = .camera
                 imageVM.showPhotoPicker()
@@ -84,13 +86,13 @@ struct AddClothesView: View {
                 HStack {
                     Image(systemName: "camera")
                         .font(Font.system(size: 30, weight: .semibold))
-                    Text("Camera")
-                        .font(Font.system(size: 30, weight: .semibold))
+//                    Text("Camera")
+//                        .font(Font.system(size: 30, weight: .semibold))
                     
                 }
                 
             }
-            .frame(width: 300, height: 60)
+            .frame(width: 150, height: 60)
             .background(Color("colorPlus"))
             .cornerRadius(40)
             .foregroundColor(.white)
@@ -101,15 +103,15 @@ struct AddClothesView: View {
                     imageVM.showPhotoPicker()
                 } label: {
                     HStack {
-                        Image(systemName: "camera")
+                        Image(systemName: "photo")
                             .font(Font.system(size: 30, weight: .semibold))
-                        Text("Photos")
-                            .font(Font.system(size: 30, weight: .semibold))
+//                        Text("Photos")
+//                            .font(Font.system(size: 30, weight: .semibold))
                         
                     }
                     
                 }
-                .frame(width: 300, height: 60)
+                .frame(width: 150, height: 60)
                 .background(Color("colorPlus"))
                 .cornerRadius(40)
                 .foregroundColor(.white)

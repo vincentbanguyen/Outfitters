@@ -20,6 +20,7 @@ struct OutfittersApp: App {
                 .environmentObject(ImageViewModel())
                 .onAppear {
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
+               //     UserDefaults.standard.setValue(false, forKey: "_UIConstraintViewAlertForUnsatisfiableConstraint")
                 }
             
         }
