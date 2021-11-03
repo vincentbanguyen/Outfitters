@@ -36,6 +36,11 @@ struct CreateOutfitView: View {
     @State var seasonType = "item"
     @State public var selectedSeasonType: Int?
     
+    
+    @State var topsImage = UIImage()
+    @State var bottomsImage = UIImage()
+    @State var shoesImage = UIImage()
+    
     @State private var outfitImage: UIImage? = UIImage(systemName: "tshirt")
     
     
@@ -292,17 +297,35 @@ struct CreateOutfitView: View {
             Button(action: {
                 // SAVE OUTFIT BY SAVING KEYS OF TOPS BOTTOMS SHOES
                 if didSelectSeasonType {
+                    if modifyingTops {
                     guard let topsRandom = tops[Array(tops.keys)[randomTopsKey]] else { return }
-                    guard let tops = tops[topsKey] else { return }
+                        topsImage = topsRandom.image
+                    } else {
+                        guard let tops = tops[topsKey] else { return }
+                        topsImage = tops.image
+                    }
+                   
                     
+                    if modifyingBottoms {
                     guard let bottomsRandom = bottoms[Array(bottoms.keys)[randomBottomsKey]] else { return }
-                    guard let bottoms = bottoms[bottomsKey] else { return }
+                        bottomsImage = bottomsRandom.image
+                    } else {
+                        guard let bottoms = bottoms[bottomsKey] else { return }
+                        bottomsImage = bottoms.image
+                    }
                     
+                    if modifyingShoes {
                     guard let shoesRandom = shoes[Array(shoes.keys)[randomShoesKey]] else { return }
-                    guard let shoes = shoes[shoesKey] else { return }
-                saveOutfit(topsImage: modifyingTops ? topsRandom.image : tops.image  ,
-                           bottomsImage:  modifyingBottoms ? bottomsRandom.image : bottoms.image,
-                           shoesImage:  modifyingShoes ? shoesRandom.image : shoes.image)
+                        shoesImage = shoesRandom.image
+                    } else {
+                        guard let shoes = shoes[shoesKey] else { return }
+                        shoesImage = shoes.image
+                    }
+                    
+                    
+                saveOutfit(topsImage: topsImage  ,
+                           bottomsImage:  bottomsImage,
+                           shoesImage:  shoesImage)
                 
                 viewRouter.currentPage = .outfits
                 }

@@ -163,41 +163,41 @@ struct ContentView: View {
                 }, resultListener: { (result) in
                     switch result {
                     case .success(let imageData):
-                        
-                        if let image = UIImage(data: imageData) {
-                        // let image = UIImage(data: imageData)
+                            // let image = UIImage(data: imageData)
                         
                         DispatchQueue.main.async {
-                            // self.posts.append(post)
-                            self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
-                            print(post.imageKey)
-                            
-                            switch post.itemType {
-                            case "tops":
-                                tops[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            case "bottoms":
-                                bottoms[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            case "shoes":
-                                shoes[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            case "outfitSpring":
-                                outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            case "outfitSummer":
-                                outfitSummer[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            case "outfitFall":
-                                outfitFall[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            case "outfitWinter":
-                                outfitWinter[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
-                            default:
-                                print("uh oh no item type")
+                            if let image = UIImage(data: imageData) {
+                                // self.posts.append(post)
+                                self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
+                                print(post.imageKey)
+                                
+                                switch post.itemType {
+                                case "tops":
+                                    tops[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                case "bottoms":
+                                    bottoms[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                case "shoes":
+                                    shoes[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                case "outfitSpring":
+                                    outfitSpring[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                case "outfitSummer":
+                                    outfitSummer[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                case "outfitFall":
+                                    outfitFall[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                case "outfitWinter":
+                                    outfitWinter[post.imageKey] = ClothingItem(imageKey: post.imageKey, image: image, itemType: post.itemType)
+                                default:
+                                    print("uh oh no item type")
+                                }
                             }
                             
                             
-                        }
+                            
                         }
                         
                     case .failure(let error):
                         print("failed to donwload image data")
-                    //    downloadData(for: posts)
+                        //    downloadData(for: posts)
                     }
                 })
         }
