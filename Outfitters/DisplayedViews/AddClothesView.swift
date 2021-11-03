@@ -149,10 +149,18 @@ struct AddClothesView: View {
                 // upload to AWS
                 else if selectedImage != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
+                    print(outputImage.size)
+                    let targetSize = CGSize(width: 300, height: 300)
+
+                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
+                        targetSize: targetSize
+                    )
                     
+                  
+
                     //upload to aws
                     processingAWS = true
-                    uploadToAWS(self.outputImage, itemType: itemType)
+                    uploadToAWS(resizedOutputImage, itemType: itemType)
                     viewRouter.currentPage = .closet
                     
                 }
@@ -245,7 +253,7 @@ struct AddClothesView: View {
         
     }
     func uploadToAWS(_ image: UIImage, itemType: String) {
-        guard let imageData = image.pngData() else {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             print("cant compress")
             return
             
