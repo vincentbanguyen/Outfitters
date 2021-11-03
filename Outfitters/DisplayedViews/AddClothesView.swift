@@ -137,7 +137,7 @@ struct AddClothesView: View {
             Button(action: {
              
                 // removing backgoung
-<<<<<<< HEAD
+
                 if selectedImage != nil && removedBg == false  {
                     if let inputImage = self.selectedImage {
                        // print(inputImage.asUIImage())
@@ -145,26 +145,16 @@ struct AddClothesView: View {
                         print(selectedImage!.size)
                         processingBg = true
                         removeBackground(inputImage: inputImage)
-=======
-                if uploadedImage == true && removedBg == false  {
-                    if let inputImage = self.image {
-                        print(inputImage.asUIImage())
-                        
-                        self.outputImage = inputImage.asUIImage()
-                        self.removedBg = true
-                      //  removeBackground(inputImage: inputImage.asUIImage())
->>>>>>> parent of 3c59ea0 (.)
+
                     }
-                    //removedBg = true
                 }
-                
                 // upload to AWS
                 else if selectedImage != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
                     print(outputImage.size)
                     let targetSize = CGSize(width: 3024, height: 4032)
 
-                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
+                    let resizedOutputImage = self.outputImage.scalePreservingAspectRatio(
                         targetSize: targetSize
                     )
                     
