@@ -128,14 +128,14 @@ struct AddClothesView: View {
              
                 // removing backgoung
                 if uploadedImage == true && removedBg == false  {
-                    if let inputImage = self.image {
+                  
                   //      print(inputImage.asUIImage())
                         
                       //  self.outputImage = inputImage.asUIImage()
                        // self.removedBg = true
                         processingBg = true
-                      removeBackground(inputImage: inputImage.asUIImage())
-                    }
+                    removeBackground(inputImage: self.image!.asUIImage())
+                    
                     //removedBg = true
                 }
                 
@@ -265,7 +265,6 @@ struct AddClothesView: View {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
                 self.image = nil
-                
             case .failure(let error):
                 print("failed to save post ")
             }
