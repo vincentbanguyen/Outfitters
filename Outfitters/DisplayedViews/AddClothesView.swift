@@ -180,10 +180,8 @@ struct AddClothesView: View {
                     if let outputImage = self.outputImage {
                         processingAWS = true
                         uploadToAWS(outputImage, itemType: itemType)
-                        viewRouter.currentPage = .closet
+                      
                     }
-                    let targetSize = CGSize(width: 3024, height: 4032)
-//
 //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
 //                        targetSize: targetSize
 //                    )
@@ -300,6 +298,7 @@ struct AddClothesView: View {
             switch result {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
+                viewRouter.currentPage = .closet
                 self.imageVM.image = nil
                 self.outputImage = nil
                 
