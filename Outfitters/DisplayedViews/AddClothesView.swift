@@ -269,7 +269,7 @@ struct AddClothesView: View {
                     return
                 }
                 // All good
-                self.outputImage = image
+                outputImage = image
                 self.removedBg = true
                 print("removed background")
             }
