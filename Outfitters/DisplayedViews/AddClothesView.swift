@@ -137,6 +137,7 @@ struct AddClothesView: View {
             Button(action: {
              
                 // removing backgoung
+<<<<<<< HEAD
                 if selectedImage != nil && removedBg == false  {
                     if let inputImage = self.selectedImage {
                        // print(inputImage.asUIImage())
@@ -144,6 +145,15 @@ struct AddClothesView: View {
                         print(selectedImage!.size)
                         processingBg = true
                         removeBackground(inputImage: inputImage)
+=======
+                if uploadedImage == true && removedBg == false  {
+                    if let inputImage = self.image {
+                        print(inputImage.asUIImage())
+                        
+                        self.outputImage = inputImage.asUIImage()
+                        self.removedBg = true
+                      //  removeBackground(inputImage: inputImage.asUIImage())
+>>>>>>> parent of 3c59ea0 (.)
                     }
                     //removedBg = true
                 }
