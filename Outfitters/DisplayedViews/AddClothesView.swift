@@ -255,7 +255,7 @@ struct AddClothesView: View {
         
     }
     func uploadToAWS(_ image: UIImage, itemType: String) {
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+        guard let imageData = image.pngData() else {
             print("cant compress")
             return
             
