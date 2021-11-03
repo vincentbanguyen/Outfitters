@@ -54,7 +54,7 @@ struct AddClothesView: View {
                 if let outfitImage = self.outputImage {
                 Image(uiImage: outfitImage)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(width: 250, height: 250)
                 .padding(40)
                 }
@@ -64,7 +64,7 @@ struct AddClothesView: View {
                
                 Image(uiImage: selectedImage!)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .frame(width: 250, height: 250)
                     .padding(40)
                 
