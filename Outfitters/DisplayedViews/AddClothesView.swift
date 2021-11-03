@@ -118,7 +118,10 @@ struct AddClothesView: View {
                 if uploadedImage == true && removedBg == false  {
                     if let inputImage = self.image {
                         print(inputImage.asUIImage())
-                        removeBackground(inputImage: inputImage.asUIImage())
+                        
+                        self.outputImage = inputImage.asUIImage()
+                        self.removedBg = true
+                      //  removeBackground(inputImage: inputImage.asUIImage())
                     }
                     //removedBg = true
                 }
@@ -126,9 +129,9 @@ struct AddClothesView: View {
                 // upload to AWS
                 else if uploadedImage == true && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
-                    let uploadImage = self.outputImage
+                 
                     //upload to aws
-                    uploadToAWS(uploadImage, itemType: itemType)
+                    uploadToAWS(outputImage, itemType: itemType)
                     viewRouter.currentPage = .closet
                     
                 }
@@ -182,6 +185,7 @@ struct AddClothesView: View {
                 }
                 guard let image = image else {
                     // No image returned
+                    print("ERROR NO IMAGE RETURNED")
                     return
                 }
                 // All good
