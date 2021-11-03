@@ -9,7 +9,7 @@ import SwiftUI
 import Amplify
 import Combine
 
-
+@available(iOS 15.0, *)
 struct ContentView: View {
     
     @State var resetAllData = false
@@ -239,7 +239,7 @@ struct ContentView: View {
     
 }
 
-
+@available(iOS 15.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(viewRouter: ViewRouter())

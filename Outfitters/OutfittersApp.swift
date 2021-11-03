@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+@available(iOS 15.0, *)
 @main
 struct OutfittersApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

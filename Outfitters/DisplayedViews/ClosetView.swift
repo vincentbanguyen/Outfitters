@@ -8,6 +8,7 @@
 import SwiftUI
 import Amplify
 import Combine
+@available(iOS 15.0, *)
 struct ClosetView: View {
     
     

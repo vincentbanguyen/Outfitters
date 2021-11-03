@@ -133,6 +133,7 @@ struct AddClothesView: View {
                         
                       //  self.outputImage = inputImage.asUIImage()
                        // self.removedBg = true
+                        processingBg = true
                       removeBackground(inputImage: inputImage.asUIImage())
                     }
                     //removedBg = true
@@ -143,6 +144,7 @@ struct AddClothesView: View {
                     print("uploading to aws")
                  
                     //upload to aws
+                    processingAWS = true
                     uploadToAWS(outputImage, itemType: itemType)
                     viewRouter.currentPage = .closet
                     
