@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 import UIKit
-extension View {
+
+
+extension Image {
 // This function changes our View to UIView, then calls another function
 // to convert the newly-made UIView to a UIImage.
     public func asUIImage() -> UIImage {
