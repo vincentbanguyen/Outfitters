@@ -171,24 +171,26 @@ struct AddClothesView: View {
     
     func removeBackground(inputImage: UIImage) {
         print("attempnig to remove background")
-        let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
-        segmentationService.segment(image: inputImage) { (image, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    // An error occured
-                    print("error in removing background")
-                    return
-                }
-                guard let image = image else {
-                    // No image returned
-                    return
-                }
-                // All good
-                outputImage = image
-                removedBg = true
-                print("removed background")
-            }
-        }
+        removedBg = true
+        outputImage = inputImage
+//        let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
+//        segmentationService.segment(image: inputImage) { (image, error) in
+//            DispatchQueue.main.async {
+//                if let error = error {
+//                    // An error occured
+//                    print("error in removing background")
+//                    return
+//                }
+//                guard let image = image else {
+//                    // No image returned
+//                    return
+//                }
+//                // All good
+//                outputImage = image
+//                removedBg = true
+//                print("removed background")
+//            }
+//        }
         
     }
     func uploadToAWS(_ image: UIImage, itemType: String) {
