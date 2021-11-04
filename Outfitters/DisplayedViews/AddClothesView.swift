@@ -50,8 +50,8 @@ struct AddClothesView: View {
 //
 //                       let _ = print("removed bg \(removedBg)")
 //                   let _ =     print("is animating \(isAnimating)")
-              let _ = print("presentng CROPPED output IMAGE SIZE: \(output.size)")
-                    Image(uiImage: output)
+            ///  let _ = print("presentng CROPPED output IMAGE SIZE: \(output.size)")
+                    output
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250, height: 250)
@@ -63,7 +63,7 @@ struct AddClothesView: View {
 //                   let _ = print("removed bg \(removedBg)")
 //               let _ =     print("is animating \(isAnimating)")
 //                let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
-                Image(uiImage: inputImage)
+                inputImage
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250)
@@ -164,15 +164,17 @@ struct AddClothesView: View {
                 if imageVM.image != nil && removedBg == false  {
                     if let inputImage = imageVM.image {
                         processingBg = true
-                        removeBackground(inputImage: inputImage)
+                        let uiimage = inputImage.asUIImage()
+                        removeBackground(inputImage: uiimage )
                     }
                 }
                 // upload to AWS
                 else if imageVM.image != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
              
+                    let uiimage = imageVM.image.asUIImage()
                         processingAWS = true
-                    uploadToAWS(imageVM.image!, itemType: itemType)
+                    uploadToAWS(uiimage, itemType: itemType)
 //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
 //                        targetSize: targetSize
 //                    )
@@ -255,11 +257,11 @@ struct AddClothesView: View {
                 // All good
                // outputImage = image
                let image1 = Image(uiImage: image)
-                imageVM.image = image1.asUIImage()
-                print("CROPPED actualy output image size \(image.size)")
+               
+            //    print("CROPPED actualy output image size \(image.size)")
                     //.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
                 
-                print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
+           //     print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
                 removedBg = true
                 print("removed background")
             }
