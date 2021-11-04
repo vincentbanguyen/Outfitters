@@ -294,6 +294,7 @@ struct CreateOutfitView: View {
                 
                 
             Button(action: {
+                print("saving outfit")
                 // SAVE OUTFIT BY SAVING KEYS OF TOPS BOTTOMS SHOES
                 if didSelectSeasonType {
                     if modifyingTops {
@@ -384,6 +385,9 @@ struct CreateOutfitView: View {
         outfitImage = topsImage
                 .overlayWith(image: bottomsImage, posX: 0, posY: CGFloat(bottomsImage.size.height))
                 .overlayWith(image: shoesImage, posX: 0, posY: CGFloat(shoesImage.size.height * 2))
+                .resized(withPercentage: 0.5)
+        
+        print("resize outfit image")
 
         if let outfitImage = outfitImage {
             uploadToAWS(outfitImage, seasonType: seasonType)
