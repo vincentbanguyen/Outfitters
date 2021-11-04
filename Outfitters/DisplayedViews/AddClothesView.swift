@@ -258,7 +258,7 @@ struct AddClothesView: View {
                 
                 let source = image
                 let cgSource = source.cgImage
-                let my3000dpiImage = UIImage(cgImage: cgSource!, scale: 3000.0 / 72.0, orientation: source.imageOrientation)
+                let my3000dpiImage = UIImage(cgImage: cgSource!, scale: 456 / 72.0, orientation: source.imageOrientation)
                 
                 imageVM.image = my3000dpiImage
 //                print("CROPPED actualy output image size \(image.size)")
