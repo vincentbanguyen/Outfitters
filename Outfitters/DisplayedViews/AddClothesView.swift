@@ -47,30 +47,21 @@ struct AddClothesView: View {
         VStack {
             if removedBg == true {
                 if let output = imageVM.image  {
-//
-//                       let _ = print("removed bg \(removedBg)")
-//                   let _ =     print("is animating \(isAnimating)")
-              let _ = print("presentng CROPPED output IMAGE SIZE: \(output.size)")
-                    Image(uiImage: output)
+                    output
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250, height: 250)
                         .padding(40)
-            }
+                }
             }
             else if let inputImage = imageVM.image  {
-//
-//                   let _ = print("removed bg \(removedBg)")
-//               let _ =     print("is animating \(isAnimating)")
-//                let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
-                Image(uiImage: inputImage)
+                inputImage
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250)
                     .padding(40)
                 
             } else {
-               
                 Image(systemName: "tshirt.fill")
                     .resizable()
                     .scaledToFit()
@@ -82,29 +73,13 @@ struct AddClothesView: View {
             
             HStack {
                 // IMAGE PICKER
-            Button{
-                imageVM.source = .camera
-                imageVM.showPhotoPicker()
-            } label: {
-                HStack {
-                    Image(systemName: "camera")
-                        .font(Font.system(size: 30, weight: .semibold))
-                }
-                
-            }
-            .frame(width: 150, height: 60)
-            .background(Color("colorPlus"))
-            .cornerRadius(40)
-            .foregroundColor(.white)
-                
-                
                 Button{
-                    imageVM.source = .library
+                    imageVM.source = .camera
                     imageVM.showPhotoPicker()
                 } label: {
                     HStack {
-                        Image(systemName: "photo")
-                            .font(Font.system(size: 30, weight: .semibold)) 
+                        Image(systemName: "camera")
+                            .font(Font.system(size: 30, weight: .semibold))
                     }
                     
                 }
@@ -113,10 +88,21 @@ struct AddClothesView: View {
                 .cornerRadius(40)
                 .foregroundColor(.white)
                 
-                
-                
+                Button{
+                    imageVM.source = .library
+                    imageVM.showPhotoPicker()
+                } label: {
+                    HStack {
+                        Image(systemName: "photo")
+                            .font(Font.system(size: 30, weight: .semibold))
+                    }
+                }
+                .frame(width: 150, height: 60)
+                .background(Color("colorPlus"))
+                .cornerRadius(40)
+                .foregroundColor(.white)
             }
-                
+            
             HStack {
                 ForEach(0..<selectedTypes.count, id: \.self) { selectedType in
                     Button(action: {
@@ -129,7 +115,7 @@ struct AddClothesView: View {
                         case 1:
                             itemType = "bottoms"
                             print(itemType)
-                        
+                            
                         case 2:
                             itemType = "shoes"
                             print(itemType)
@@ -140,48 +126,44 @@ struct AddClothesView: View {
                         
                         Text("\(selectedTypes[selectedType])")
                             .font(Font.system(size: 30, weight: .semibold))
-                           
+                        
                     }
                     .frame(width: 90, height: 60)
                     .background(self.selectedItemType == selectedType ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
                     .cornerRadius(40)
-                   // .foregroundColor(self.buttonSelected == selectedType ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
+                    // .foregroundColor(self.buttonSelected == selectedType ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
                     .overlay(
-                           RoundedRectangle(cornerRadius: 40)
-                               .stroke(Color(#colorLiteral(red: 0.2067584602, green: 0.6186007545, blue: 1, alpha: 1)), lineWidth: 5)
-                       )
+                        RoundedRectangle(cornerRadius: 40)
+                            .stroke(Color(#colorLiteral(red: 0.2067584602, green: 0.6186007545, blue: 1, alpha: 1)), lineWidth: 5)
+                    )
                     .padding(4)
                 }
             }
             .padding(10)
-
-            
             // activate remove bg
             Button {
-             
+                
                 // removing backgoung
-
+                
                 if imageVM.image != nil && removedBg == false  {
                     if let inputImage = imageVM.image {
                         processingBg = true
-                        removeBackground(inputImage: inputImage)
+                        removeBackground(inputImage: inputImage.asUIImage())
                     }
                 }
                 // upload to AWS
                 else if imageVM.image != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
-             
-                        processingAWS = true
-                    uploadToAWS(imageVM.image!, itemType: itemType)
-//                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
-//                        targetSize: targetSize
-//                    )
-//
-//                    print(resizedOutputImage.size)
-
-                    //upload to aws
-                   
                     
+                    processingAWS = true
+                    uploadToAWS(imageVM.image.asUIImage(), itemType: itemType)
+                    //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
+                    //                        targetSize: targetSize
+                    //                    )
+                    //
+                    //                    print(resizedOutputImage.size)
+                    
+                    //upload to aws
                 }
             } label: {
                 HStack {
@@ -192,7 +174,6 @@ struct AddClothesView: View {
                         Text("Confirm")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
-                    
                     else if removedBg == false && processingBg == true {
                         Image(systemName: "arrow.triangle.2.circlepath")
                             .foregroundColor(.white)
@@ -253,12 +234,12 @@ struct AddClothesView: View {
                     return
                 }
                 // All good
-               // outputImage = image
-    
+                // outputImage = image
                 
-                imageVM.image = image.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
-//
-//                print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
+                
+                imageVM.image = Image(uiImage: image)
+                //
+                //                print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
                 removedBg = true
                 print("removed background")
             }
@@ -277,15 +258,15 @@ struct AddClothesView: View {
             case .success:
                 print("@Storage add \(itemType): \(key)  ")
                 DispatchQueue.main.async {
-                viewRouter.currentPage = .closet
-                imageVM.image = nil
-             //   outputImage = nil
+                    viewRouter.currentPage = .closet
+                    imageVM.image = nil
+                    //   outputImage = nil
                     removedBg = false
                     isAnimating = false
                     didSelectItemType = false
                     processingBg = false
-                     processingAWS = false
-                print("resetting stuff")
+                    processingAWS = false
+                    print("resetting stuff")
                 }
                 
                 let post = Post(imageKey: key, itemType: itemType)
@@ -301,7 +282,7 @@ struct AddClothesView: View {
             switch result {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
-              
+                
             case .failure(let error):
                 print("failed to save post ")
             }

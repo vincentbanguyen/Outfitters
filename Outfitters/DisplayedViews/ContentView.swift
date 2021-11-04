@@ -108,6 +108,7 @@ struct ContentView: View {
         }
         .onAppear(perform: {
             UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("colorPlus"))
+            UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             getPosts()
             observePosts()
         })
