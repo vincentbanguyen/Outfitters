@@ -16,19 +16,19 @@ struct OutfittersApp: App {
     @StateObject var viewRouter = ViewRouter()
     var body: some Scene {
         WindowGroup {
-//            ContentView(viewRouter: viewRouter)
-//                .environmentObject(ImageViewModel())
-//                .onAppear {
-//                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
-//               //     UserDefaults.standard.setValue(false, forKey: "_UIConstraintViewAlertForUnsatisfiableConstraint")
-//                }
-            
-            TestView()
+            ContentView(viewRouter: viewRouter)
                 .environmentObject(ImageViewModel())
                 .onAppear {
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
                //     UserDefaults.standard.setValue(false, forKey: "_UIConstraintViewAlertForUnsatisfiableConstraint")
                 }
+            
+//            TestView()
+//                .environmentObject(ImageViewModel())
+//                .onAppear {
+//                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
+//               //     UserDefaults.standard.setValue(false, forKey: "_UIConstraintViewAlertForUnsatisfiableConstraint")
+//                }
             
         }
     }
