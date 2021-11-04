@@ -54,7 +54,7 @@ struct AddClothesView: View {
                     Image(uiImage: output)
                         .resizable()
                         .scaledToFit()
-//                        .frame(width: 250, height: 250)
+                        .frame(width: 250, height: 250)
                         .padding(40)
             }
             }
@@ -256,6 +256,7 @@ struct AddClothesView: View {
                // outputImage = image
                 
                 imageVM.image = image
+                print("CROPPED actualy output image size \(image.size)")
                     //.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
                 
                 print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
