@@ -382,6 +382,7 @@ struct CreateOutfitView: View {
     
     func saveOutfit(topsImage: UIImage, bottomsImage: UIImage, shoesImage: UIImage) {
       
+        print("attemping to overlay images")
         outfitImage = topsImage
                 .overlayWith(image: bottomsImage, posX: 0, posY: CGFloat(bottomsImage.size.height))
                 .overlayWith(image: shoesImage, posX: 0, posY: CGFloat(shoesImage.size.height * 2))
