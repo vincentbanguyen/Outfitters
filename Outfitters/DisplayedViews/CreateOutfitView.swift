@@ -435,7 +435,7 @@ struct CreateOutfitView: View {
 struct arrowLeft: View {
     var body: some View {
     Image(systemName: "arrow.left")
-            .font(Font.system(size: 30, weight: .bold))
+            .font(Font.system(size: 40, weight: .bold))
             .foregroundColor(Color("colorPlus"))
     }
 }
@@ -443,7 +443,7 @@ struct arrowLeft: View {
 struct arrowRight: View {
     var body: some View {
     Image(systemName: "arrow.right")
-            .font(Font.system(size: 30, weight: .bold))
+            .font(Font.system(size: 40, weight: .bold))
             .foregroundColor(Color("colorPlus"))
     }
 }

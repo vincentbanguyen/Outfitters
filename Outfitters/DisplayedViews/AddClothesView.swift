@@ -46,19 +46,20 @@ struct AddClothesView: View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
             
-            if removedBg == true {
-                if let outfitImage = self.outputImage {
-                Image(uiImage: outfitImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 250, height: 250)
-                .padding(40)
-                }
-            }
-        
-            else if imageVM.image != nil  {
+//            if removedBg == true {
+//                if let outfitImage = self.outputImage {
+//                Image(uiImage: outfitImage)
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 250, height: 250)
+//                .padding(40)
+//                }
+//            }
+//
+//            else
+                if let inputImage =  imageVM.image  {
                
-                Image(uiImage: imageVM.image!)
+                Image(uiImage: inputImage)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250)
@@ -68,7 +69,7 @@ struct AddClothesView: View {
                
                 Image(systemName: "tshirt.fill")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .frame(width: 250, height: 250)
                     .padding(40)
             }
@@ -76,8 +77,6 @@ struct AddClothesView: View {
             // adding clothing item image
             
             HStack {
-                
-                
                 // IMAGE PICKER
             Button{
                 imageVM.source = .camera
@@ -86,9 +85,6 @@ struct AddClothesView: View {
                 HStack {
                     Image(systemName: "camera")
                         .font(Font.system(size: 30, weight: .semibold))
-//                    Text("Camera")
-//                        .font(Font.system(size: 30, weight: .semibold))
-                    
                 }
                 
             }
@@ -104,10 +100,7 @@ struct AddClothesView: View {
                 } label: {
                     HStack {
                         Image(systemName: "photo")
-                            .font(Font.system(size: 30, weight: .semibold))
-//                        Text("Photos")
-//                            .font(Font.system(size: 30, weight: .semibold))
-                        
+                            .font(Font.system(size: 30, weight: .semibold)) 
                     }
                     
                 }
@@ -160,28 +153,24 @@ struct AddClothesView: View {
 
             
             // activate remove bg
-            Button(action: {
+            Button {
              
                 // removing backgoung
 
                 if imageVM.image != nil && removedBg == false  {
                     if let inputImage = imageVM.image {
-
-                    
                         processingBg = true
                         removeBackground(inputImage: inputImage)
-
                     }
                 }
                 // upload to AWS
                 else if imageVM.image != nil && removedBg == true && didSelectItemType == true {
                     print("uploading to aws")
-                 
-                    if let outputImage = self.outputImage {
+             
                         processingAWS = true
-                        uploadToAWS(outputImage, itemType: itemType)
+                    uploadToAWS(imageVM.image!, itemType: itemType)
                       
-                    }
+                
 //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
 //                        targetSize: targetSize
 //                    )
@@ -192,7 +181,7 @@ struct AddClothesView: View {
                    
                     
                 }
-            }) {
+            } label: {
                 HStack {
                     
                     if removedBg == false && processingBg == false {
@@ -242,9 +231,6 @@ struct AddClothesView: View {
                 .foregroundColor(.white)
             }
         }
-        .onAppear(perform: {
-            print(didSelectItemType)
-        })
         .sheet(isPresented: $imageVM.showPicker) {
             ImagePicker(sourceType: imageVM.source == .library ? .photoLibrary : .camera, selectedImage: $imageVM.image)
                 .ignoresSafeArea()
@@ -267,7 +253,8 @@ struct AddClothesView: View {
                     return
                 }
                 // All good
-                outputImage = image
+                imageVM.image = image
+                print("CROPPED IMAGE SIZE: \(outputImage!.size)")
                 self.removedBg = true
                 print("removed background")
             }
