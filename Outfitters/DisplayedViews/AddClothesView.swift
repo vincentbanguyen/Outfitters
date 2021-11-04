@@ -45,19 +45,17 @@ struct AddClothesView: View {
     var body: some View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
-            
-//            if removedBg == true {
-//                if let outfitImage = self.outputImage {
-//                Image(uiImage: outfitImage)
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: 250, height: 250)
-//                .padding(40)
-//                }
-//            }
-//
-//            else
-                if let inputImage =  imageVM.image  {
+            if removedBg == true {
+                if let outfitImage = self.outputImage {
+                Image(uiImage: outfitImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 250, height: 250)
+                .padding(40)
+                }
+            }
+        
+            else if let inputImage =  imageVM.image  {
                
                 Image(uiImage: inputImage)
                     .resizable()
@@ -168,7 +166,7 @@ struct AddClothesView: View {
                     print("uploading to aws")
              
                         processingAWS = true
-                    uploadToAWS(imageVM.image!, itemType: itemType)
+                    uploadToAWS(outputImage!, itemType: itemType)
                       
                 
 //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
@@ -253,7 +251,7 @@ struct AddClothesView: View {
                     return
                 }
                 // All good
-                imageVM.image = image
+                outputImage = image
                 print("CROPPED IMAGE SIZE: \(outputImage!.size)")
                 self.removedBg = true
                 print("removed background")
