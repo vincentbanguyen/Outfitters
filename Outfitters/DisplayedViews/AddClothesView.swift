@@ -56,7 +56,7 @@ struct AddClothesView: View {
             }
         
             else if let inputImage =  imageVM.image  {
-               let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage!.size)")
+                let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
                 Image(uiImage: inputImage)
                     .resizable()
                     .scaledToFit()
