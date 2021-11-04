@@ -46,7 +46,9 @@ struct AddClothesView: View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
             if removedBg == true {
-                if let outfitImage = self.outputImage {
+                let _ = print("removed bg \(removedBg)")
+            let _ =     print("is animating \(isAnimating)")
+                if let outfitImage = outputImage {
                 Image(uiImage: outfitImage)
                 .resizable()
                 .scaledToFit()
@@ -54,8 +56,10 @@ struct AddClothesView: View {
                 .padding(40)
                 }
             }
-        
-            else if let inputImage =  imageVM.image  {
+            else if let inputImage = imageVM.image  {
+             
+                   let _ = print("removed bg \(removedBg)")
+               let _ =     print("is animating \(isAnimating)")
                 let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
                 Image(uiImage: inputImage)
                     .resizable()
@@ -253,7 +257,7 @@ struct AddClothesView: View {
                 // All good
                 outputImage = image
                 print("CROPPED OUTPUT IMAGE SIZE: \(outputImage!.size)")
-                self.removedBg = true
+                removedBg = true
                 print("removed background")
             }
         }
@@ -270,6 +274,18 @@ struct AddClothesView: View {
             switch result {
             case .success:
                 print("@Storage add \(itemType): \(key)  ")
+                DispatchQueue.main.async {
+                viewRouter.currentPage = .closet
+                imageVM.image = nil
+                outputImage = nil
+                    removedBg = false
+                    isAnimating = false
+                    didSelectItemType = false
+                    processingBg = false
+                     processingAWS = false
+                print("resetting stuff")
+                }
+                
                 let post = Post(imageKey: key, itemType: itemType)
                 save(post)
             case .failure(let error):
@@ -283,10 +299,7 @@ struct AddClothesView: View {
             switch result {
             case .success:
                 print("@DataStore add \(itemType): \(post.imageKey)")
-                viewRouter.currentPage = .closet
-                self.imageVM.image = nil
-                self.outputImage = nil
-                
+              
             case .failure(let error):
                 print("failed to save post ")
             }

@@ -59,6 +59,7 @@ struct ContentView: View {
                     }
                     
                 case .addClothes:
+                    let _ = print("on add clothes view")
                    AddClothesView(viewRouter: viewRouter)
                     
                 case .addOutfit:
