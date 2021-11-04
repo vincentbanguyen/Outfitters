@@ -223,7 +223,7 @@ struct AddClothesView: View {
     func removeBackground(inputImage: UIImage) {
         print("trying to remove background")
         
-        if let inputImage = inputImage.resized(withPercentage: 0.5) {
+        if let inputImage = inputImage.resized(withPercentage: 0.2) {
             segmentationService.segment(image: inputImage) { (image, error) in
                 DispatchQueue.main.async {
                     if let error = error {
