@@ -13,6 +13,7 @@
 		E128FB02273318CA002D02BF /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FB01273318CA002D02BF /* ImageViewModel.swift */; };
 		E128FB0427331A77002D02BF /* PickerImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FB0327331A77002D02BF /* PickerImageSource.swift */; };
 		E128FB0827331D40002D02BF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FB0727331D40002D02BF /* ImagePicker.swift */; };
+		E128FB0A2733886E002D02BF /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E128FB092733886E002D02BF /* TestView.swift */; };
 		E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */; };
 		E12E5859272D417C006B0D52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E12E5858272D417C006B0D52 /* Assets.xcassets */; };
 		E12E5891272D4CE2006B0D52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12E5890272D4CE2006B0D52 /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		E128FB01273318CA002D02BF /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		E128FB0327331A77002D02BF /* PickerImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerImageSource.swift; sourceTree = "<group>"; };
 		E128FB0727331D40002D02BF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E128FB092733886E002D02BF /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClothingItem+Extension.swift"; sourceTree = "<group>"; };
 		E12E5858272D417C006B0D52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		E12E5880272D48CE006B0D52 /* Amplify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Amplify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,7 @@
 				E1ED1D0F272D2B2600AD6034 /* DisplayedViews */,
 				E1ED1CE6272D0EE300AD6034 /* OutfittersApp.swift */,
 				E128FB01273318CA002D02BF /* ImageViewModel.swift */,
+				E128FB092733886E002D02BF /* TestView.swift */,
 				E128FB0327331A77002D02BF /* PickerImageSource.swift */,
 				E128FB0727331D40002D02BF /* ImagePicker.swift */,
 				E12E5852272D34B5006B0D52 /* ClothingItem+Extension.swift */,
@@ -319,6 +322,7 @@
 				E128FB0827331D40002D02BF /* ImagePicker.swift in Sources */,
 				E1ED1CE7272D0EE300AD6034 /* OutfittersApp.swift in Sources */,
 				E1FD0496273076CA00CAFF8A /* CreateOutfitView.swift in Sources */,
+				E128FB0A2733886E002D02BF /* TestView.swift in Sources */,
 				E1FD0497273076CA00CAFF8A /* OutfitsView.swift in Sources */,
 				E1ED1CFF272D10F900AD6034 /* VIewRouter.swift in Sources */,
 				E12E5853272D34B5006B0D52 /* ClothingItem+Extension.swift in Sources */,
