@@ -46,21 +46,23 @@ struct AddClothesView: View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
             if removedBg == true {
-                let _ = print("removed bg \(removedBg)")
-            let _ =     print("is animating \(isAnimating)")
-                if let outfitImage = outputImage {
-                Image(uiImage: outfitImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 250, height: 250)
-                .padding(40)
-                }
+                if let inputImage = imageVM.image  {
+//
+//                       let _ = print("removed bg \(removedBg)")
+//                   let _ =     print("is animating \(isAnimating)")
+//                    let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
+                    Image(uiImage: inputImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 250, height: 250)
+                        .padding(40)
+            }
             }
             else if let inputImage = imageVM.image  {
-             
-                   let _ = print("removed bg \(removedBg)")
-               let _ =     print("is animating \(isAnimating)")
-                let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
+//
+//                   let _ = print("removed bg \(removedBg)")
+//               let _ =     print("is animating \(isAnimating)")
+//                let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
                 Image(uiImage: inputImage)
                     .resizable()
                     .scaledToFit()
@@ -170,9 +172,7 @@ struct AddClothesView: View {
                     print("uploading to aws")
              
                         processingAWS = true
-                    uploadToAWS(outputImage!, itemType: itemType)
-                      
-                
+                    uploadToAWS(imageVM.image!, itemType: itemType)
 //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
 //                        targetSize: targetSize
 //                    )
@@ -239,8 +239,6 @@ struct AddClothesView: View {
         }
         
     }
-
-    
     func removeBackground(inputImage: UIImage) {
         print("trying to remove background")
         segmentationService.segment(image: inputImage) { (image, error) in
@@ -255,8 +253,11 @@ struct AddClothesView: View {
                     return
                 }
                 // All good
-                outputImage = image
-                print("CROPPED OUTPUT IMAGE SIZE: \(outputImage!.size)")
+               // outputImage = image
+                
+                imageVM.image = image.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
+                
+                print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
                 removedBg = true
                 print("removed background")
             }
@@ -277,7 +278,7 @@ struct AddClothesView: View {
                 DispatchQueue.main.async {
                 viewRouter.currentPage = .closet
                 imageVM.image = nil
-                outputImage = nil
+             //   outputImage = nil
                     removedBg = false
                     isAnimating = false
                     didSelectItemType = false

@@ -408,6 +408,7 @@ struct CreateOutfitView: View {
             case .success:
                 print("@Storage add \(seasonType): \(key)   ")
                 let post = Post(imageKey: key, itemType: seasonType)
+                viewRouter.currentPage = .outfits
                 save(post)
                 
             case .failure(let error):
@@ -421,8 +422,8 @@ struct CreateOutfitView: View {
             switch result {
             case .success:
                 print("@DataStore add : \(post.imageKey)")
-                self.outfitImage = nil
-                viewRouter.currentPage = .outfits
+                outfitImage = nil
+                
                 
             case .failure(let error):
                 print("failed to save post ")
