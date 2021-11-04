@@ -254,8 +254,8 @@ struct AddClothesView: View {
                 }
                 // All good
                // outputImage = image
-                
-                imageVM.image = image
+               let image1 = Image(uiImage: image)
+                imageVM.image = image1.asUIImage()
                 print("CROPPED actualy output image size \(image.size)")
                     //.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
                 
