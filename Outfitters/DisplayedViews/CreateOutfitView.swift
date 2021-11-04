@@ -394,6 +394,9 @@ struct CreateOutfitView: View {
         print("resize outfit image")
 
         if let outfitImage = outfitImage {
+            
+            viewRouter.currentPage = .outfits
+            
             uploadToAWS(outfitImage, seasonType: seasonType)
         }
         
@@ -416,7 +419,7 @@ struct CreateOutfitView: View {
             case .success:
                 print("@Storage add \(seasonType): \(key)   ")
                 let post = Post(imageKey: key, itemType: seasonType)
-                viewRouter.currentPage = .outfits
+               
                 save(post)
                 
             case .failure(let error):
