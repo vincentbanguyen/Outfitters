@@ -46,12 +46,12 @@ struct AddClothesView: View {
         // WARNING: Force wrapped image for demo purpose
         VStack {
             if removedBg == true {
-                if let inputImage = imageVM.image  {
+                if let output = imageVM.image  {
 //
 //                       let _ = print("removed bg \(removedBg)")
 //                   let _ =     print("is animating \(isAnimating)")
-//                    let _ = print("CROPPED INPUT IMAGE SIZE: \(inputImage.size)")
-                    Image(uiImage: inputImage)
+              let _ = print("presentng CROPPED output IMAGE SIZE: \(output.size)")
+                    Image(uiImage: output)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250, height: 250)
