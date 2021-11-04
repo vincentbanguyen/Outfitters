@@ -56,7 +56,7 @@ struct AddClothesView: View {
             }
         
             else if let inputImage =  imageVM.image  {
-               
+               let _ = print("CROPPED INPUT IMAGE SIZE: \(outputImage!.size)")
                 Image(uiImage: inputImage)
                     .resizable()
                     .scaledToFit()
@@ -252,7 +252,7 @@ struct AddClothesView: View {
                 }
                 // All good
                 outputImage = image
-                print("CROPPED IMAGE SIZE: \(outputImage!.size)")
+                print("CROPPED OUTPUT IMAGE SIZE: \(outputImage!.size)")
                 self.removedBg = true
                 print("removed background")
             }
