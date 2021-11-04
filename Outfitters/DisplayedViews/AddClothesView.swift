@@ -254,15 +254,9 @@ struct AddClothesView: View {
                 }
                 // All good
                // outputImage = image
-               
+    
                 
-                let source = image
-                let cgSource = source.cgImage
-                let my3000dpiImage = UIImage(cgImage: cgSource!, scale: 456 / 72.0, orientation: source.imageOrientation)
-                
-                imageVM.image = my3000dpiImage
-//                print("CROPPED actualy output image size \(image.size)")
-//                    //.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
+                imageVM.image = image.scalePreservingAspectRatio(targetSize: CGSize(width: 3024, height: 4032))
 //
 //                print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
                 removedBg = true
