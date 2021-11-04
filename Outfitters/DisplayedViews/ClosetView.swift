@@ -188,11 +188,13 @@ struct ClosetView: View {
                 
             }
         }
+        
         .onDelete { indexSet in
 //            let key = keys[indexSet.first!]
 //         print("deleting: ")
 //            deleteItem(imageKey: key, selectedItemType: selectedItemType)
         }
+        .listRowBackground(Color("ListBackground"))
         
     }
     

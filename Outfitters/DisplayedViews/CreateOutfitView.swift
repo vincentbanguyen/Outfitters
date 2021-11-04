@@ -387,8 +387,8 @@ struct CreateOutfitView: View {
         let resizedShoe = shoesImage.resized(withPercentage: resizePercentage)!
         print("attemping to overlay images")
         outfitImage = resizedTop
-            .overlayWith(image: resizedBottom, posX: 0, posY: CGFloat(resizedBottom.size.height))
-            .overlayWith(image: resizedShoe, posX: 0, posY: CGFloat(resizedShoe.size.height * 2))
+            .overlayWith(image: resizedBottom, posX: 0, posY: CGFloat(resizedBottom.size.height * 0.95))
+            .overlayWith(image: resizedShoe, posX: 0, posY: CGFloat(resizedShoe.size.height * 0.95 * 2))
                 
         
         print("resize outfit image")
