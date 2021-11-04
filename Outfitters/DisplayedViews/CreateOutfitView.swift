@@ -56,7 +56,7 @@ struct CreateOutfitView: View {
     @State private var outfitImage: UIImage? = UIImage(systemName: "tshirt")
     
     
-    let imageSize = 150.0
+    let imageSize = 160.0
     let circleSize = 60.0
 
     var body: some View {
@@ -436,7 +436,7 @@ struct CreateOutfitView: View {
 struct arrowLeft: View {
     var body: some View {
     Image(systemName: "arrow.left")
-            .font(Font.system(size: 40, weight: .bold))
+            .font(Font.system(size: 50, weight: .bold))
             .foregroundColor(Color("colorPlus"))
     }
 }
@@ -444,7 +444,7 @@ struct arrowLeft: View {
 struct arrowRight: View {
     var body: some View {
     Image(systemName: "arrow.right")
-            .font(Font.system(size: 40, weight: .bold))
+            .font(Font.system(size: 50, weight: .bold))
             .foregroundColor(Color("colorPlus"))
     }
 }
