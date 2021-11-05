@@ -214,7 +214,7 @@ struct AddClothesView: View {
                 .foregroundColor(.white)
             }
         }
-        .sheet(isPresented: $imageVM.showPicker) {
+        .fullScreenCover(isPresented: $imageVM.showPicker) {
             ImagePicker(sourceType: imageVM.source == .library ? .photoLibrary : .camera, selectedImage: $imageVM.image)
                 .ignoresSafeArea()
         }

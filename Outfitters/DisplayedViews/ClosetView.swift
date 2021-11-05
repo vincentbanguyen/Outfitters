@@ -50,6 +50,8 @@ struct ClosetView: View {
                 }
             }
             .navigationTitle("Closet")
+          
+            
         }
         .onAppear {
             print("on closet page")

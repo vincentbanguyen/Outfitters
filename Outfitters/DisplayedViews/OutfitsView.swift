@@ -43,43 +43,51 @@ struct OutfitsView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 
-                HStack {
-                    
-                    if promptDelete == true {
-                        Button(action: {
-                            deleteDataStore()
-                        }, label: {
-                            ZStack {
-                                Circle().fill(.red).frame(width: 20, height: 20)
-                                Image(systemName: "exclamationmark.triangle")
-                                    .font(Font.system(size: 10, weight: .semibold))
-                                    .foregroundColor(.white)
-                            }
-                        })
-                    }
-                    Spacer()
-                    Button(action: {
-                        withAnimation{
-                            promptDelete.toggle()
-                        }
-                    }, label: {
-                        ZStack {
-                            Circle().fill(Color("colorPlus")).frame(width: 20, height: 20)
-                            Image(systemName: "trash.fill")
-                                .font(Font.system(size: 10, weight: .semibold))
-                                .foregroundColor(.white)
-                        }
-                    })
-                }
+        
                 Spacer()
                ScrollView(.horizontal) {
                     HStack(spacing: 20) {
                         
                         self.listContent(for: getArrayKeys(selectedSeasonType: selectedSeasonType), selectedSeasonType: selectedSeasonType)
-                  }
-                }
+                    }
+               }
             }
             .navigationTitle("Outfits")
+            .navigationBarItems(
+                
+                leading: Button {
+                    if promptDelete == true {
+                        deleteDataStore()
+                    }
+                } label: {
+                    if promptDelete == true {
+                        ZStack {
+                            //Circle().fill(.red)
+                            //.frame(width: 20, height: 20)
+                            Image(systemName: "exclamationmark.triangle")
+                            // .font(Font.system(size: 10, weight: .semibold))
+                                .foregroundColor(Color("colorPlus"))
+                        }
+                    }
+                },
+                trailing: Button {
+                    withAnimation{
+                        promptDelete.toggle()
+                    }
+                } label: {
+                    ZStack {
+                      //  Circle().fill(Color("colorPlus"))
+                        //.frame(width: 20, height: 20)
+                        Image(systemName: "trash.fill")
+                            //.font(Font.system(size: 10, weight: .semibold))
+                            .foregroundColor(Color("colorPlus"))
+                    }
+                }
+            )
+            
+            
+        
+            
         }
     }
     
