@@ -14,13 +14,9 @@ struct AddClothesView: View {
     let segmentationService = SegmentationService(apiKey: "717500a714e4abb189ff152656c8189bf8900532")
     
     @StateObject var viewRouter = ViewRouter()
-    
-    
     @EnvironmentObject var imageVM: ImageViewModel
     
     @State private var isAnimating = false
-
-
     var foreverAnimation: Animation {
         Animation.linear(duration: 2.0)
             .repeatForever(autoreverses: false)
@@ -29,21 +25,16 @@ struct AddClothesView: View {
     @State var processingBg = false
     @State var processingAWS = false
 
-    
-    
     @State var outputImage: UIImage?
-    //@State var testImage: UIImage = UIImage(systemName: "tshirt")!
     @State var removedBg = false
     @State var didSelectItemType = false
     @State var itemType = "item"
-
     let selectedTypes = ["👚", "👖", "👟"]
     
     @State public var selectedItemType: Int?
     
     
     var body: some View {
-        // WARNING: Force wrapped image for demo purpose
         VStack {
             if removedBg == true {
                 if let output = imageVM.image  {
@@ -68,9 +59,7 @@ struct AddClothesView: View {
                     .frame(width: 250, height: 250)
                     .padding(40)
             }
-            
             // adding clothing item image
-            
             HStack {
                 // IMAGE PICKER
                 Button{
@@ -131,7 +120,6 @@ struct AddClothesView: View {
                     .frame(width: 90, height: 60)
                     .background(self.selectedItemType == selectedType ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
                     .cornerRadius(40)
-                    // .foregroundColor(self.buttonSelected == selectedType ? Color("itemTypeButtonOn") : Color("itemTypeButtonOff"))
                     .overlay(
                         RoundedRectangle(cornerRadius: 40)
                             .stroke(Color(#colorLiteral(red: 0.2067584602, green: 0.6186007545, blue: 1, alpha: 1)), lineWidth: 5)
@@ -140,11 +128,7 @@ struct AddClothesView: View {
                 }
             }
             .padding(10)
-            // activate remove bg
-            Button {
-                
-                // removing backgoung
-                
+            Button { // activate remove bg
                 if imageVM.image != nil && removedBg == false  {
                     if let inputImage = imageVM.image {
                         processingBg = true
@@ -157,17 +141,9 @@ struct AddClothesView: View {
                     
                     processingAWS = true
                     uploadToAWS(imageVM.image.asUIImage(), itemType: itemType)
-                    //                    let resizedOutputImage = outputImage.scalePreservingAspectRatio(
-                    //                        targetSize: targetSize
-                    //                    )
-                    //
-                    //                    print(resizedOutputImage.size)
-                    
-                    //upload to aws
                 }
             } label: {
                 HStack {
-                    
                     if removedBg == false && processingBg == false {
                         Image(systemName: "checkmark")
                             .font(Font.system(size: 30, weight: .semibold))
@@ -185,18 +161,13 @@ struct AddClothesView: View {
                         Text("Confirm")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
-                    
-                    
-                    
                     else if removedBg == true && processingAWS == false {
                         Image(systemName: "plus")
                             .font(Font.system(size: 30, weight: .semibold))
                         Text("Add to Closet")
                             .font(Font.system(size: 30, weight: .semibold))
                     }
-                    
                     else {
-                        
                         Image(systemName: "arrow.triangle.2.circlepath")
                             .foregroundColor(.white)
                             .font(Font.system(size: 30, weight: .semibold))
@@ -235,13 +206,7 @@ struct AddClothesView: View {
                         // No image returned
                         return
                     }
-                    // All good
-                    // outputImage = image
-                    
-                    
                     imageVM.image = Image(uiImage: image)
-                    //
-                    //                print("CROPPED OUTPUT IMAGE SIZE: \( imageVM.image!.size)")
                     removedBg = true
                     print("removed background")
                 }
@@ -271,7 +236,6 @@ struct AddClothesView: View {
                     processingAWS = false
                     print("resetting stuff")
                 }
-                
                 let post = Post(imageKey: key, itemType: itemType)
                 save(post)
             case .failure(let error):

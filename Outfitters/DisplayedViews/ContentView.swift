@@ -13,10 +13,7 @@ import Combine
 struct ContentView: View {
     
     @State var resetAllData = false
-    
     @StateObject var viewRouter: ViewRouter
-    
-    
     
     // instantiaiotn
     @State var observationObject: AnyCancellable?
@@ -33,35 +30,29 @@ struct ContentView: View {
     
     @State var posts = [String: Post]()
     
-   
     @State var topsKey = "none"
     @State var bottomsKey = "none"
     @State var shoesKey = "none"
     
     @State var modifyingOutfits = false
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
                 switch viewRouter.currentPage {
-                    
                 case .closet:
                     ClosetView(viewRouter: viewRouter, posts: $posts, tops: $tops, bottoms: $bottoms, shoes: $shoes, topsKey: $topsKey, bottomsKey: $bottomsKey, shoesKey: $shoesKey)
-                   
-                  
                 case .outfits:
                     if outfitSpring.count > 0 || outfitSummer.count > 0 || outfitFall.count > 0 || outfitWinter.count > 0 {
-                        
                         OutfitsView(resetAllData: $resetAllData, viewRouter: viewRouter, posts: $posts, outfitSpring: $outfitSpring, outfitSummer: $outfitSummer, outfitFall: $outfitFall, outfitWinter: $outfitWinter)
                     }
                     else {
                         Text("Create an outfit first!")
                     }
-                    
                 case .addClothes:
                     let _ = print("on add clothes view")
-                   AddClothesView(viewRouter: viewRouter)
-                    
+                    AddClothesView(viewRouter: viewRouter)
                 case .addOutfit:
                     if tops.count > 0 && bottoms.count > 0 && shoes.count > 0 {
                         CreateOutfitView(viewRouter: viewRouter, posts: $posts, tops: $tops, bottoms: $bottoms, shoes: $shoes, topsKey: $topsKey, bottomsKey: $bottomsKey, shoesKey: $shoesKey, modifyingOutfits: $modifyingOutfits)
@@ -78,7 +69,7 @@ struct ContentView: View {
                     }
                     HStack {
                         TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .closet, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "rectangle.portrait.split.2x1", tabName: "Closet")
-                  
+                        
                         ZStack {
                             Circle()
                                 .foregroundColor(.white)
@@ -91,20 +82,20 @@ struct ContentView: View {
                                 .foregroundColor(Color("colorPlus"))
                                 .rotationEffect(Angle(degrees: showPopUp ? 90 : 0))
                         }
-                            .offset(y: -geometry.size.height/8/2)
-                            .onTapGesture {
-                                withAnimation {
-                                    showPopUp.toggle()
-                                }
+                        .offset(y: -geometry.size.height/8/2)
+                        .onTapGesture {
+                            withAnimation {
+                                showPopUp.toggle()
                             }
+                        }
                         TabBarIcon(viewRouter: viewRouter, showPopUp: $showPopUp, assignedPage: .outfits, width: geometry.size.width/3, height: geometry.size.height/28, systemIconName: "tshirt.fill", tabName: "Outfits")
-                   
+                        
                     }
-                        .frame(width: geometry.size.width, height: geometry.size.height/8)
+                    .frame(width: geometry.size.width, height: geometry.size.height/8)
                     .background(Color("TabBarBackground").shadow(radius: 2))
                 }
             }
-                .edgesIgnoringSafeArea(.bottom)
+            .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear(perform: {
             UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("colorPlus"))
@@ -115,54 +106,26 @@ struct ContentView: View {
     }
     
     func getPosts() {
-        
-        
-        
         Amplify.DataStore.query(Post.self) { result in
             switch result {
             case .success(let posts):
                 print("GETTING POSTS")
-                
-                
-//                //      to clear datastore/
-//                                for post in posts {
-//                                Amplify.DataStore.delete(post) { result in
-//                                    switch result {
-//                                    case .success:
-//                                        print("Post key \(post.imageKey) deleted in datastore at")
-//                                       // self.images.remove(atOffsets: indexSet)
-//                                    case .failure(let error):
-//                                        print("Error deleting post - \(error.localizedDescription)")
-//                                    }
-//                                }
-//                                }
-//                
-//                print("NUCLEAR DELETE")
-//                
                 // download images
                 downloadData(for: posts)
-                
-                //   self.posts = posts
-                
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    
     func downloadData(for posts: [Post]) {
-        
         for post in posts {
             let storageOperation = Amplify.Storage.downloadData(
                 key: post.imageKey,
                 progressListener: { progress in
-                    //     print("Progress: \(progress)")
                 }, resultListener: { (result) in
                     switch result {
                     case .success(let imageData):
-                            // let image = UIImage(data: imageData)
-                        
                         DispatchQueue.main.async {
                             if let image = UIImage(data: imageData) {
                                 // self.posts.append(post)
@@ -188,14 +151,9 @@ struct ContentView: View {
                                     print("uh oh no item type")
                                 }
                             }
-                            
-                            
-                            
                         }
-                        
                     case .failure(let error):
                         print("failed to donwload image data")
-                        //    downloadData(for: posts)
                     }
                 })
         }
@@ -205,16 +163,12 @@ struct ContentView: View {
             receiveCompletion: { print($0)},
             receiveValue: { changes in
                 guard let post = try? changes.decodeModel(as: Post.self) else { return }
-                
-                
                 switch changes.mutationType {
                 case "create":
                     self.posts[post.imageKey] = Post(id: post.id, imageKey: post.imageKey, itemType: post.itemType)
                     downloadData(for: [post])
-                    
                 case "delete":
                     print("deleted stuff")
-                    
                     if resetAllData == true {
                         self.bottoms.removeAll()
                         self.tops.removeAll()
@@ -224,16 +178,12 @@ struct ContentView: View {
                         self.outfitSummer.removeAll()
                         self.outfitWinter.removeAll()
                     }
-                    
                 default:
                     break
                 }
-                
-                
             }
         )
     }
-    
 }
 
 @available(iOS 15.0, *)
@@ -294,7 +244,7 @@ struct PlusMenu: View {
                 
             }
         }
-            .transition(.scale)
+        .transition(.scale)
     }
     
     
@@ -308,7 +258,7 @@ struct TabBarIcon: View {
     
     let width, height: CGFloat
     let systemIconName, tabName: String
-
+    
     var body: some View {
         VStack {
             Image(systemName: systemIconName)
@@ -320,13 +270,13 @@ struct TabBarIcon: View {
                 .font(.footnote)
             Spacer()
         }
-            .padding(.horizontal, -4)
-            .onTapGesture {
-                viewRouter.currentPage = assignedPage
-                withAnimation {
-                    showPopUp = false
-                }
+        .padding(.horizontal, -4)
+        .onTapGesture {
+            viewRouter.currentPage = assignedPage
+            withAnimation {
+                showPopUp = false
             }
-            .foregroundColor(viewRouter.currentPage == assignedPage ? Color("TabBarHighlight") : .gray)
+        }
+        .foregroundColor(viewRouter.currentPage == assignedPage ? Color("TabBarHighlight") : .gray)
     }
 }

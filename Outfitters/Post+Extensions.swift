@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 extension Post: Identifiable {}
 extension Post: Equatable {
     public static func ==(lhs: Post, rhs: Post) -> Bool {

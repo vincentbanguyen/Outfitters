@@ -10,9 +10,8 @@ import SwiftUI
 @available(iOS 15.0, *)
 @main
 struct OutfittersApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject var viewRouter = ViewRouter()
     var body: some Scene {
         WindowGroup {
@@ -20,16 +19,7 @@ struct OutfittersApp: App {
                 .environmentObject(ImageViewModel())
                 .onAppear {
                     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
-               //     UserDefaults.standard.setValue(false, forKey: "_UIConstraintViewAlertForUnsatisfiableConstraint")
                 }
-            
-//            TestView()
-//                .environmentObject(ImageViewModel())
-//                .onAppear {
-//                    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBaseLayoutLogUnsatisfiable")
-//               //     UserDefaults.standard.setValue(false, forKey: "_UIConstraintViewAlertForUnsatisfiableConstraint")
-//                }
-            
         }
     }
 }

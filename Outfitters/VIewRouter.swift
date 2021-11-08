@@ -8,12 +8,8 @@
 import SwiftUI
 
 class ViewRouter: ObservableObject {
-    
     @Published var currentPage: Page = .outfits
-    
 }
-
-
 enum Page {
     case closet
     case outfits

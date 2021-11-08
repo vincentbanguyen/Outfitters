@@ -7,10 +7,7 @@
 
 import Foundation
 import SwiftUI
-
 import UIKit
-
-
 
 extension View {
 // This function changes our View to UIView, then calls another function

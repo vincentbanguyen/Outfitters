@@ -8,25 +8,20 @@
 import SwiftUI
 import Amplify
 import Combine
+
 @available(iOS 15.0, *)
 struct ClosetView: View {
     
-    
-    
     @StateObject var viewRouter = ViewRouter()
-
     @Binding var posts: [String: Post]
-
     @State var images = [String: ClothingItem]()
-    
     @Binding var tops: [String: ClothingItem]
     @Binding var bottoms: [String: ClothingItem]
     @Binding var shoes: [String: ClothingItem]
-    
     @Binding var topsKey: String
     @Binding var bottomsKey: String
     @Binding var shoesKey: String
-    
+    @State var selectedItemType: itemTypes = .tops
     
     enum itemTypes: String, CaseIterable {
         case tops = "Tops"
@@ -34,9 +29,7 @@ struct ClosetView: View {
         case shoes = "Shoes"
     }
     
-    @State var selectedItemType: itemTypes = .tops
     var body: some View {
-        
         NavigationView {
             VStack {
                 Picker("Closet", selection: $selectedItemType) {
@@ -50,15 +43,10 @@ struct ClosetView: View {
                 }
             }
             .navigationTitle("Closet")
-          
-            
         }
         .onAppear {
             print("on closet page")
-            
             // might move all functions to loading screen]
-            
-            
         }
     }
     
@@ -79,130 +67,101 @@ struct ClosetView: View {
     private func listContent(for keys: [String], selectedItemType: itemTypes) -> some View {
         ForEach(keys, id: \.self) { key in
             if let key = key {
-                
-                
                 switch selectedItemType {
                 case .tops:
                     VStack {
                         if let image = self.tops[key]?.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(20)
-                            .swipeActions(edge: .leading) {
-                                
-                                Button {
-                                    topsKey = key
-                                    viewRouter.currentPage = .addOutfit
-                                    print("going to add outfit")
-                                    
-                                } label: {
-                                    Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(20)
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        topsKey = key
+                                        viewRouter.currentPage = .addOutfit
+                                        print("going to add outfit")
+                                    } label: {
+                                        Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                                    }
+                                    .tint(Color("colorPlus"))
                                 }
-                                .tint(Color("colorPlus"))
-                            }
-                        
-                            .swipeActions(edge: .trailing) {
-                                
-                                Button {
-                                    print("deleting: \(key)")
-                                    deleteItem(imageKey: key, selectedItemType: selectedItemType)
-                                    
-                                } label: {
-                                    Label("Remove Item", systemImage: "trash.fill")
+                                .swipeActions(edge: .trailing) {
+                                    Button {
+                                        print("deleting: \(key)")
+                                        deleteItem(imageKey: key, selectedItemType: selectedItemType)
+                                    } label: {
+                                        Label("Remove Item", systemImage: "trash.fill")
+                                    }
+                                    .tint(.red)
                                 }
-                                .tint(.red)
-                            }
                         }
                     }
                 case .bottoms:
                     VStack {
-                 
                         if let image = self.bottoms[key]?.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(20)
-                            .swipeActions(edge: .leading) {
-                                
-                                Button {
-                                    bottomsKey = key
-                                    viewRouter.currentPage = .addOutfit
-                                    print("going to add outfit")
-                                    
-                                } label: {
-                                    Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(20)
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        bottomsKey = key
+                                        viewRouter.currentPage = .addOutfit
+                                        print("going to add outfit")
+                                    } label: {
+                                        Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                                    }
+                                    .tint(Color("colorPlus"))
                                 }
-                                .tint(Color("colorPlus"))
-                            }
-                        
-                            .swipeActions(edge: .trailing) {
-                                
-                                Button {
-                                    print("deleting: \(key)")
-                                    deleteItem(imageKey: key, selectedItemType: selectedItemType)
-                                    
-                                } label: {
-                                    Label("Remove Item", systemImage: "trash.fill")
+                                .swipeActions(edge: .trailing) {
+                                    Button {
+                                        print("deleting: \(key)")
+                                        deleteItem(imageKey: key, selectedItemType: selectedItemType)
+                                    } label: {
+                                        Label("Remove Item", systemImage: "trash.fill")
+                                    }
+                                    .tint(.red)
                                 }
-                                .tint(.red)
-                            }
                         }
-                        
                     }
                 case .shoes:
                     VStack {
-                  
                         if let image = self.shoes[key]?.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(20)
-                            .swipeActions(edge: .leading) {
-                                
-                                Button {
-                                    shoesKey = key
-                                    viewRouter.currentPage = .addOutfit
-                                    print("going to add outfit")
-                                    
-                                } label: {
-                                    Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(20)
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        shoesKey = key
+                                        viewRouter.currentPage = .addOutfit
+                                        print("going to add outfit")
+                                    } label: {
+                                        Label("Create Outfit", systemImage: "wand.and.stars.inverse")
+                                    }
+                                    .tint(Color("colorPlus"))
                                 }
-                                .tint(Color("colorPlus"))
-                            }
-                        
-                            .swipeActions(edge: .trailing) {
-                                
-                                Button {
-                                    print("deleting: \(key)")
-                                    deleteItem(imageKey: key, selectedItemType: selectedItemType)
-                                    
-                                } label: {
-                                    Label("Remove Item", systemImage: "trash.fill")
+                                .swipeActions(edge: .trailing) {
+                                    Button {
+                                        print("deleting: \(key)")
+                                        deleteItem(imageKey: key, selectedItemType: selectedItemType)
+                                    } label: {
+                                        Label("Remove Item", systemImage: "trash.fill")
+                                    }
+                                    .tint(.red)
                                 }
-                                .tint(.red)
-                            }
                         }
-                        
                     }
                 }
-                
-                
             }
         }
-        
         .onDelete { indexSet in
-//            let key = keys[indexSet.first!]
-//         print("deleting: ")
-//            deleteItem(imageKey: key, selectedItemType: selectedItemType)
         }
         .listRowBackground(Color("ListBackground"))
-        
     }
     
     func deleteItem(imageKey: String, selectedItemType: itemTypes) {
         guard let post = self.posts[imageKey] else { return }
-        
         Amplify.DataStore.delete(post) { result in
             switch result {
             case .success:
@@ -212,20 +171,15 @@ struct ClosetView: View {
                 print("Error deleting post - \(error.localizedDescription)")
             }
         }
-        
         Amplify.Storage.remove(key: imageKey) { event in
             switch event {
             case let .success(data):
-                
                 print("@Storage remove: \(imageKey)")
-                
             case let .failure(storageError):
                 print("Failed: \(storageError.errorDescription). \(storageError.recoverySuggestion)")
             }
         }
-        
         self.posts.removeValue(forKey: imageKey)
-        
         switch selectedItemType {
         case .tops:
             print("REMOVING TOP: \(imageKey)")
@@ -237,11 +191,7 @@ struct ClosetView: View {
             print("REMOVING SHOE: \(imageKey)")
             self.shoes.removeValue(forKey: imageKey)
         }
-        
-        
     }
-   
-    
 }
 //
 //struct ClosetView_Previews: PreviewProvider {

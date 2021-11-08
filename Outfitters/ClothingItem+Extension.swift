@@ -11,7 +11,6 @@ import UIKit
 struct ClothingItem: Identifiable {
     let id = UUID()
     var imageKey: String
-    
     var image: UIImage
     var itemType: String
 }
