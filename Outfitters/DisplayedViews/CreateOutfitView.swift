@@ -321,7 +321,7 @@ struct CreateOutfitView: View {
     }
     
     func uploadToAWS(_ image: UIImage, seasonType: String) {
-        guard let imageData = image.pngData() else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.4) else { return }
         let key = UUID().uuidString + ".jpg"
         _ = Amplify.Storage.uploadData(key: key, data: imageData) { result in
             switch result {
